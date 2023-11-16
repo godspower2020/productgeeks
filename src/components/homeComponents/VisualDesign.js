@@ -2,7 +2,7 @@ import React from "react";
 
 const VisualDesign = ({ value, text }) => {
   return (
-    <div className="rating">
+    <div className="rating mx-4">
       <i
         className={
           value >= 1

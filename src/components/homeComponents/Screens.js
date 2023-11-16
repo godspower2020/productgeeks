@@ -9,6 +9,8 @@ const Screens = () => {
   //   setIndex(i);
   // }
 
+  // const categoryText = products.category.map(item => item.substring(0, 10)).join(', ');
+
   return (
     <>
       <div className="container-product mobile-web-category">
@@ -37,27 +39,27 @@ const Screens = () => {
                         <Link to={`/products/${product._id}`}>
                           <>
                             <div className="shopBack">
-                            {product.screensFlow.map((item) => (
-                              <div>
-                                <img src={item} alt={product.brandName} />
-                              </div>
-                            ))}
+                              {product.screensFlow.map((item) => (
+                                <div>
+                                  <img src={item} alt={product.brandName} />
+                                </div>
+                              ))}
                             </div>
                           </>
                         </Link>
                       </div>
-                      <div className="mt-2 mx-2 d-flex align-items-center">
-                        <div>
+                      <div className="product-brand-cat mt-2">
+                        <div className="product-brand">
                           <img src={product.productLogo} alt={product.brandName} />
                         </div>
                         <div className="shoptext px-2">
                           <Link to={`/products/${product._id}`}>
                             {product.brandName}
                           </Link>
-                          <div className="category d-flex">
+                          <div className="category">
                             {product.category.map((item, index) => (
                               <Link to={`/products/${product._id}`}>
-                                {(index ? ', ' : '') + item} 
+                                {(index ? ', ' : '') + item}
                               </Link>
                             ))}
                           </div>
