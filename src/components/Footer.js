@@ -8,8 +8,8 @@ const Footer = () => {
 
   return (
     <div className="footer p-3">
-      <div className="row jcs-b">
-        <div className="col-lg-4 d-flex align-items-center">
+      <div className="row">
+        <div className="col-lg-4 d-flex align-items-center footer-logo">
           <Link className="navbar-brand p-1 m-0" to="/">
             <img alt="logo" src="/images/logo.png" />
           </Link> 
@@ -18,18 +18,18 @@ const Footer = () => {
             <h5>geeks</h5>
           </div>
         </div>
-        <div className="col-lg-4 d-flex align-items-center social-icons">
-          <a className="m-2" href='https://www.instagram.com/godspower_augustine/' target='_blank' rel="noreferrer">
+        <div className="col-lg-4 social-icons">
+          <a className="" href='https://www.instagram.com/godspower_augustine/' target='_blank' rel="noreferrer">
             <img alt="facebook" src="/images/facebook.png" />
           </a>
-          <a className="m-2" href='https://twitter.com/AugustineGods15' target='_blank' rel="noreferrer">
+          <a className="" href='https://twitter.com/AugustineGods15' target='_blank' rel="noreferrer">
             <img alt="twitter-x" src="/images/twitter-x.png" />
           </a>
-          <a className="m-2" href='https://www.linkedin.com/in/augustine-godspower-523a2b1a4/' target='_blank' rel="noreferrer">
+          <a className="" href='https://www.linkedin.com/in/augustine-godspower-523a2b1a4/' target='_blank' rel="noreferrer">
             <img alt="linkedin" src="/images/linkedin.png" />
           </a>
         </div>
-        <div className="col-lg-4 d-flex align-items-center text-white">
+        <div className="col-lg-4 year text-white">
           <p>ProductGeeks {year}. All Rights Reserved </p>
         </div>
       </div>

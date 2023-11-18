@@ -3,19 +3,28 @@ import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
-    <div className="form-register d-flex flex-column justify-content-center align-items-center">
-        <form className="form-me">
-          <input type="text" placeholder="Username" />
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
+    <div className="form-register">
+      <h4>Register</h4>
+      <form className="form-me">
+        <input type="text" placeholder="Username" />
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <input type="password" placeholder="Confirm Password" />
 
-          <button type="submit">Register</button>
-          <p>
-            <Link to={"/login"}>
-              I Have Account <strong>Login</strong>
-            </Link>
-          </p>
-        </form>
+        <button className='register-button' type="submit">Register</button>
+
+        <button className='google-button'>
+          <span className='mx-3'>
+            <img className="" alt="googlelogo" src="/images/google.png" />
+          </span>
+          Continue with Google
+        </button>
+
+        <p>
+          Already have an account?
+          <Link className='mx-3' to={"/login"}>Login</Link>
+        </p>
+      </form>
     </div>
   )
 }

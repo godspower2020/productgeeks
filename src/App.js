@@ -12,6 +12,10 @@ import Login from "./pages/LoginScreen";
 import Register from "./pages/RegisterScreen"; 
 import ProfileScreen from "./pages/ProfileScreen";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Faqs from "./pages/Faqs";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -26,6 +30,10 @@ function App() {
           <Route path="/register" exact element={<Register />} />
           <Route path="/profile" exact element={<ProfileScreen />} /> 
           <Route path="/contact" exact element={<Contact />} /> 
+          <Route path="/about" exact element={<About />} /> 
+          <Route path="/faqs" exact element={<Faqs />} /> 
+          <Route path="/privacy" exact element={<Privacy />} /> 
+          <Route path="/terms" exact element={<Terms />} /> 
           <Route path="*" exact element={<NotFound />} />
         </Routes>
     </BrowserRouter>

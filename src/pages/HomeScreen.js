@@ -2,8 +2,6 @@ import React from "react";
 import Header from "./../components/Header";
 import Carousel from "./../components/homeComponents/Carousel";
 import Screens from "./../components/homeComponents/Screens";
-// import ContactInfo from "./../components/homeComponents/ContactInfo";
-// import CalltoActionSection from "./../components/homeComponents/CalltoActionSection";
 import Footer from "./../components/Footer";
 
 const HomeScreen = () => {
@@ -13,8 +11,6 @@ const HomeScreen = () => {
       <Header />
       <Carousel />
       <Screens />
-      {/* <CalltoActionSection />
-      <ContactInfo /> */}
       <Footer />
     </div>
   );

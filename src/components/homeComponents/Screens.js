@@ -17,7 +17,7 @@ const Screens = () => {
         <div className="section">
           <div className="row">
             <div className="col-lg-12 col-md-12 article">
-              <h3 className="browse py-5 px-2">Browse</h3>
+              <h3 className="browse">Browse</h3>
               {/* <div>
                 {products.category.map((category, index) => (
                   <div 
