@@ -100,11 +100,15 @@ const SingleProduct = ({ match }) => {
           </div>
           <div className="single-product-flows">
             <div className="screen-video-button">
-              <p>screens</p>
-              {/* <p>Video Process Flow</p> */}
+              <div className="screen-button">
+                <p>screens</p>
+              </div>
+              <div className="video-button">
+                <p>Video Process Flow</p>
+              </div>
             </div>
             <div>
-              <p>onboarding</p>
+              <p className="mt-3">onboarding</p>
               <div className="product-flows">
                 <div className="flow">
                   {product.screensFlow.map((item) => (

@@ -10,10 +10,10 @@ const Footer = () => {
     <div className="footer p-3">
       <div className="row">
         <div className="col-lg-4 d-flex align-items-center footer-logo">
-          <Link className="navbar-brand p-1 m-0" to="/">
+          <Link className="navbar-brand m-0" to="/">
             <img alt="logo" src="/images/logo.png" />
           </Link> 
-          <div className="navbar-brand-text text-white">
+          <div className="px-1 navbar-brand-text text-white">
             <h5>product</h5>
             <h5>geeks</h5>
           </div>

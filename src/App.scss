@@ -541,7 +541,7 @@ textarea:focus {
 
 /* SINGLE PRODUCT */
 .single-product {
-  margin: 50px 0;
+  padding: 70px 0;
   display: flex;
   flex-direction: column;
 
@@ -554,6 +554,16 @@ textarea:focus {
     background-color: var(--category-info-bg-gray-color);
     border-radius: 10px;
     padding: 30px 20px;
+
+    p,
+    span {
+      font-size: 15px;
+    }
+
+    h5 {
+      font-size: 17px;
+      font-weight: 900;
+    }
 
     .brand-cat-web {
       display: flex;
@@ -581,7 +591,6 @@ textarea:focus {
     }
 
     .rating {
-      margin-right: 90px;
 
       div {
         display: flex;
@@ -658,7 +667,7 @@ textarea:focus {
     }
   
     @media (min-width: 767px) {
-      margin-right: 40px;
+      margin-right: 50px;
     }
   }
 
@@ -666,15 +675,31 @@ textarea:focus {
   .single-product-flows {
 
     .screen-video-button {
-      display: inline-block;
-      background-color: var(--screen-video-color);
-      color: #fff;
-      padding: 10px 20px;
-      margin: 40px 0 30px;
-      border-radius: 10px 10px 0 0;
+      display: flex;
+      gap: 10px;
+      position: relative;
+      border-bottom: .5px solid var(--gray-color-opacity);
 
-      @media (min-width: 767px) {
-        margin: 0 0 30px;
+      .screen-button,
+      .video-button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 40px 0 0;
+        border-radius: 10px 10px 0 0;
+
+        @media (min-width: 767px) {
+          margin: 0;
+        }
+      }
+      
+      .screen-button {
+        background-color: var(--category-info-bg-gray-color);
+        color: var(--theme-dark);
+      }
+
+      .video-button {
+        background-color: var(--screen-video-color);
+        color: #fff;
       }
     }
 
@@ -719,21 +744,19 @@ textarea:focus {
           gap: 20px;
         }
       }
+     
+      @media (min-width: 767px) {
+        overflow-x: auto;
+      }
     }
   }
 
-  @media (min-width: 767px) {
-    .single-product-info {
-      flex: 10%;
-    }
-
-    .single-product-flows {
-      flex: 90%;
-    }
-  }
-  
   @media (min-width: 767px) {
     flex-direction: row;
+
+    .single-product-info {
+      max-width: 291px;
+    }
   }
 }
 
