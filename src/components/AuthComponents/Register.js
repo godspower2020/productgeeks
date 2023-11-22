@@ -11,7 +11,7 @@ const Register = () => {
         <input type="password" placeholder="Password" />
         <input type="password" placeholder="Confirm Password" />
 
-        <button className='register-button' type="submit">Register</button>
+        <button className='register-button' type="submit" to={"/confirm-mail"}>Register</button>
 
         <button className='google-button'>
           <span className='mx-3'>

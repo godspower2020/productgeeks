@@ -1,9 +1,9 @@
 import React from 'react'
-import Login from './AuthComponents/Login'
+import Login from './Login'
 
 const Prompt = () => {
   return (
-    <div>
+    <div className='login-prompt'>
         <Login />
     </div>
   )

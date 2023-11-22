@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [isSignin, setIsSignin] = useState(false)
   
   return (
     <div className="form-login">
-      <h4>Log In</h4>
+      { isSignin ? 
+      <p className='prompt-text'>Log in or sign up <br />
+      to continue browsing apps</p> :
+      <><h4>Log In</h4></> } 
       <form className="form-me">
         <input type="email" placeholder="Email" />
         <input type="password" placeholder="Password" />

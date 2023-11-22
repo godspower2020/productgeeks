@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "../components/AuthComponents/Login";
 
-const LoginScreen = () => {
+const LoginScreen = () => { 
   window.scrollTo(0, 0);
 
   return (
