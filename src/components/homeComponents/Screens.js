@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import products from "../../data/Products";
+import Slider from "../Slider";
 
 const Screens = () => {
-  const [filterCategory, setFilterCategory] = useState([])
-  const [activeFilter, setActiveFilter] = useState('All');
   const [platform, setPlatform] = useState('Mobile');
-  // const [index, setIndex] = useState(0)
-
-  useEffect(() => {
-
-  }, [])
-
-  // const handleClick = (i) => {
-  //   setIndex(i);
-  // }
-
-  // const categoryText = products.category.map(item => item.substring(0, 10)).join(', ');
 
   return (
     <>
@@ -38,17 +26,9 @@ const Screens = () => {
                             className="shop-product"
                             key={product._id}
                           >
-                            <Link to={`/products/${product._id}`}>
-                              <>
-                                <div className="shopBack">
-                                  {product.screensFlow.map((item) => (
-                                    <div>
-                                      <img src={item} alt={product.brandName} />
-                                    </div>
-                                  ))}
-                                </div>
-                              </>
-                            </Link>
+                            <div className="shopBack">
+                              <Slider images={product.screensFlow} productId={product._id} />
+                            </div>
                           </div>
                           <div className="product-brand-cat mt-2">
                             <div className="product-brand">
