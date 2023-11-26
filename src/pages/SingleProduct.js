@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import Usability from "../components/homeComponents/Usability";
@@ -12,6 +12,8 @@ const SingleProduct = ({ match }) => {
 
   const product = products.find((p) => String(p._id) === id);
 
+  window.scrollTo(0, 0);
+
   return (
     <>
       <Header />
@@ -22,7 +24,7 @@ const SingleProduct = ({ match }) => {
               <div className="single-product-brand">
                 <img className="sp-img" src={product.productLogo} alt={product.brandName} />
               </div>
-              <div className="single-product-cat-web px-3">
+              <div className="single-product-cat-web px-2">
                 <div>
                   <h3>{product.brandName}</h3>
                 </div>

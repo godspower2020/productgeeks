@@ -117,11 +117,11 @@ textarea:focus {
     justify-content: center;
 
     .slider-dot {
-      width: 8px;
-      height: 8px;
+      width: 6.5px;
+      height: 6.5px;
       background-color: #bbb;
       border-radius: 50%;
-      margin: 0 5px;
+      margin: 0 3px;
       cursor: pointer;
       transition: background-color 0.3s ease-in-out;
 
@@ -304,7 +304,7 @@ textarea:focus {
       order: 3;
     }
 
-    @media (min-width: 1053px) {
+    @media (min-width: 1168px) {
       .order:nth-child(3) {
         order: 3;
       }
@@ -328,6 +328,7 @@ textarea:focus {
 // CAROUSEL
 .carousel {
 
+
   .indicate {
     background-color: var(--category-info-bg-gray-color) !important;
   }
@@ -335,13 +336,13 @@ textarea:focus {
   .carousel-text {
     position: absolute;
     width: 100%;
-    top: 42px;
+    top: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: var(--black-color);
-    gap: 15px;
+    gap: 25px;
     padding: 10px;
 
     h1 {
@@ -359,6 +360,9 @@ textarea:focus {
     }
 
     p {
+      font-size: 20px;
+      padding: 0 16px;
+      text-align: center;
 
       @media (min-width: 1200px) {
         font-size: 20px;
@@ -374,20 +378,20 @@ textarea:focus {
     }
 
     @media (min-width: 1200px) {
-      top: 110px;
+      top: 100px;
       gap: 30px;
     }
 
     @media (min-width: 1400px) {
-      top: 130px;
       gap: 30px;
     }
   }
 }
 
-@media (max-width: 768px),
+@media (max-width: 1380px),
 (max-height: 700px) {
   .carousel {
+    height: 68vh;
 
     img {
       height: 68vh;
@@ -644,12 +648,15 @@ textarea:focus {
       align-items: center;
   
       .single-product-brand {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
         width: 40%;
         max-width: 120px;
         height: 120px;
         
         img {
-          width: 100%;
+          width: 95%;
           border-radius: 20px !important;
         }
       }
@@ -694,8 +701,8 @@ textarea:focus {
       .switch {
         position: relative;
         display: inline-block;
-        width: 52px;
-        height: 30px;
+        width: 42px;
+        height: 22px;
       }
       
       .switch input { 
@@ -719,10 +726,10 @@ textarea:focus {
       .slider:before {
         position: absolute;
         content: "";
-        height: 22px;
-        width: 22px;
-        left: 4px;
-        bottom: 4px;
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 2px;
         background-color: white;
         -webkit-transition: .4s;
         transition: .4s;
@@ -737,14 +744,14 @@ textarea:focus {
       }
       
       input:checked + .slider:before {
-        -webkit-transform: translateX(22px);
-        -ms-transform: translateX(22px);
-        transform: translateX(22px);
+        -webkit-transform: translateX(18px);
+        -ms-transform: translateX(18px);
+        transform: translateX(18px);
       }
       
       /* Rounded sliders */
       .slider.round {
-        border-radius: 34px;
+        border-radius: 40px;
       }
       
       .slider.round:before {
@@ -766,6 +773,7 @@ textarea:focus {
       gap: 10px;
       position: relative;
       border-bottom: .5px solid var(--gray-color-opacity);
+      cursor: pointer;
 
       .screen-button,
       .video-button {
@@ -794,7 +802,7 @@ textarea:focus {
       display: flex;
       gap: 20px;
       width: 100%;
-      overflow-x: auto;
+      overflow-x: auto !important;
       white-space: nowrap;
       scrollbar-width: thin;
       scrollbar-color: var(--black-color-opacity-2);
@@ -830,10 +838,6 @@ textarea:focus {
         @media (min-width: 767px) {
           gap: 20px;
         }
-      }
-     
-      @media (min-width: 767px) {
-        overflow-x: auto;
       }
     }
   }

@@ -7,7 +7,7 @@ const Blogs = () => {
     <>
         <div className="container blogs">
             <div className="row blog-header text-black">
-                <h2 className='py-3'>Unlocking Digital Experiences</h2>
+                <h2 className='py-3 mt-5'>Unlocking Digital Experiences</h2>
                 <p>Explore User Flows, Get Inspired, and Contribute to the Future of Digital Products.</p>
             </div>
             <div className="row blog-posts">
