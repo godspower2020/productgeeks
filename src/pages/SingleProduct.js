@@ -17,7 +17,7 @@ const SingleProduct = ({ match }) => {
   return (
     <>
       <Header />
-      <div className="container-fluid">
+      <div className="container-single-product">
         <div className="single-product">
           <div className="single-product-info">
             <div className="mt-2 mb-3 brand-cat-web">
@@ -101,16 +101,27 @@ const SingleProduct = ({ match }) => {
             </div>
           </div>
           <div className="single-product-flows">
-            <div className="screen-video-button">
-              <div className="screen-button">
-                <p>screens</p>
+            <div className="screen-video-version-button">
+              <div className="screen-video-button">
+                <div className="screen-button">
+                  <p>screens</p>
+                </div>
+                <div className="video-button">
+                  <p>Video Process Flow</p>
+                </div>
               </div>
-              <div className="video-button">
-                <p>Video Process Flow</p>
+              <div className="version">
+                <p className="version-text">version</p>
+                <div className="d-inline-block">
+                  <div className="version-button">
+                    <p>Aug 2023 (Latest)</p>
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </div>
+                </div>
               </div>
             </div>
             <div>
-              <p className="mt-3">onboarding</p>
+              <p className="mt-3">Onboarding</p>
               <div className="product-flows">
                 <div className="flow">
                   {product.screensFlow.map((item) => (

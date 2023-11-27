@@ -62,7 +62,9 @@ const Header = () => {
               : 
               <div className="navbar-Login-Register">
                 <Link className="px-3" to="/login">
-                  log in
+                  <div className="login-hover-show">
+                    Log In
+                  </div>
                 </Link>
                 <Link className="" to="/register">
                   <button type="button" class="btn btn-theme-purple">sign up</button>
