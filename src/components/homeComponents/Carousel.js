@@ -2,7 +2,7 @@ import React from 'react'
 
 const Carousel = () => {
   return (
-    <div id="carouselExampleIndicators" className="my-1 carousel slide" data-bs-ride="carousel">
+    <div id="carouselExampleIndicators" className="mt-5 carousel slide" data-bs-ride="carousel">
         <div className="carousel-indicators my-0">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={0} className="active indicate" aria-current="true" aria-label="Slide 1" />
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={1} className="indicate" aria-label="Slide 2" />

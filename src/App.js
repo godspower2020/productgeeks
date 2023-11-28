@@ -4,8 +4,6 @@ import "./App.scss";
 import "./responsive.scss";
 import "react-toastify/dist/ReactToastify.css";
 
-import Layout from "./components/Layout";
-
 import HomeScreen from "./pages/HomeScreen";
 import SingleProduct from "./pages/SingleProduct";
 import Blog from "./pages/Blog";
@@ -25,7 +23,6 @@ import VerifiedMail from "./pages/VerifiedMail";
 function App() {
   return (
     <BrowserRouter>
-      <Layout>
         <Routes>
           <Route path="/" exact element={<HomeScreen />} />
           <Route path="/products/:id" exact element={<SingleProduct />} />
@@ -43,7 +40,6 @@ function App() {
           <Route path="/terms" exact element={<Terms />} /> 
           <Route path="*" exact element={<NotFound />} />
         </Routes>
-      </Layout>
     </BrowserRouter>
   );
 }

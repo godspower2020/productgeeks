@@ -16,6 +16,12 @@ const Slider = ({ images, productId }) => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
   };
 
+  const containerStyle = {
+    display: 'flex',
+    transition: 'transform 0.3s ease-in-out',
+    transform: `translateX(${-currentIndex * 100}%)`,
+  };
+
   return (
     <div className="slider-container">
       <div className="slider">
@@ -25,12 +31,26 @@ const Slider = ({ images, productId }) => {
           </div>
         )}
         <Link to={`/products/${productId}`}>
-          <img
-            src={images[currentIndex]}
-            alt={`Slide ${currentIndex}`}
-            className="slider-image"
-          />
+          <div className="slider-images" style={containerStyle}>
+            {images.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`Slide ${index}`}
+                className="slider-image"
+              />
+            ))}
+          </div>
         </Link>
+        {/* <Link to={`/products/${productId}`}>
+          <div className="slider-images">
+            <img
+              src={images[currentIndex]}
+              alt={`Slide ${currentIndex}`}
+              className="slider-image"
+            />
+          </div>
+        </Link> */}
         {currentIndex !== images.length - 1 && (
           <div className="slider-icon slider-icon-right" onClick={goToNext}>
             <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
