@@ -5,6 +5,10 @@ const Header = () => {
   const [isSignin, setIsSignin] = useState(false)
   const location = useLocation();
 
+  const activeLink = (path) => {
+    return location.pathname.startsWith(path);
+  };
+
   return (
     <div>
       <div className="header">
@@ -35,20 +39,17 @@ const Header = () => {
           </div>
           <div className="nav order">
             <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="#">Mobile Apps</Link>
+            <li className={`nav-item ${activeLink("/browse/mobile/apps") && "active"}`}>
+                <Link className="nav-link" to="/browse/mobile/apps">Mobile Apps</Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="#">Web Apps</Link>
+              <li className={`nav-item ${activeLink("/browse/web/apps") && "active"}`}>
+                <Link className="nav-link" to="/browse/web/apps">Web Apps</Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/">Landing Pages</Link>
-              </li>
-              <li className="nav-item">
+              <li className={`nav-item ${activeLink("/blog") && "active"}`}>
                 <Link className="nav-link" to="/blog">Blog</Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/contact">contact</Link>
+              <li className={`nav-item ${activeLink("/contact") && "active"}`}>
+                <Link className="nav-link" to="/contact">Contact</Link>
               </li>
             </ul>
           </div>
@@ -63,7 +64,7 @@ const Header = () => {
               <div className="navbar-Login-Register">
                 <Link className="px-3" to="/login">
                   <div className="login-hover-show">
-                    Log In
+                    Log in
                   </div>
                 </Link>
                 <Link className="" to="/register">

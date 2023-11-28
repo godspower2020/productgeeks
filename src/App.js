@@ -13,14 +13,15 @@ import Register from "./pages/RegisterScreen";
 import ProfileScreen from "./pages/ProfileScreen";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
-import Faqs from "./pages/Faqs";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import Faqs from "./pages/Faqs";
 import NotFound from "./pages/NotFound";
 import ConfirmMail from "./pages/ConfirmMail";
 import VerifiedMail from "./pages/VerifiedMail";
 
 function App() {
+
   return (
     <BrowserRouter>
         <Routes>
@@ -35,9 +36,9 @@ function App() {
           <Route path="/profile" exact element={<ProfileScreen />} /> 
           <Route path="/contact" exact element={<Contact />} /> 
           <Route path="/about" exact element={<About />} /> 
-          <Route path="/faqs" exact element={<Faqs />} /> 
           <Route path="/privacy" exact element={<Privacy />} /> 
           <Route path="/terms" exact element={<Terms />} /> 
+          <Route path="/faqs" exact element={<Faqs />} /> 
           <Route path="*" exact element={<NotFound />} />
         </Routes>
     </BrowserRouter>

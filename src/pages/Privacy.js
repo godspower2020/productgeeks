@@ -1,8 +1,12 @@
 import React from 'react'
+import Header from '../components/Header'
 
 const Privacy = () => {
   return (
-    <div>Privacy</div>
+    <>
+      <Header />
+      <div>Privacy</div>
+    </>
   )
 }
 

@@ -2,6 +2,8 @@
   --theme-purple: #9C55C2;
   --theme-dark: #626262;
   --black-color: #000;
+  --link-grey-color: #989898;
+  --link-black-color: #151515;
   --screen-video-color: rgb(46, 46, 46);
   --black-color-opacity-2: rgba(0, 0, 0, .2);;
   --gray-color-opacity: rgba(148, 149, 153, .2);
@@ -136,6 +138,18 @@ textarea:focus {
   }
 }
 
+.centered-links {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+
+  a:hover {
+    color: var(--black-color);
+  }
+}
+
 .row,
 .col-6,
 .col-4 {
@@ -185,6 +199,7 @@ textarea:focus {
           width: 40px;
         }
         .navbar-brand-text h5 {
+          color: var(--link-black-color);
           font-size: 12px;
           text-transform: uppercase;
           font-weight: 900;
@@ -249,17 +264,18 @@ textarea:focus {
     
     .navbar-nav {
       flex-direction: row;
-      gap: 12px;
+      gap: 20px;
 
       .nav-link {
         padding: 12px 0;
-        font-size: 15px;
-        color: var(--theme-dark) !important;
+        font-size: 16px;
+        color: var(--link-grey-color) !important;
         white-space: nowrap;
       }
 
-      @media (min-width: 980px) {
-        gap: 20px;
+      .active .nav-link {
+        color: var(--link-black-color) !important;
+        font-weight: 600
       }
     }
 
@@ -268,7 +284,7 @@ textarea:focus {
       .navbar-Login-Register {
         display: flex;
         align-items: center;
-        font-size: 15px;
+        font-size: 16px;
         color: var(--theme-dark) !important;
         white-space: nowrap;
         text-decoration: none;
@@ -277,6 +293,7 @@ textarea:focus {
           border-radius: 8px;
           padding: 6px 12px;
           color: var(--black-color);
+          font-weight: 600;
 
           &:hover {
             background-color: var(--search-bg-color);
@@ -417,6 +434,42 @@ textarea:focus {
   }
 }
 
+/* Add this to your stylesheet */
+.category {
+  display: flex;
+  gap: 8px;
+  
+  .categoryButton {
+    padding: 8px 12px;
+    border-radius: 50px;
+    border: 1px solid var(--gray-color-opacity);
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--link-black-color); 
+    font-weight: 700;
+    background-color: #fff;
+    
+    &:hover {
+      background-color: var(--gray-color-opacity); 
+      color: var(--link-black-color); 
+      transition: .3s ease-in-out;
+    }
+  
+    a {
+      font-size: 16px;
+    }
+  }
+  
+  .activeCategory {
+    background-color: var(--link-black-color);
+    color: #fff;
+    
+    &:hover {
+      background-color: var(--link-black-color);
+      color: #fff; 
+    }
+  }
+}
 
 /* SHOP */
 .mobile-web-category {
@@ -450,7 +503,7 @@ textarea:focus {
         flex-flow: row wrap;
         gap: 35px 10px;
         
-        .product-screen {
+        .mobile-product-screen {
           display: flex;
           flex-direction: column;
           flex: 0 1 calc(50% - 10px);
@@ -537,8 +590,8 @@ textarea:focus {
           display: none;
         }
         
-        .product-screen:hover .slider-container .slider-icon,
-        .product-screen:hover .slider-container .slider-dots {
+        .mobile-product-screen:hover .slider-container .slider-icon,
+        .mobile-product-screen:hover .slider-container .slider-dots {
           transition: transform .5s ease-in-out;
           display: block;
           z-index: 2000;
@@ -1032,6 +1085,8 @@ textarea:focus {
         display: flex;
         overflow: hidden;
         flex: 1 1 0%;
+        position: relative;
+        text-align: center;
 
         img {
           width: 100%;

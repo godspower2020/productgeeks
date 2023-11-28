@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
-import Usability from "../components/homeComponents/Usability";
-import VisualDesign from "../components/homeComponents/VisualDesign";
-import Functionality from "../components/homeComponents/Functionality";
+import Rating from "../components/homeComponents/Rating";
 import { Link, useParams  } from "react-router-dom";
 import products from "../data/Products";
 
@@ -14,10 +12,10 @@ const SingleProduct = ({ match }) => {
 
   window.scrollTo(0, 0);
 
-  return (
+  return ( 
     <>
       <Header />
-      <div className="container-single-product">
+      <div className="container-single-product mt-5">
         <div className="single-product">
           <div className="single-product-info">
             <div className="mt-2 mb-3 brand-cat-web">
@@ -41,21 +39,15 @@ const SingleProduct = ({ match }) => {
             <div className="rating">
               <div>
                 <p>usability</p>
-                <Usability
-                  value={product.description.usability}
-                />
+                <Rating value={product.description.usability} />
               </div>
               <div>
                 <p>functionality</p>
-                <Functionality
-                  value={product.description.functionality}
-                />
+                <Rating value={product.description.functionality} />
               </div>
               <div>
                 <p>visualDesign</p>
-                <VisualDesign
-                  value={product.description.visualDesign}
-                />
+                <Rating value={product.description.visualDesign} />
               </div>
             </div>
             <hr />

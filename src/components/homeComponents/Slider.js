@@ -42,15 +42,6 @@ const Slider = ({ images, productId }) => {
             ))}
           </div>
         </Link>
-        {/* <Link to={`/products/${productId}`}>
-          <div className="slider-images">
-            <img
-              src={images[currentIndex]}
-              alt={`Slide ${currentIndex}`}
-              className="slider-image"
-            />
-          </div>
-        </Link> */}
         {currentIndex !== images.length - 1 && (
           <div className="slider-icon slider-icon-right" onClick={goToNext}>
             <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
