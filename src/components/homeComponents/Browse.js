@@ -1,16 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import Slider from "./Slider";
 
 const Browse = ({ products, platform }) => {
   const [selectedCategory, setSelectedCategory] = useState(
-    (new URLSearchParams(useLocation().search)).get('category') || 'All'
+    new URLSearchParams(useLocation().search).get('category') || 'All'
   );
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
+
+  useEffect(() => {
+    setFilteredProducts(
+      selectedCategory === 'All'
+        ? products
+        : products.filter((product) => product.category.includes(selectedCategory))
+    );
+  }, [selectedCategory, products]);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -22,7 +31,7 @@ const Browse = ({ products, platform }) => {
 
   return (
     <>
-      <div className="category mb-4 px-2">
+      <div className="filter-category mb-4 px-2">
         {categories.map((category) => (
           <Link
             key={category}
@@ -38,30 +47,35 @@ const Browse = ({ products, platform }) => {
         ))}
       </div>
       <div className="product-case">
-        {products.map((product) => (
-          <div className={`mobile-product-screen ${platform === "Mobile" ? "" : "web-product-screen"}`} key={product._id}>
+        {filteredProducts.map((product) => (
+          <div
+            className={`mobile-product-screen ${platform === 'Mobile' ? '' : 'web-product-screen'}`}
+            key={product._id}
+          >
             <>
               <div className="shop-product" key={product._id}>
                 <div className="shopBack">
                   <Slider images={product.screensFlow} productId={product._id} />
                 </div>
               </div>
-              <div className="product-brand-cat mt-2">
+              <div className="product-brand-cat mt-3">
                 <div className="product-brand">
                   <img src={product.productLogo} alt={product.brandName} />
                 </div>
-                <div className="shoptext px-2">
-                  <Link to={`/products/${product._id}`}>
-                    {product.brandName}
-                  </Link>
+                <Link to={`/products/${product._id}`} className="shoptext px-2">
+                  <p>{product.brandName}</p>
                   <div className="category">
-                    {product.category.map((item, index) => (
-                      <Link to={`/products/${product._id}`}>
-                        {(index ? ', ' : '') + item}
-                      </Link>
-                    ))}
+                    <span>
+                      {product.category.length > 0 &&
+                        (product.category
+                          .map((item, index) => (index ? ', ' : '') + item)
+                          .join(', ')
+                          .length > 26
+                          ? `${product.category.map((item, index) => (index ? ', ' : '') + item).join('').slice(0, 26)}...`
+                          : product.category.map((item, index) => (index ? ', ' : '') + item).join(''))}
+                    </span>
                   </div>
-                </div>
+                </Link>
               </div>
             </>
           </div>

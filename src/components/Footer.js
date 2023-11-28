@@ -7,7 +7,7 @@ const Footer = () => {
   const year= today.getFullYear()
 
   return (
-    <div className="footer p-3">
+    <div className="footer">
       <div className="row">
         <Link className="col-lg-4 d-flex align-items-center footer-logo" to="/">
           <div className="navbar-brand m-0">

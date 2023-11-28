@@ -271,6 +271,12 @@ textarea:focus {
         font-size: 16px;
         color: var(--link-grey-color) !important;
         white-space: nowrap;
+
+        &:hover {
+          color: var(--link-black-color) !important;
+          font-weight: 600;
+          transition: .1s ease-in-out;
+        }
       }
 
       .active .nav-link {
@@ -434,10 +440,15 @@ textarea:focus {
   }
 }
 
-/* Add this to your stylesheet */
-.category {
+/* CATEORY BUTTON STYLES */
+.filter-category {
   display: flex;
   gap: 8px;
+
+  a {
+    font-size: 16.5px;
+    white-space: nowrap;
+  }
   
   .categoryButton {
     padding: 8px 12px;
@@ -453,10 +464,6 @@ textarea:focus {
       background-color: var(--gray-color-opacity); 
       color: var(--link-black-color); 
       transition: .3s ease-in-out;
-    }
-  
-    a {
-      font-size: 16px;
     }
   }
   
@@ -544,8 +551,16 @@ textarea:focus {
             }
         
             .shoptext {
+
+              p {
+                color: var(--link-black-color);
+              }
+              
+              &:hover>p {
+                text-decoration: underline;
+              }
         
-              .category a {
+              .category span {
                 font-size: 13.3px;
                 color: var(--light-gray-color);
               }
@@ -1349,6 +1364,7 @@ textarea:focus {
 .footer {
   background-color: var(--black-color);
   margin-top: .5rem;
+  padding: 16px;
 
   .row {
 
@@ -1386,11 +1402,16 @@ textarea:focus {
       align-items: center;
       justify-content: flex-start;
       gap: 25px;
+      white-space: nowrap;
 
       @media (min-width: 992px) {
         justify-content: flex-end;
       }
     }
+  }
+
+  @media (min-width: 992px) {
+    padding: 16px 30px;
   }
 }
 
