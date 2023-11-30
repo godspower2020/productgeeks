@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import Slider from "./Slider";
+import FilterCategorySlider from './FilterCategorySlider';
 
 const Browse = ({ products, platform }) => {
   const [selectedCategory, setSelectedCategory] = useState(
@@ -31,21 +32,11 @@ const Browse = ({ products, platform }) => {
 
   return (
     <>
-      <div className="filter-category mb-4 px-2">
-        {categories.map((category) => (
-          <Link
-            key={category}
-            to={{
-              pathname: "/",
-              search: `?category=${category}`,
-            }}
-            className={`categoryButton ${selectedCategory === category ? "activeCategory" : ""}`}
-            onClick={() => handleCategoryClick(category)}
-          >
-            {category}
-          </Link>
-        ))}
-      </div>
+      <FilterCategorySlider
+        categories={categories}
+        selectedCategory={selectedCategory}
+        handleCategoryClick={handleCategoryClick}
+      />
       <div className="product-case">
         {filteredProducts.map((product) => (
           <div
@@ -85,4 +76,4 @@ const Browse = ({ products, platform }) => {
   )
 }
 
-export default Browse
+export default Browse 
