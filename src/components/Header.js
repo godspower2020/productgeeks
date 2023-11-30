@@ -14,13 +14,17 @@ const Header = () => {
       <div className="header">
         <div className="container-header">
           <div className="brand order">
-            <Link className="navbar-brand d-flex align-items-center m-0" to="/">
-              <img className="m-0" alt="logo" src="/images/logo.png" />
-              <div className="navbar-brand-text text-black">
-                <h5>product</h5>
-                <h5>geeks</h5>
-              </div>
-            </Link> 
+          <Link
+            className="navbar-brand d-flex align-items-center m-0"
+            to="/"
+            onClick={() => window.location.href = "/browse/mobile/apps"}
+          >
+            <img className="m-0" alt="logo" src="/images/logo.png" />
+            <div className="navbar-brand-text text-black">
+              <h5>product</h5>
+              <h5>geeks</h5>
+            </div>
+          </Link> 
           </div>
           <div className="search-bar d-flex align-items-center order">
             <form className="navbar-search input-group m-0">
@@ -39,7 +43,7 @@ const Header = () => {
           </div>
           <div className="nav order">
             <ul className="navbar-nav">
-            <li className={`nav-item ${activeLink("/browse/mobile/apps") && "active"}`}>
+              <li className={`nav-item ${activeLink("/browse/mobile/apps") && "active"}`}>
                 <Link className="nav-link" to="/browse/mobile/apps">Mobile Apps</Link>
               </li>
               <li className={`nav-item ${activeLink("/browse/web/apps") && "active"}`}>

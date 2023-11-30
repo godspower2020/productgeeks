@@ -26,6 +26,7 @@ function App() {
     <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<HomeScreen />} />
+          <Route path="/browse/mobile/apps" element={<HomeScreen />} />
           <Route path="/products/:id" exact element={<SingleProduct />} />
           <Route path="/blog" exact element={<Blog />} />
           <Route path="/blog/:id" exact element={<SingleBlog />} />

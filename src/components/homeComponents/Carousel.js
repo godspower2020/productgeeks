@@ -10,7 +10,7 @@ const Carousel = () => {
         </div>
         <div className="carousel-inner">
             <div className="carousel-item active">
-                <img src="../images/carousel1.png" className="d-block w-100" alt="..." />
+                <img src="/images/carousel1.png" className="d-block w-100" alt="..." />
                 <div className='carousel-text'>
                     <h1>Discover | Optimize | Share</h1>
                     <p>Explore the world of user experiences.</p>
@@ -21,7 +21,7 @@ const Carousel = () => {
                 </div>
             </div>
             <div className="carousel-item">
-                <img src="../images/carousel1.png" className="d-block w-100" alt="..." />
+                <img src="/images/carousel1.png" className="d-block w-100" alt="..." />
                 <div className='carousel-text'>
                     <h1>Discover | Optimize | Share</h1>
                     <p>Explore the world of user experiences.</p>
@@ -29,7 +29,7 @@ const Carousel = () => {
                 </div>
             </div>
             <div className="carousel-item">
-                <img src="../images/carousel1.png" className="d-block w-100" alt="..." />
+                <img src="/images/carousel1.png" className="d-block w-100" alt="..." />
                 <div className='carousel-text'>
                     <h1>Discover | Optimize | Share</h1>
                     <p>Explore the world of user experiences.</p>

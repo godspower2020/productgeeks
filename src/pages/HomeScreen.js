@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./../components/Header";
 import Carousel from "./../components/homeComponents/Carousel";
 import Footer from "./../components/Footer";
@@ -9,6 +9,10 @@ import Browse from "../components/homeComponents/Browse";
 
 const HomeScreen = () => {
   const [platform] = useState('Mobile');
+
+  useEffect(() => {
+    window.location.pathname === '/' && (window.location.href = '/browse/mobile/apps');
+  }, []);
 
   window.scrollTo(0, 0);
   
