@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
-import Rating from "../components/homeComponents/Rating";
+import Rating from "../components/browsScreen/Rating";
 import { Link, useParams  } from "react-router-dom";
 import products from "../data/Products";
 

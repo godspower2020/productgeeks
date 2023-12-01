@@ -2,7 +2,7 @@ import React from 'react'
 import Header from "./../components/Header";
 import Footer from '../components/Footer';
 import Blogs from '../components/blogComponents/Blogs';
-import CalltoActionSection from '../components/homeComponents/CalltoActionSection';
+import CalltoActionSection from '../components/blogComponents/CalltoActionSection';
 
 const Blog = () => {
   return (

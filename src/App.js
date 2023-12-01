@@ -5,6 +5,7 @@ import "./responsive.scss";
 import "react-toastify/dist/ReactToastify.css";
 
 import HomeScreen from "./pages/HomeScreen";
+import WebScreen from "./pages/WebScreen";
 import SingleProduct from "./pages/SingleProduct";
 import Blog from "./pages/Blog";
 import SingleBlog from "./pages/SingleBlog";
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<HomeScreen />} />
           <Route path="/browse/mobile/apps" element={<HomeScreen />} />
+          <Route path="/browse/web/apps" exact element={<WebScreen />} />
           <Route path="/products/:id" exact element={<SingleProduct />} />
           <Route path="/blog" exact element={<Blog />} />
           <Route path="/blog/:id" exact element={<SingleBlog />} />

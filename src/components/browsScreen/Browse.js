@@ -21,6 +21,13 @@ const Browse = ({ products, platform }) => {
         : products.filter((product) => product.category.includes(selectedCategory))
     );
   }, [selectedCategory, products]);
+  // useEffect(() => {
+  //   setFilteredProducts(
+  //     selectedCategory === 'All'
+  //       ? products.filter((product) => product.platform === platform)
+  //       : products.filter((product) => product.category.includes(selectedCategory) && product.platform === platform)
+  //   );
+  // }, [selectedCategory, products, platform]);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -37,10 +44,10 @@ const Browse = ({ products, platform }) => {
         selectedCategory={selectedCategory}
         handleCategoryClick={handleCategoryClick}
       />
-      <div className="product-case">
+      <div className={`product-case ${selectedCategory === 'All' ? 'all-products' : ''}`}>
         {filteredProducts.map((product) => (
           <div
-            className={`mobile-product-screen ${platform === 'Mobile' ? '' : 'web-product-screen'}`}
+            className={`product-screen ${product.platform === 'Mobile' ? 'mobile-product-screen' : 'web-product-screen'}`}
             key={product._id}
           >
             <>

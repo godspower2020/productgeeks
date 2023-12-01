@@ -1,16 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./../components/Header";
 import Carousel from "../components/Carousel";
 import Footer from "./../components/Footer";
 import Prompt from "../components/AuthComponents/Prompt";
 import Screens from "../components/Screens";
 
-
-const HomeScreen = () => {
-
-  useEffect(() => {
-    window.location.pathname === '/' && (window.location.href = '/browse/mobile/apps');
-  }, []);
+const WebScreen = () => {
   
   return (
     <div>
@@ -23,4 +18,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default WebScreen;

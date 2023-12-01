@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const FilterCategorySlider = ({ categories, selectedCategory, handleCategoryClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(false);
   const containerRef = useRef(null);
+
+  const location = useLocation();
 
   useEffect(() => {
     updateButtonVisibility();
@@ -68,7 +70,7 @@ const FilterCategorySlider = ({ categories, selectedCategory, handleCategoryClic
             id={`category-${index}`}
             key={category}
             to={{
-              pathname: '/',
+              pathname: location.pathname, 
               search: `?category=${category}`,
             }}
             className={`categoryButton ${selectedCategory === category ? 'activeCategory' : ''}`}

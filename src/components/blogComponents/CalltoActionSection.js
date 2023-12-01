@@ -18,11 +18,6 @@ const CalltoActionSection = () => {
             </div>
           </div>
         </form>
-
-        {/* <form className="form-section">
-          <input placeholder="Your Email..." name="email" type="email" />
-          <button type="button">Yes. I want!</button>
-        </form> */}
       </div>
     </div>
   );
