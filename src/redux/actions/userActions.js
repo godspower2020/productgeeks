@@ -1,4 +1,5 @@
-import axios from "axios";
+import API from '../api/index';
+
 import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
 
 // USER LOGIN
@@ -14,7 +15,7 @@ export const login = (email, password) => async(dispatch) => {
             }
         }
 
-        const {data} = await axios.post(`/api/users/login`, {email, password}, config);
+        const {data} = await API.post(`/api/users/login`, {email, password}, config);
 
         dispatch({
             type: USER_LOGIN_SUCCESS, 
@@ -60,7 +61,7 @@ export const register = (name, email, password, confirmPassword) => async(dispat
             }
         }
 
-        const {data} = await axios.post(`/api/users`, {name, email, password, confirmPassword}, config);
+        const {data} = await API.post(`/api/users`, {name, email, password, confirmPassword}, config);
 
         dispatch({
             type: USER_REGISTER_SUCCESS, 
@@ -99,7 +100,7 @@ export const getUserProfileDetails = (id) => async(dispatch, getState) => {
             },
         }
 
-        const {data} = await axios.get(`/api/users/${id}`, config);
+        const {data} = await API.get(`/api/users/${id}`, config);
 
         dispatch({
             type: USER_PROFILE_SUCCESS, 
@@ -137,7 +138,7 @@ export const updateUserProfile = (user) => async(dispatch, getState) => {
             },
         }
 
-        const {data} = await axios.put(`/api/users/profile`, user, config);
+        const {data} = await API.put(`/api/users/profile`, user, config);
 
         dispatch({
             type: USER_UPDATE_PROFILE_SUCCESS, 
@@ -179,7 +180,7 @@ export const confirmEmail = (email, code) => async (dispatch) => {
         },
         };
 
-        await axios.post(`/api/users/confirm-email`, { email, code }, config);
+        await API.post(`/api/users/confirm-email`, { email, code }, config);
 
         dispatch({
         type: EMAIL_CONFIRMATION_SUCCESS,
