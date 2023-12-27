@@ -32,7 +32,7 @@ function App() {
           <Route path="/browse/mobile/apps/*" element={<HomeScreen />} />
           <Route path="/landing-page" element={<LandingPage />} />
           <Route path="/browse/web/apps/*" element={<WebScreen />} />
-          {/* <Route path="/apps/:id" element={<SingleProduct />} /> */}
+          <Route path="/apps/:id" element={<SingleProduct />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<SingleBlog />} />
           <Route path="/login" element={<Login />} />

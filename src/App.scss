@@ -386,10 +386,10 @@ textarea:focus {
     
     .navbar-nav {
       flex-direction: row;
-      gap: 20px;
+      gap: 15px;
 
       .nav-link {
-        padding: 12px 0;
+        padding: 10px 0 5px;
         font-size: 16px;
         color: var(--link-grey-color) !important;
         white-space: nowrap;
@@ -399,11 +399,19 @@ textarea:focus {
           font-weight: 600;
           transition: .1s ease-in-out;
         }
+
+        @media (min-width: 1093px) {
+          padding: 12px 0;
+        }
       }
 
       .active .nav-link {
         color: var(--link-black-color) !important;
         font-weight: 600
+      }
+
+      @media (min-width: 1093px) {
+        gap: 20px;
       }
     }
 
@@ -464,7 +472,7 @@ textarea:focus {
       order: 3;
     }
 
-    @media (min-width: 1093px) {
+    @media (min-width: 949px) {
       .order:nth-child(3) {
         order: 3;
       }
@@ -775,7 +783,7 @@ textarea:focus {
             }
           }
 
-          @media (min-width: 390px) {
+          @media (min-width: 420px) {
             flex: 0 1 calc(50% - 10px);
           }
 

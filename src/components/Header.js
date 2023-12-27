@@ -90,10 +90,10 @@ const Header = () => {
           <div className="nav order">
             <ul className="navbar-nav">
               <li className={`nav-item ${activeLink("/browse/mobile/apps") && "active"}`}>
-                <Link className="nav-link" to="/browse/mobile/apps">Mobile Apps</Link>
+                <Link className="nav-link" to="/browse/mobile/apps">Mobile</Link>
               </li>
               <li className={`nav-item ${activeLink("/browse/web/apps") && "active"}`}>
-                <Link className="nav-link" to="/browse/web/apps">Web Apps</Link>
+                <Link className="nav-link" to="/browse/web/apps">Web</Link>
               </li>
               <li className={`nav-item ${activeLink("/landing-page") && "active"}`}>
                 <Link className="nav-link" to="/landing-page">Landing Page</Link>
