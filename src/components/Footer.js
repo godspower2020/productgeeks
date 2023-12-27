@@ -9,7 +9,11 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="row">
-        <Link className="col-lg-4 d-flex align-items-center footer-logo" to="/">
+        <Link 
+          className="col-lg-4 d-flex align-items-center footer-logo" 
+          to="/"
+            onClick={() => window.location.href = "/browse/mobile/apps"}
+        >
           <div className="navbar-brand m-0">
             <img alt="logo" src="/images/logo.png" />
           </div> 

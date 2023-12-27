@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-const Slider = ({ images, productId }) => {
+const Slider = ({ images, productId, maxSlides }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToSlide = (index) => {
@@ -9,11 +9,11 @@ const Slider = ({ images, productId }) => {
   };
 
   const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
   const goToPrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
   const containerStyle = {
@@ -30,7 +30,7 @@ const Slider = ({ images, productId }) => {
             <i className="fa fa-long-arrow-left" aria-hidden="true"></i>
           </div>
         )}
-        <Link to={`/products/${productId}`}>
+        <Link key={productId} to={`/apps/${productId}`}>
           <div className="slider-images" style={containerStyle}>
             {images.map((image, index) => (
               <img

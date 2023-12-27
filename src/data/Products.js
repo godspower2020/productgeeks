@@ -1,12 +1,16 @@
 const products = [
   {
-    _id: "1",
+       
     brandName: "Uber",
     category: ["All", "Business", "Transport", "Logistics", "Sky diving"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/swiggy.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video1.mp4", "/videos/video2.mp4", "/videos/video3.mp4"],
+    videosFlow: ["/videos/video1.avif", "/videos/video2.avif", "/videos/video3.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.brand.com",
@@ -21,13 +25,17 @@ const products = [
       visualDesign: 4.8
     },
   },
-  { _id: "2",
+  {    
     brandName: "patreon",
     category: ["All", "Business", "Eatery"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/patreon.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video2.avif", "/videos/video1.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -42,13 +50,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "3",
+  {    
     brandName: "revolut",
     category: ["All", "Business", "Logistics", "Tourism"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/revolut.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video4.mp4", "/videos/video5.mp4", "/videos/video3.mp4"],
+    videosFlow: ["/videos/video2.avif", "/videos/video1.avif", "/videos/video3.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.revolut.com",
@@ -63,13 +75,17 @@ const products = [
       visualDesign: 4
     },
   },
-  { _id: "4",
+  {    
     brandName: "swiggy",
     category: ["All", "Business", "Transport", "Car Racing"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/swiggy.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video5.mp4", "/videos/video6.mp4", "/videos/video7.mp4"],
+    videosFlow: ["/videos/video1.avif", "/videos/video2.avif", "/videos/video3.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.swiggy.com",
@@ -85,13 +101,17 @@ const products = [
     },
   },
   {
-    _id: "5",
-    brandName: "Uber",
+       
+    brandName: "Uber1",
     category: ["All", "Business", "Gaming"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/swiggy.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video1.mp4", "/videos/video2.mp4", "/videos/video3.mp4"],
+    videosFlow: ["/videos/video1.avif", "/videos/video2.avif", "/videos/video3.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.brand.com",
@@ -106,13 +126,17 @@ const products = [
       visualDesign: 4
     },
   },
-  { _id: "6",
-    brandName: "patreon",
+  {    
+    brandName: "patreon1",
     category: ["All", "Business", "Entertainment"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/patreon.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video2.avif", "/videos/video1.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -127,13 +151,17 @@ const products = [
       visualDesign: 4
     },
   },
-  { _id: "7",
-    brandName: "revolut",
+  {    
+    brandName: "revolut1",
     category: ["All", "Business"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/revolut.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video4.mp4", "/videos/video5.mp4", "/videos/video3.mp4"],
+    videosFlow: ["/videos/video2.avif", "/videos/video1.avif", "/videos/video3.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.revolut.com",
@@ -148,13 +176,17 @@ const products = [
       visualDesign: 4
     },
   },
-  { _id: "8",
-    brandName: "swiggy",
+  {    
+    brandName: "swiggy1",
     category: ["All", "Business", "Transport"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/swiggy.jpg", "/images/revolut.jpg", "/images/revolut.jpg"],
-    videosFlow: ["/videos/video5.mp4", "/videos/video6.mp4", "/videos/video7.mp4"],
+    videosFlow: ["/videos/video2.avif", "/videos/video2.avif", "/videos/video3.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.swiggy.com",
@@ -170,13 +202,17 @@ const products = [
     },
   },
   {
-    _id: "9",
-    brandName: "Uber",
+       
+    brandName: "Uber2",
     category: ["All", "Logistics"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/swiggy.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video1.mp4", "/videos/video2.mp4", "/videos/video3.mp4"],
+    videosFlow: ["/videos/video1.avif", "/videos/video2.avif", "/videos/video3.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.brand.com",
@@ -191,13 +227,17 @@ const products = [
       visualDesign: 4
     },
   },
-  { _id: "10",
-    brandName: "patreon",
+  {     
+    brandName: "patreon2",
     category: ["All"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/revolut.jpg", "/images/patreon.jpg", "/images/revolut.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video2.avif", "/videos/video2.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -212,13 +252,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "11",
-    brandName: "patreon",
+  {     
+    brandName: "patreon3",
     category: ["All"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/patreon.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video2.avif", "/videos/video2.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -233,13 +277,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "12",
-    brandName: "patreon",
+  {     
+    brandName: "patreon4",
     category: ["All", "Food & Beverages"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/patreon.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video2.avif", "/videos/video2.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -254,13 +302,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "13",
-    brandName: "patreon",
+  {     
+    brandName: "patreon5",
     category: ["All"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/revolut.jpg", "/images/patreon.jpg", "/images/revolut.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video2.avif", "/videos/video2.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -275,13 +327,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "14",
-    brandName: "patreon",
+  {     
+    brandName: "patreon6",
     category: ["All"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/patreon.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video2.avif", "/videos/video2.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -296,13 +352,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "15",
-    brandName: "patreon",
+  {     
+    brandName: "patreon7",
     category: ["All"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/revolut.jpg", "/images/patreon.jpg", "/images/revolut.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video2.avif", "/videos/video2.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -317,13 +377,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "16",
-    brandName: "patreon",
+  {     
+    brandName: "patreon8",
     category: ["All", "Coding Challenge"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/swiggy.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video2.avif", "/videos/video2.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -338,13 +402,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "17",
-    brandName: "patreon",
+  {     
+    brandName: "patreon9",
     category: ["All"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/patreon.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video2.avif", "/videos/video1.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -359,13 +427,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "18",
-    brandName: "patreon",
-    category: ["All", "Food & Beverages"],
+  {     
+    brandName: "patreon10",
+    category: ["All", "Food & Beverages", "Building"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/swiggy.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/revolut.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video1.avif", "/videos/video2.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -380,13 +452,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "19",
-    brandName: "patreon",
-    category: ["All", "Food & Beverages"],
+  {     
+    brandName: "patreon11",
+    category: ["All", "Food & Beverages", "Travel & Guide"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/patreon.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video3.avif", "/videos/video1.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -401,13 +477,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "20",
-    brandName: "patreon",
+  {     
+    brandName: "patreon12",
     category: ["All", "Food & Beverages"],
     platform: "Mobile",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/patreon.jpg", "/images/swiggy.jpg", "/images/swiggy.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/video3.avif", "/videos/video1.avif", "/videos/video1.avif"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -423,13 +503,17 @@ const products = [
     },
   },
   {
-    _id: "94",
-    brandName: "Uber",
+        
+    brandName: "Uber6",
     category: ["All", "Business", "Gaming"],
     platform: "Web",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/web-screen1.jpg", "/images/web-screen2.jpg", "/images/web-screen3.jpg"],
-    videosFlow: ["/videos/video1.mp4", "/videos/video2.mp4", "/videos/video3.mp4"],
+    videosFlow: ["/videos/web-video1.mp4", "/videos/web-video2.mp4", "/videos/web-video3.mp4"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.brand.com",
@@ -444,13 +528,17 @@ const products = [
       visualDesign: 4
     },
   },
-  { _id: "95",
-    brandName: "patreon",
+  {     
+    brandName: "patreon13",
     category: ["All", "Business", "Entertainment"],
     platform: "Web",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/web-screen3.jpg", "/images/web-screen2.jpg", "/images/web-screen3.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/web-video3.mp4", "/videos/web-video4.mp4", "/videos/web-video5.mp4"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -465,13 +553,17 @@ const products = [
       visualDesign: 4
     },
   },
-  { _id: "96",
-    brandName: "revolut",
+  {     
+    brandName: "revolut14",
     category: ["All", "Business", "Logistics"],
     platform: "Web",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/web-screen1.jpg", "/images/web-screen3.jpg", "/images/web-screen3.jpg"],
-    videosFlow: ["/videos/video4.mp4", "/videos/video5.mp4", "/videos/video3.mp4"],
+    videosFlow: ["/videos/web-video4.mp4", "/videos/web-video5.mp4", "/videos/web-video3.mp4"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.revolut.com",
@@ -486,13 +578,17 @@ const products = [
       visualDesign: 4
     },
   },
-  { _id: "97",
-    brandName: "swiggy",
+  {     
+    brandName: "swiggy15",
     category: ["All", "Business", "Transport"],
     platform: "Web",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/web-screen2.jpg", "/images/web-screen2.jpg", "/images/web-screen3.jpg"],
-    videosFlow: ["/videos/video5.mp4", "/videos/video6.mp4", "/videos/video7.mp4"],
+    videosFlow: ["/videos/web-video5.mp4", "/videos/web-video2.mp4", "/videos/web-video3.mp4"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.swiggy.com",
@@ -508,13 +604,16 @@ const products = [
     },
   },
   {
-    _id: "98",
-    brandName: "Uber",
+    brandName: "Uber16",
     category: ["All", "Business", "Transport", "Logistics"],
     platform: "Web",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/web-screen1.jpg", "/images/web-screen2.jpg", "/images/web-screen3.jpg"],
-    videosFlow: ["/videos/video1.mp4", "/videos/video2.mp4", "/videos/video3.mp4"],
+    videosFlow: ["/videos/web-video1.mp4", "/videos/web-video2.mp4", "/videos/web-video3.mp4"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.brand.com",
@@ -529,13 +628,17 @@ const products = [
       visualDesign: 4
     },
   },
-  { _id: "99",
-    brandName: "patreon",
+  {     
+    brandName: "patreon17",
     category: ["All"],
     platform: "Web",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/web-screen3.jpg", "/images/web-screen2.jpg", "/images/web-screen1.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/web-video3.mp4", "/videos/web-video4.mp4", "/videos/web-video5.mp4"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",
@@ -550,13 +653,17 @@ const products = [
       visualDesign: 3
     },
   },
-  { _id: "100",
-    brandName: "patreon",
+  { 
+    brandName: "patreon18",
     category: ["All"],
     platform: "Web",
-    productLogo: "/images/uber-logo.png",
+    productLogo: {
+      url: "/images/uber-logo.png",
+      originalname: "uber-logo.png",
+      filename: "uber-logo.png"
+    },
     screensFlow: ["/images/web-screen1.jpg", "/images/web-screen2.jpg", "/images/web-screen3.jpg"],
-    videosFlow: ["/videos/video3.mp4", "/videos/video4.mp4", "/videos/video5.mp4"],
+    videosFlow: ["/videos/web-video3.mp4", "/videos/web-video4.mp4", "/videos/web-video5.mp4"],
     description: {
       about: "Monzo is a digital-only bank platform and marketplace that allows customers to access a range of products and services.",
       website: "www.patreon.com",

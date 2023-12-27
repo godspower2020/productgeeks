@@ -1,12 +1,12 @@
 import React from "react";
 
-const LargeLoading = () => {
+const GrowLoading = () => {
   return (
     <div className="d-flex justify-content-center">
       <div
-        className="spinner-border text-success"
+        className="spinner-grow text-secondary"
         role="status"
-        style={{ width: "50px", height: "50px" }}
+        style={{ width: "30px", height: "30px" }}
       >
         <span className="sr-only">Loading...</span>
       </div>
@@ -14,13 +14,13 @@ const LargeLoading = () => {
   );
 };
 
-const SmallLoading = () => {
+const SpinnerLoading = () => {
   return (
     <div className="d-flex justify-content-center">
       <div
-        className="spinner-border text-success"
+        className="spinner-border text-white"
         role="status"
-        style={{ width: "20px", height: "20px" }}
+        style={{ width: "23px", height: "23px" }}
       >
         <span className="sr-only">Loading...</span>
       </div>
@@ -28,4 +28,4 @@ const SmallLoading = () => {
   );
 };
 
-export { LargeLoading, SmallLoading };
+export { GrowLoading, SpinnerLoading };

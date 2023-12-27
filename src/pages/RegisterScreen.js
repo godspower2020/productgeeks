@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Register from "../components/AuthComponents/Register";
-import AboutLinks from "../components/AboutLinks";
+import AboutLinks from "../components/AuthComponents/AboutLinks";
+// import MailCode from "../components/AuthComponents/MailCode";
 
 const RegisterScreen = () => {
   window.scrollTo(0, 0);
+
+  // const [showMailCode, setShowMailCode] = useState(false);
+
+  // const switchToMailCode = () => {
+  //   setShowMailCode(true);
+  // };
 
   return (
     <div className="stretch-me">
@@ -15,6 +22,7 @@ const RegisterScreen = () => {
           </div>
         </div>
         <Register />
+        {/* {showMailCode ? <MailCode /> : <Register onSuccess={switchToMailCode} />} */}
       </div>
     </div>
   );

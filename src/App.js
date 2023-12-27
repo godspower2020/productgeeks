@@ -1,11 +1,12 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import "./App.scss";
 import "./responsive.scss";
 import "react-toastify/dist/ReactToastify.css";
 
 import HomeScreen from "./pages/HomeScreen";
 import WebScreen from "./pages/WebScreen";
+import LandingPage from "./pages/LandingPage";
 import SingleProduct from "./pages/SingleProduct";
 import Blog from "./pages/Blog";
 import SingleBlog from "./pages/SingleBlog";
@@ -20,31 +21,33 @@ import Faqs from "./pages/Faqs";
 import NotFound from "./pages/NotFound";
 import ConfirmMail from "./pages/ConfirmMail";
 import VerifiedMail from "./pages/VerifiedMail";
+import PrivateRouter from "./PrivateRouter";
 
 function App() {
 
   return (
-    <BrowserRouter>
+    <Router>
         <Routes>
-          <Route path="/" exact element={<HomeScreen />} />
-          <Route path="/browse/mobile/apps" element={<HomeScreen />} />
-          <Route path="/browse/web/apps" exact element={<WebScreen />} />
-          <Route path="/products/:id" exact element={<SingleProduct />} />
-          <Route path="/blog" exact element={<Blog />} />
-          <Route path="/blog/:id" exact element={<SingleBlog />} />
-          <Route path="/login" exact element={<Login />} />
-          <Route path="/register" exact element={<Register />} />
-          <Route path="/confirm-mail" exact element={<ConfirmMail />} />
-          <Route path="/verified-mail" exact element={<VerifiedMail />} />
-          <Route path="/profile" exact element={<ProfileScreen />} /> 
-          <Route path="/contact" exact element={<Contact />} /> 
-          <Route path="/about" exact element={<About />} /> 
-          <Route path="/privacy" exact element={<Privacy />} /> 
-          <Route path="/terms" exact element={<Terms />} /> 
-          <Route path="/faqs" exact element={<Faqs />} /> 
-          <Route path="*" exact element={<NotFound />} />
+          <Route path="/" element={<Navigate to="/browse/mobile/apps" replace />} />
+          <Route path="/browse/mobile/apps/*" element={<HomeScreen />} />
+          <Route path="/landing-page" element={<LandingPage />} />
+          <Route path="/browse/web/apps/*" element={<WebScreen />} />
+          {/* <Route path="/apps/:id" element={<SingleProduct />} /> */}
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<SingleBlog />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/confirm-mail" element={<ConfirmMail />} />
+          <Route path="/verified-mail" element={<VerifiedMail />} />
+          <Route path="/profile" element={<PrivateRouter component={ProfileScreen} />} /> 
+          <Route path="/contact" element={<Contact />} /> 
+          <Route path="/about" element={<About />} /> 
+          <Route path="/privacy" element={<Privacy />} /> 
+          <Route path="/terms" element={<Terms />} /> 
+          <Route path="/faqs" element={<Faqs />} /> 
+          <Route path="*" element={<NotFound />} />
         </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

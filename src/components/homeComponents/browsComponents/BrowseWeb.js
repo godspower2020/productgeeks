@@ -1,7 +1,7 @@
 import React from 'react'
-import Browse from "../browsScreen/Browse";
+import Browse from "./Browse";
 
-const BrowseWeb = ({ products }) => {
+const BrowseWeb = ({ products, loading, error }) => {
     const webProducts = products.filter((product) => product.platform === 'Web');
 
     return (
@@ -10,7 +10,7 @@ const BrowseWeb = ({ products }) => {
           <div className="row">
             <div className="products">
               <h3 className="browse">Browse</h3>
-              <Browse platform="Web" products={webProducts} />
+              <Browse platform="Web" products={webProducts} loading={loading} error={error} />
             </div>
           </div>
         </div>

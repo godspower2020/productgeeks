@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-const FilterCategorySlider = ({ categories, selectedCategory, handleCategoryClick }) => {
+const FilterCategorySlider = ({ loading, categories, selectedCategory, handleCategoryClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(false);
@@ -55,40 +55,42 @@ const FilterCategorySlider = ({ categories, selectedCategory, handleCategoryClic
   };
 
   return (
-    <div className="filter-category-slider">
-      {showLeftButton && (
-        <div className="category-slider-fading left">
-          <div className="category-slider-icon category-slider-icon-left" onClick={handlePrevCategory}>
-            <i className="fa fa-long-arrow-left text-black" aria-hidden="true"></i>
+    <>
+      <div className="filter-category-slider">
+        {showLeftButton && (
+          <div className="category-slider-fading left">
+            <div className="category-slider-icon category-slider-icon-left" onClick={handlePrevCategory}>
+              <i className="fa fa-long-arrow-left text-black" aria-hidden="true"></i>
+            </div>
           </div>
+        )}
+  
+        <div className="filter-category" ref={containerRef} onScroll={handleScroll}>
+          {categories.map((category, index) => (
+            <Link
+              id={`category-${index}`}
+              key={category}
+              to={{
+                pathname: location.pathname, 
+                search: `?category=${category}`,
+              }}
+              className={`categoryButton ${selectedCategory === category ? 'activeCategory' : ''}`}
+              onClick={() => handleCategoryClick(category)}
+            >
+              {category}
+            </Link>
+          ))}
         </div>
-      )}
-
-      <div className="filter-category" ref={containerRef} onScroll={handleScroll}>
-        {categories.map((category, index) => (
-          <Link
-            id={`category-${index}`}
-            key={category}
-            to={{
-              pathname: location.pathname, 
-              search: `?category=${category}`,
-            }}
-            className={`categoryButton ${selectedCategory === category ? 'activeCategory' : ''}`}
-            onClick={() => handleCategoryClick(category)}
-          >
-            {category}
-          </Link>
-        ))}
+  
+        {showRightButton && (
+          <div className="category-slider-fading right">
+            <div className="category-slider-icon category-slider-icon-right" onClick={handleNextCategory}>
+              <i className="fa fa-long-arrow-right text-black" aria-hidden="true"></i>
+            </div>
+          </div>
+        )}
       </div>
-
-      {showRightButton && (
-        <div className="category-slider-fading right">
-          <div className="category-slider-icon category-slider-icon-right" onClick={handleNextCategory}>
-            <i className="fa fa-long-arrow-right text-black" aria-hidden="true"></i>
-          </div>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 

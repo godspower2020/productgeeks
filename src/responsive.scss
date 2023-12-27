@@ -1,3 +1,7 @@
+.single-product {
+  margin-top: 20px;
+}
+
 @media (max-width: 991.98px) {
   .display-none {
     display: none !important;
@@ -42,9 +46,6 @@
   }
   .subtotal-order button {
     margin-bottom: 30px;
-  }
-  .single-product {
-    margin-top: 20px;
   }
 }
 @media (max-width: 768px) {

@@ -1,10 +1,10 @@
 import React from 'react'
 import Login from './Login'
 
-const Prompt = () => {
+const Prompt = ({headingText}) => {
   return (
     <div className='login-prompt'>
-        <Login />
+        <Login headingText={headingText} useParagraphTag={true} />
     </div>
   )
 }

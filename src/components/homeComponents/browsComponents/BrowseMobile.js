@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Browse from '../browsScreen/Browse'
+import Browse from "./Browse";
 
-const BrowseMobile = ({ products }) => {
+const BrowseMobile = ({ products, loading, error }) => {
   const mobileProducts = products.filter((product) => product.platform === 'Mobile');
 
   return (
@@ -11,7 +11,7 @@ const BrowseMobile = ({ products }) => {
         <div className="row">
           <div className="products">
             <h3 className="browse">Browse</h3>
-            <Browse platform="Mobile" products={mobileProducts} />
+            <Browse platform="Mobile" products={mobileProducts} loading={loading} error={error} />
           </div>
         </div>
       </div>

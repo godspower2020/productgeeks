@@ -1,4 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
+import CarouselSlider from './CarouselSlider';
 
 const Carousel = () => {
   return (
@@ -9,33 +12,9 @@ const Carousel = () => {
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={2} className="indicate" aria-label="Slide 3" />
         </div>
         <div className="carousel-inner">
-            <div className="carousel-item active">
-                <img src="/images/carousel1.png" className="d-block w-100" alt="..." />
-                <div className='carousel-text'>
-                    <h1>Discover | Optimize | Share</h1>
-                    <p>Explore the world of user experiences.</p>
-                    <div>
-                        <button >Try For free</button>
-                        {/* <img className="m-0" alt="logo" src="/images/logo.png" /> */}
-                    </div>
-                </div>
-            </div>
-            <div className="carousel-item">
-                <img src="/images/carousel1.png" className="d-block w-100" alt="..." />
-                <div className='carousel-text'>
-                    <h1>Discover | Optimize | Share</h1>
-                    <p>Explore the world of user experiences.</p>
-                    <button >Try For free</button>
-                </div>
-            </div>
-            <div className="carousel-item">
-                <img src="/images/carousel1.png" className="d-block w-100" alt="..." />
-                <div className='carousel-text'>
-                    <h1>Discover | Optimize | Share</h1>
-                    <p>Explore the world of user experiences.</p>
-                    <button >Try For free</button>
-                </div>
-            </div>
+            <CarouselSlider active imgSrc="/images/carousel1.png" title="Discover | Optimize | Share" description="Explore the world of user experiences." />
+            <CarouselSlider imgSrc="/images/carousel1.png" title="Another Title" description="Another description." />
+            <CarouselSlider imgSrc="/images/carousel1.png" title="Yet Another Title" description="Yet another description." />
         </div>
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
             <span className="carousel-control-prev-icon" aria-hidden="true" />

@@ -1,23 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./../components/Header";
-import Carousel from "../components/Carousel";
 import Footer from "./../components/Footer";
 import Prompt from "../components/AuthComponents/Prompt";
-import Screens from "../components/Screens";
-
+import Carousel from "../components/homeComponents/Carousel";
+import Screens from "../components/homeComponents/Screens";
+import { useSelector } from "react-redux";
+import Interests from "../components/homeComponents/Interests";
 
 const HomeScreen = () => {
+  const userLogin = useSelector((state) => state.userLogin)
+  const {userInfo} = userLogin;
 
-  useEffect(() => {
-    window.location.pathname === '/' && (window.location.href = '/browse/mobile/apps');
-  }, []);
+  const homeScreenHeadingText = "Log in or sign up to continue browsing apps";
   
   return (
     <div>
       <Header />
-      <Carousel />
+      {!userInfo && <Carousel />}
+      {userInfo && <Interests />}
       <Screens />
-      <Prompt />
+      {!userInfo && <Prompt headingText={homeScreenHeadingText} />}
       <Footer />
     </div>
   );

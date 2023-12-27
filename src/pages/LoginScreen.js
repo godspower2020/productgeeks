@@ -1,6 +1,6 @@
 import React from "react";
 import Login from "../components/AuthComponents/Login";
-import AboutLinks from "../components/AboutLinks";
+import AboutLinks from "../components/AuthComponents/AboutLinks";
 
 const LoginScreen = () => { 
   window.scrollTo(0, 0);
@@ -14,7 +14,7 @@ const LoginScreen = () => {
             <AboutLinks />
           </div>
         </div>
-        <Login />
+        <Login headingText="Log In" useParagraphTag={false} />
       </div>
     </div>
   );
