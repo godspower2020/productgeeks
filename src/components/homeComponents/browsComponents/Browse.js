@@ -13,7 +13,7 @@ const Browse = ({ products, loading, error }) => {
   );
   const [filteredProducts, setFilteredProducts] = useState(products);
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
@@ -21,17 +21,17 @@ const Browse = ({ products, loading, error }) => {
     setFilteredProducts(
       selectedCategory === 'All'
         ? products
-        : products.filter((product) => product.category.includes(selectedCategory))
+        : products.filter((product) => product.categories.includes(selectedCategory))
     );
   }, [selectedCategory, products]);
 
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    queryParams.set('category', category);
+  const handleCategoryClick = (categories) => {
+    setSelectedCategory(categories);
+    queryParams.set('categories', categories);
     navigate({ search: queryParams.toString() });
   };
 
-  const categories = Array.from(new Set(products.flatMap((product) => product.category)));
+  const categories = Array.from(new Set(products.flatMap((product) => product.categories || [])));
 
   return (
     <>
@@ -63,7 +63,18 @@ const Browse = ({ products, loading, error }) => {
                 >
                   <div className="shop-product" key={product._id}>
                     <div className="shopBack">
-                      <Slider images={product.screensFlow} maxSlides={product.platform === 'Mobile' ? 3 : 4} productBrandName={product.brandName} productPlatform={product.platform} productId={product._id} />
+                    {product.screensFlow && product.screensFlow.length > 0 && (
+                      <Slider 
+                        images={product.screensFlow.map(flow => {
+                          console.log('Flow:', flow);
+                          return flow.url;
+                        })}
+                        maxSlides={product.platform === 'Mobile' ? 3 : 4} 
+                        productBrandName={product.brandName} 
+                        productPlatform={product.platform} 
+                        productId={product._id} 
+                      />
+                    )}
                     </div>
                   </div>
                   <div className="product-brand-cat mt-3" key={`brand-cat-${product._id}`}>
@@ -74,13 +85,21 @@ const Browse = ({ products, loading, error }) => {
                       <p>{product.brandName}</p>
                       <div className="category">
                         <span>
-                          {product.category.length > 0 &&
-                            (product.category
+                          {product.categories && product.categories.length > 0 ? (
+                            product.categories
                               .map((item, index) => (index ? ', ' : '') + item)
                               .join(', ')
-                              .length > 26
-                              ? `${product.category.map((item, index) => (index ? ', ' : '') + item).join('').slice(0, 26)}...`
-                              : product.category.map((item, index) => (index ? ', ' : '') + item).join(''))}
+                              .length > 26 ? (
+                                `${product.categories
+                                  .map((item, index) => (index ? ', ' : '') + item)
+                                  .join('')
+                                  .slice(0, 26)}...`
+                              ) : (
+                                product.categories.map((item, index) => (index ? ', ' : '') + item).join('')
+                              )
+                          ) : (
+                            ''
+                          )}
                         </span>
                       </div>
                     </Link>

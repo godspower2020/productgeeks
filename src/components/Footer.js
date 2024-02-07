@@ -15,7 +15,7 @@ const Footer = () => {
             onClick={() => window.location.href = "/browse/mobile/apps"}
         >
           <div className="navbar-brand m-0">
-            <img alt="logo" src="/images/logo.png" />
+            <img alt="logo" src="/img/logo.png" />
           </div> 
           <div className="px-1 navbar-brand-text text-white">
             <h5>product</h5>
@@ -24,13 +24,13 @@ const Footer = () => {
         </Link>
         <div className="col-lg-4 social-icons">
           <a className="" href='' target='_blank' rel="noreferrer">
-            <img alt="facebook" src="/images/facebook.png" />
+            <img alt="facebook" src="/img/facebook.png" />
           </a>
           <a className="" href='' target='_blank' rel="noreferrer">
-            <img alt="twitter-x" src="/images/twitter-x.png" />
+            <img alt="twitter-x" src="/img/twitter-x.png" />
           </a>
           <a className="" href='' target='_blank' rel="noreferrer">
-            <img alt="linkedin" src="/images/linkedin.png" />
+            <img alt="linkedin" src="/img/linkedin.png" />
           </a>
         </div>
         <div className="col-lg-4 year text-white">

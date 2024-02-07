@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 const Slider = ({ images, productId, maxSlides }) => {
+  console.log('Images:', images);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToSlide = (index) => {
@@ -36,9 +37,9 @@ const Slider = ({ images, productId, maxSlides }) => {
               <img
                 key={index}
                 src={image}
-                alt={`Slide ${index}`}
+                alt={`Slide ${index + 1}`}
                 className="slider-image"
-              />
+              /> 
             ))}
           </div>
         </Link>

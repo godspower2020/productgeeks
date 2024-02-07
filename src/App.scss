@@ -2,7 +2,7 @@
   --theme-purple: #9C55C2;
   --theme-dark: #626262;
   --black-color: #000;
-  --link-grey-color: #989898;
+  --link-grey-color: #989898; 
   --link-black-color: #151515;
   --screen-video-color: rgb(46, 46, 46);
   --black-color-opacity-2: rgba(0, 0, 0, .2);;
@@ -864,7 +864,7 @@ textarea:focus {
 
           @media (min-width: 1800px) {
             flex: 0 1 calc(22% - 10px);
-          }
+          } 
         }
 
         .slider-container .slider-icon,

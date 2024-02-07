@@ -68,8 +68,8 @@ const FilterCategorySlider = ({ loading, categories, selectedCategory, handleCat
         <div className="filter-category" ref={containerRef} onScroll={handleScroll}>
           {categories.map((category, index) => (
             <Link
+              key={index}
               id={`category-${index}`}
-              key={category}
               to={{
                 pathname: location.pathname, 
                 search: `?category=${category}`,

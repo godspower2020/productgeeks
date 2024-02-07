@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PasswordValidation = ({ validationResults, focused, formSubmitted  }) => {
-  
+   
   return (
     <div className={`password-validation ${focused ? 'visible' : ''}`}>
       <div className={`validation-item ${validationResults.minLength ? 'valid' : ''}`}>

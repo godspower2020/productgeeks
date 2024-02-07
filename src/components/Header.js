@@ -65,7 +65,7 @@ const Header = () => {
               to="/"
               onClick={() => window.location.href = "/browse/mobile/apps"}
             >
-              <img className="m-0" alt="logo" src="/images/logo.png" />
+              <img className="m-0" alt="logo" src="/img/logo.png" />
               <div className="navbar-brand-text text-black">
                 <h5>product</h5>
                 <h5>geeks</h5>

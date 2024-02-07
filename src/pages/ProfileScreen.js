@@ -38,7 +38,7 @@ const ProfileScreen = () => {
   const dispatch = useDispatch()
 
   const userProfileDetails = useSelector((state) => state.userProfileDetails)
-  const {error, user} = userProfileDetails;
+  const {error, loading, user} = userProfileDetails;
 
   const userUpdateProfileDetails = useSelector((state) => state.userUpdateProfileDetails)
   const {loading: updateLoading} = userUpdateProfileDetails;
@@ -143,100 +143,104 @@ const ProfileScreen = () => {
             <h2 className="my-2">Account settings</h2>
             <p className="py-3">Manage your Productgeeks profile</p>
           </div>
-          <div className="profile-avatar">
-            <p className="py-3">Profile Avatar</p>
-            <div className="round-cover-avatar">
-              <h1>AG</h1>
-            </div>
-          </div>
-          <form className="form-container" onSubmit={submitHandler}>
-            <div className="col-lg-12">
-              <div className="form">
-                <label for="account-fn">Full name</label>
-                <input 
-                  className="form-control" 
-                  type="text" 
-                  required 
-                  value={name} 
-                  onChange={handleNameChange} 
-                />
+          {loading ? "" : (
+            <>
+              <div className="profile-avatar">
+                <p className="py-3">Profile Avatar</p>
+                <div className="round-cover-avatar">
+                  <h1>AG</h1>
+                </div>
               </div>
-            </div>
-            <div className="col-lg-12">
-              <div className="form">
-                <label for="account-email">Email</label>
-                <input 
-                  className="form-control" 
-                  type="email" 
-                  required
-                  value={email} 
-                  onChange={(e) => setEmail(e.target.value)}  
-                />
-              </div>
-            </div>
-            {changePassword && (
-              <>
+              <form className="form-container" onSubmit={submitHandler}>
                 <div className="col-lg-12">
                   <div className="form">
-                    <label htmlFor="account-pass">New Password</label>
-                    {passwordFocused && <PasswordValidation validationResults={validationResults} focused={passwordFocused} />}
-                    <div className="password-input-container">
-                      <input
-                        className="form-control"
-                        type={showPassword ? 'text' : 'password'}
-                        placeholder="Password"
-                        required
-                        value={password}
-                        onChange={handlePasswordChange}
-                        onFocus={handlePasswordFocus}
-                      />
-                      {password && (
-                        <i
-                          className={`password-toggle ${showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'}`}
-                          aria-hidden="true"
-                          onClick={handleShowPassword}
-                        ></i>
-                      )}
-                    </div>
+                    <label for="account-fn">Full name</label>
+                    <input 
+                      className="form-control" 
+                      type="text" 
+                      required 
+                      value={name} 
+                      onChange={handleNameChange} 
+                    />
                   </div>
                 </div>
                 <div className="col-lg-12">
-                  <div className="confirmpassword-input-container form">
-                    <label htmlFor="account-confirm-pass">Confirm new password</label>
-                    <input
-                      className="form-control"
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder="Confirm Password"
+                  <div className="form">
+                    <label for="account-email">Email</label>
+                    <input 
+                      className="form-control" 
+                      type="email" 
                       required
-                      value={confirmPassword}
-                      onChange={(e) => {
-                        setConfirmPassword(e.target.value);
-                        setPasswordMatch(password === e.target.value);
-                      }}
+                      value={email} 
+                      onChange={(e) => setEmail(e.target.value)}  
                     />
-                    {!passwordMatch && (
-                      <span className="error-message">Passwords do not match</span>
-                    )}
                   </div>
                 </div>
-              </>
-            )}
-            <button
-              className="update-button"
-              type="submit"
-              disabled={!isFormValid && changePassword}
-            >
-              {updateLoading ? <SpinnerLoading /> : "Update"}
-            </button>
-            <br />
-            <button 
-              className="change-password-button"
-              type="button" 
-              onClick={() => setChangePassword(!changePassword)}
-            >
-              {changePassword ? 'Cancel Change Password' : 'Change Password'}
-            </button>
-          </form>
+                {changePassword && (
+                  <>
+                    <div className="col-lg-12">
+                      <div className="form">
+                        <label htmlFor="account-pass">New Password</label>
+                        {passwordFocused && <PasswordValidation validationResults={validationResults} focused={passwordFocused} />}
+                        <div className="password-input-container">
+                          <input
+                            className="form-control"
+                            type={showPassword ? 'text' : 'password'}
+                            placeholder="Password"
+                            required
+                            value={password}
+                            onChange={handlePasswordChange}
+                            onFocus={handlePasswordFocus}
+                          />
+                          {password && (
+                            <i
+                              className={`password-toggle ${showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'}`}
+                              aria-hidden="true"
+                              onClick={handleShowPassword}
+                            ></i>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-lg-12">
+                      <div className="confirmpassword-input-container form">
+                        <label htmlFor="account-confirm-pass">Confirm new password</label>
+                        <input
+                          className="form-control"
+                          type={showPassword ? 'text' : 'password'}
+                          placeholder="Confirm Password"
+                          required
+                          value={confirmPassword}
+                          onChange={(e) => {
+                            setConfirmPassword(e.target.value);
+                            setPasswordMatch(password === e.target.value);
+                          }}
+                        />
+                        {!passwordMatch && (
+                          <span className="error-message">Passwords do not match</span>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                )}
+                <button
+                  className="update-button"
+                  type="submit"
+                  disabled={!isFormValid && changePassword}
+                >
+                  {updateLoading ? <SpinnerLoading /> : "Update"}
+                </button>
+                <br />
+                <button 
+                  className="change-password-button"
+                  type="button" 
+                  onClick={() => setChangePassword(!changePassword)}
+                >
+                  {changePassword ? 'Cancel Change Password' : 'Change Password'}
+                </button>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </>
