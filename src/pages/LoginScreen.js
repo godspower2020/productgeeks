@@ -9,7 +9,7 @@ const LoginScreen = () => {
     <div className="stretch-me">
       <div className="login-me">
         <div className="image">
-          <img className="m-0" alt="logo" src="/images/login-image.png" />
+          <img className="m-0" alt="logo" src="/img/login-image.png" />
           <div className="centered-links">
             <AboutLinks />
           </div>
