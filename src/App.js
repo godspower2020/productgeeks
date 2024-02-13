@@ -19,8 +19,6 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Faqs from "./pages/Faqs";
 import NotFound from "./pages/NotFound";
-import ConfirmMail from "./pages/ConfirmMail";
-import VerifiedMail from "./pages/VerifiedMail";
 import PrivateRouter from "./PrivateRouter";
 
 function App() {
@@ -37,8 +35,6 @@ function App() {
           <Route path="/blog/:id" element={<SingleBlog />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/confirm-mail" element={<ConfirmMail />} />
-          <Route path="/verified-mail" element={<VerifiedMail />} />
           <Route path="/profile" element={<PrivateRouter component={ProfileScreen} />} /> 
           <Route path="/contact" element={<Contact />} /> 
           <Route path="/about" element={<About />} /> 

@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import Register from "../components/AuthComponents/Register";
 import AboutLinks from "../components/AuthComponents/AboutLinks";
-// import MailCode from "../components/AuthComponents/MailCode";
+import ConfirmEmail from "../components/AuthComponents/ConfirmEmail";
 
 const RegisterScreen = () => {
   window.scrollTo(0, 0);
 
-  // const [showMailCode, setShowMailCode] = useState(false);
+  const [showConfirmEmail, setShowConfirmEmail] = useState(false);
 
-  // const switchToMailCode = () => {
-  //   setShowMailCode(true);
-  // };
+  const userRegister = useSelector((state) => state.userRegister); 
+  const { success } = userRegister; 
+
+  useEffect(() => {
+    if (success) {
+      setShowConfirmEmail(true);
+    }
+  }, [success]);
 
   return (
     <div className="stretch-me">
@@ -21,8 +27,7 @@ const RegisterScreen = () => {
             <AboutLinks />
           </div>
         </div>
-        <Register />
-        {/* {showMailCode ? <MailCode /> : <Register onSuccess={switchToMailCode} />} */}
+        {showConfirmEmail ? <ConfirmEmail /> : <Register />}
       </div>
     </div>
   );

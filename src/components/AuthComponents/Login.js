@@ -39,8 +39,8 @@ const Login = ({ headingText, useParagraphTag }) => {
   return (
     <div className="form-login">
       <HeadingTag className="heading">{headingText}</HeadingTag>
-      {error && <Message variant="alert-danger">{error}</Message>}
       <form className="form-me" onSubmit={submitHandler}>
+        {error && <Message variant="alert-danger">{error}</Message>}
         <div className="email-input-container">
           <input 
             required
@@ -85,7 +85,7 @@ const Login = ({ headingText, useParagraphTag }) => {
 
         <button className='google-button'>
           <span className='mx-3'>
-            <img className="" alt="googlelogo" src="/images/google.png" />
+            <img className="" alt="googlelogo" src="/img/google.png" />
           </span>
           Continue with Google
         </button>

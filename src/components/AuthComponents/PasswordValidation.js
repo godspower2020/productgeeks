@@ -18,7 +18,7 @@ const PasswordValidation = ({ validationResults, focused, formSubmitted  }) => {
         ) : (
           <i className="fa fa-times" aria-hidden="true"></i>
         )}
-        <p>Lower case letter</p>
+        <p>Lowercase letter</p>
       </div>
       <div className={`validation-item ${validationResults.uppercase ? 'valid' : ''}`}>
         {validationResults.uppercase ? (
@@ -26,7 +26,7 @@ const PasswordValidation = ({ validationResults, focused, formSubmitted  }) => {
         ) : (
           <i className="fa fa-times" aria-hidden="true"></i>
         )}
-        <p>Upper case letter</p>
+        <p>Uppercase letter</p>
       </div>
       <div className={`validation-item ${validationResults.number ? 'valid' : ''}`}>
         {validationResults.number ? (

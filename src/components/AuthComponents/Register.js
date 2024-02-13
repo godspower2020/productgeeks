@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { register } from '../../redux/actions/userActions';
 import Message from '../LoadingError/Error';
 import { SpinnerLoading } from '../LoadingError/Loading';
@@ -23,20 +23,13 @@ const Register = () => {
     specialChar: false,
   });
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const dispatch = useDispatch(); 
   const location = useLocation(); 
 
   const redirect = location.search ? location.search.split("=")[1]:"/landing-page";
 
   const userRegister = useSelector((state) => state.userRegister)
-  const {error, loading, userInfo} = userRegister;
-
-  useEffect(() => {
-    if (userInfo) {
-      navigate(redirect);
-    }
-  }, [userInfo, navigate, redirect]);
+  const {error, loading} = userRegister;
 
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -89,17 +82,17 @@ const Register = () => {
     setName(capitalizedName);
   };
 
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
 
-    await dispatch(register(name, email, password, confirmPassword));
+   dispatch(register(name, email, password, confirmPassword));
   };
 
   return (
     <div className="form-register">
       <h4 className="heading">Register</h4>
-      {error && <Message variant="alert-danger">{error}</Message>}
       <form className="form-me" onSubmit={submitHandler}>
+        {error && <Message variant="alert-danger">{error}</Message>}
         <Link className="how-it-works" to={"/how-it-works"}>
           Need Help ?
         </Link>
@@ -160,7 +153,6 @@ const Register = () => {
         <button 
           className='register-button' 
           type="submit" 
-          to={"/confirm-mail"}
           disabled={!isFormValid}
         >
           {loading ? <SpinnerLoading /> : "Register"}
@@ -168,7 +160,7 @@ const Register = () => {
 
         <button className='google-button'>
           <span className='mx-3'>
-            <img className="" alt="googlelogo" src="/images/google.png" />
+            <img className="" alt="googlelogo" src="/img/google.png" />
           </span>
           Continue with Google
         </button>

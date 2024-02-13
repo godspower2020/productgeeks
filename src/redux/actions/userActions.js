@@ -67,12 +67,6 @@ export const register = (name, email, password, confirmPassword) => async(dispat
             type: USER_REGISTER_SUCCESS, 
             payload: data,
         });
-        dispatch({
-            type: USER_LOGIN_SUCCESS, 
-            payload: data,
-        });
-
-        localStorage.setItem("userInfo", JSON.stringify(data))
 
     } catch (error) {
         dispatch({
@@ -85,22 +79,65 @@ export const register = (name, email, password, confirmPassword) => async(dispat
     }
 }
 
+// CONFIRM EMAIL BY OTP
+export const confirmEmail = (email, otp) => async (dispatch) => {
+    try {
+      dispatch({
+        type: EMAIL_CONFIRMATION_REQUEST,
+      });
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+  
+      const { data } = await API.post(`/api/email-verification/verify`, { email, otp }, config);
+  
+      const verifiedUserInfo = { ...data, verified: true };
+  
+      dispatch({
+        type: EMAIL_CONFIRMATION_SUCCESS,
+      });
+  
+      dispatch({
+        type: USER_LOGIN_SUCCESS,
+        payload: verifiedUserInfo, 
+      });
+  
+      localStorage.setItem("userInfo", JSON.stringify(verifiedUserInfo));
+    } catch (error) {
+      dispatch({
+        type: EMAIL_CONFIRMATION_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+};
+  
 // USER PROFILE DETAILS
 export const getUserProfileDetails = (id) => async(dispatch, getState) => {
     try {
         dispatch({
             type: USER_PROFILE_REQUEST,
-        })
+        });
 
-        const { userLogin: { userInfo },} = getState();
+        const { userLogin: { userInfo }, } = getState();
+        const token = userInfo?.token; // Ensure userInfo and token are available
+
+        if (!token) {
+            throw new Error('User token is missing');
+        }
 
         const config = {
             headers: {
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${token}`
             },
-        }
+        };
 
-        const {data} = await API.get(`/api/users/${id}`, config);
+        const { data } = await API.get(`/api/users/${id}`, config);
 
         dispatch({
             type: USER_PROFILE_SUCCESS, 
@@ -109,18 +146,20 @@ export const getUserProfileDetails = (id) => async(dispatch, getState) => {
 
     } catch (error) {
         const message = error.response && error.response.data.message 
-        ? error.response.data.message 
-        : error.message;
+            ? error.response.data.message 
+            : error.message;
+
         if (message === "Not authorized, token failed") {
-            dispatch(logout())
+            dispatch(logout());
         }
+
         dispatch({
             type: USER_PROFILE_FAIL,
             payload: message,
-                
         });
     }
 }
+
 
 // USER UPDATE PROFILE
 export const updateUserProfile = (user) => async(dispatch, getState) => {
@@ -164,34 +203,6 @@ export const updateUserProfile = (user) => async(dispatch, getState) => {
                 
         });
     }
-
 }
-
-// CONFIRM EMAIL BY CODE
-export const confirmEmail = (email, code) => async (dispatch) => {
-    try {
-        dispatch({
-        type: EMAIL_CONFIRMATION_REQUEST,
-        });
-
-        const config = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        };
-
-        await API.post(`/api/users/confirm-email`, { email, code }, config);
-
-        dispatch({
-        type: EMAIL_CONFIRMATION_SUCCESS,
-        });
-    } catch (error) {
-        dispatch({
-        type: EMAIL_CONFIRMATION_FAIL,
-        payload:
-            error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-        });
-    }
-};
+  
+  
