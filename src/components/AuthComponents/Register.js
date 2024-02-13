@@ -91,8 +91,8 @@ const Register = () => {
   return (
     <div className="form-register">
       <h4 className="heading">Register</h4>
+      {error && <Message variant="alert-danger">{error}</Message>}
       <form className="form-me" onSubmit={submitHandler}>
-        {error && <Message variant="alert-danger">{error}</Message>}
         <Link className="how-it-works" to={"/how-it-works"}>
           Need Help ?
         </Link>

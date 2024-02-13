@@ -39,8 +39,8 @@ const Login = ({ headingText, useParagraphTag }) => {
   return (
     <div className="form-login">
       <HeadingTag className="heading">{headingText}</HeadingTag>
+      {error && <Message variant="alert-danger">{error}</Message>}
       <form className="form-me" onSubmit={submitHandler}>
-        {error && <Message variant="alert-danger">{error}</Message>}
         <div className="email-input-container">
           <input 
             required

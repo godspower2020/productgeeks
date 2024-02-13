@@ -30,8 +30,8 @@ const ConfirmEmail = () => {
   return (
     <div className="form-confirm mail-code">
       <h4 className='heading'>Verify Email</h4>
+      {error && <Message variant="alert-danger">{error}</Message>}
       <form className="form-me">
-        {error && <Message variant="alert-danger">{error}</Message>}
         <p className='mb-5'>
           A short code was sent to your email address <a href={`mailto:${userInfo.email}`} target="_blank" rel='noreferrer' style={{ color: 'blue' }}>{userInfo.email}</a>. Enter the code to verify your account.
         </p>
