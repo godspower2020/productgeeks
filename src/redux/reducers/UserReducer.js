@@ -1,4 +1,4 @@
-import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_RESET, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
+import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, RESEND_OTP_FAIL, RESEND_OTP_REQUEST, RESEND_OTP_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_RESET, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
 
 // LOGIN
 export const userLoginReducer = (state = {}, action) => {
@@ -68,6 +68,20 @@ export const emailConfirmationReducer = (state = {}, action) => {
       case EMAIL_CONFIRMATION_SUCCESS:
         return { loading: false, success: true };
       case EMAIL_CONFIRMATION_FAIL:
+        return { loading: false, error: action.payload };
+      default:
+        return state;
+    }
+  };
+
+// USER RESEND EMAIL
+export const resendEmailConfirmationReducer = (state = {}, action) => {
+    switch (action.type) {
+      case RESEND_OTP_REQUEST:
+        return { loading: true };
+      case RESEND_OTP_SUCCESS:
+        return { loading: false, success: true };
+      case RESEND_OTP_FAIL:
         return { loading: false, error: action.payload };
       default:
         return state;

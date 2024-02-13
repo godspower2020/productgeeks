@@ -1,6 +1,6 @@
 import API from '../api/index';
 
-import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
+import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, RESEND_OTP_FAIL, RESEND_OTP_REQUEST, RESEND_OTP_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
 
 // USER LOGIN
 export const login = (email, password) => async(dispatch) => {
@@ -160,7 +160,6 @@ export const getUserProfileDetails = (id) => async(dispatch, getState) => {
     }
 }
 
-
 // USER UPDATE PROFILE
 export const updateUserProfile = (user) => async(dispatch, getState) => {
     try {
@@ -205,4 +204,26 @@ export const updateUserProfile = (user) => async(dispatch, getState) => {
     }
 }
   
+export const resendOTP = (email) => async (dispatch) => {
+    try {
+      dispatch({ type: RESEND_OTP_REQUEST });
   
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+  
+      await API.post('/api/email-verification/resend-otp', { email }, config);
+  
+      dispatch({ type: RESEND_OTP_SUCCESS });
+    } catch (error) {
+      dispatch({
+        type: RESEND_OTP_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };  

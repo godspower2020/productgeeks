@@ -14,11 +14,11 @@ const GrowLoading = () => {
   );
 };
 
-const SpinnerLoading = () => {
+const SpinnerLoading = ({ variant }) => {
   return (
     <div className="d-flex justify-content-center">
       <div
-        className="spinner-border text-white"
+        className={`spinner-border ${variant}`}
         role="status"
         style={{ width: "23px", height: "23px" }}
       >
@@ -26,6 +26,10 @@ const SpinnerLoading = () => {
       </div>
     </div>
   );
+};
+
+SpinnerLoading.defaultProps = {
+  variant: "text-white",
 };
 
 export { GrowLoading, SpinnerLoading };

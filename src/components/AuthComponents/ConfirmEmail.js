@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { confirmEmail } from '../../redux/actions/userActions';
-import { SpinnerLoading } from '../LoadingError/Loading';
+import { toast } from "react-toastify";
+import Toast from '../LoadingError/Toast';
 import Message from '../LoadingError/Error';
+import { useNavigate } from 'react-router-dom';
+import { confirmEmail, resendOTP } from '../../redux/actions/userActions';
+import { SpinnerLoading } from '../LoadingError/Loading';
+
+const ToastObjects = {
+  pauseOnFocusLoss : false,
+  draggable: false,
+  pauseOnHover: false,
+  autoClose: 3000,
+}
 
 const ConfirmEmail = () => {
   const [otp, setOtp] = useState('');
+  
+  const toastId = React.useRef(null);
 
   const navigate = useNavigate(); 
   const dispatch = useDispatch();
@@ -14,52 +25,74 @@ const ConfirmEmail = () => {
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo } = userRegister;
 
-  const { loading, error } = useSelector((state) => state.userEmailConfirmation);
+  const { loading, success, error } = useSelector((state) => state.userEmailConfirmation);
+
+  const { loading: resendLoading, success:resendSuccess, error:resendError } = useSelector((state) => state.userResendEmailConfirmation);
+
+  useEffect(() => {
+    if (success) {
+      navigate('/landing-page');
+    }
+    if (resendSuccess) {
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast.success("Email Resent Successfully", ToastObjects);
+      }
+    }
+  }, [success, resendSuccess, navigate]);
 
   const handleConfirmation = async (e) => {
     e.preventDefault();
     
-    await dispatch(confirmEmail(userInfo?.email, otp))
-    .then(() => {
-      if (!error) {
-        navigate('/landing-page');
-      }
-    });
+    dispatch(confirmEmail(userInfo?.email, otp))
   }
 
+  const handleResendOTP = async () => {
+    try {
+      dispatch(resendOTP(userInfo?.email));
+      
+    } catch (error) {
+      console.error('Error resending OTP:', error);
+    }
+  }
+
+  // 07033903922_#Five
+
   return (
-    <div className="form-confirm mail-code">
-      <h4 className='heading'>Verify Email</h4>
-      {error && <Message variant="alert-danger">{error}</Message>}
-      <form className="form-me">
-        <p className='mb-5'>
-          A short code was sent to your email address <a href={`mailto:${userInfo.email}`} target="_blank" rel='noreferrer' style={{ color: 'blue' }}>{userInfo.email}</a>. Enter the code to verify your account.
-        </p>
-        <div className="fullname-input-container">
-          <label htmlFor="account-confirm-pass">Enter Code</label>
-          <input
-            required
-            type="text"
-            placeholder="Enter code"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-          />
-        </div>
-        <button
-          onClick={handleConfirmation}
-          className="register-button"
-          type="button"
-          disabled={!otp} // Disable button if otp field is empty
-          style={{ opacity: !otp ? '0.5' : '1' }} // Adjust opacity based on whether the otp field is empty
-        >
-          {loading ? <SpinnerLoading /> : 'Verify'}
-        </button>
-        <div className='return-resend'>
-          <span className="return-to-login">Return to login</span>
-          <span className="resend-otp">Resend OTP</span>
-        </div>
-      </form>
-    </div>
+    <>
+      <Toast />
+      <div className="form-confirm mail-code">
+        <h4 className='heading'>Verify Email</h4>
+        {error && <Message variant="alert-danger">{error}</Message>}
+        {resendError && <Message variant="alert-danger">{resendError}</Message>}
+        <form className="form-me">
+          <p className='mb-5'>
+            A short code was sent to your email address <a href={`mailto:${userInfo.email}`} target="_blank" rel='noreferrer' style={{ color: 'blue' }}>{userInfo.email}</a>. Enter the code to verify your account.
+          </p>
+          <div className="fullname-input-container">
+            <label htmlFor="account-confirm-pass">Enter Code</label>
+            <input
+              required
+              type="text"
+              placeholder="Enter code"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+            />
+          </div>
+          <button
+            onClick={handleConfirmation}
+            className="register-button"
+            type="button"
+            disabled={!otp} 
+            style={{ opacity: !otp ? '0.5' : '1' }} 
+          >
+            {loading ? <SpinnerLoading /> : 'Verify'}
+          </button>
+          <div className='resend' onClick={handleResendOTP}>
+            <span className="resend-otp">{resendLoading ? <SpinnerLoading variant="text-primary" /> : 'Resend OTP'}</span>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

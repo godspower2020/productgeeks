@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { productDetailsReducer, productListReducer } from './reducers/ProductReducers';
-import { userLoginReducer, userRegisterReducer, userProfileDetailsReducer, userUpdateProfileDetailsReducer, emailConfirmationReducer } from './reducers/UserReducer';
+import { userLoginReducer, userRegisterReducer, userProfileDetailsReducer, userUpdateProfileDetailsReducer, emailConfirmationReducer, resendEmailConfirmationReducer } from './reducers/UserReducer';
 
 // USER LOGIN
 const userInfoFromLocalStorage = localStorage.getItem("userInfo")
@@ -16,6 +16,7 @@ const store = configureStore({
     userProfileDetails : userProfileDetailsReducer,
     userUpdateProfileDetails : userUpdateProfileDetailsReducer,
     userEmailConfirmation: emailConfirmationReducer,
+    userResendEmailConfirmation: resendEmailConfirmationReducer,
   },
   preloadedState: {
     userLogin: {
