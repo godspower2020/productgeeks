@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from "react-router-dom";
+import { GoogleLogin } from '@react-oauth/google';
 import { register } from '../../redux/actions/userActions';
 import Message from '../LoadingError/Error';
 import { SpinnerLoading } from '../LoadingError/Loading';
 import PasswordValidation from './PasswordValidation';
 
-const Register = () => {
+const Register = ({onEmailChange}) => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -82,6 +83,11 @@ const Register = () => {
     setName(capitalizedName);
   };
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    onEmailChange(e.target.value);
+};
+
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -113,7 +119,7 @@ const Register = () => {
             placeholder="Email" 
             autoComplete="email"
             value={email} 
-            onChange={(e) => setEmail(e.target.value)}  
+            onChange={handleEmailChange}  
            />
         </div>
         {passwordFocused && <PasswordValidation validationResults={validationResults} focused={passwordFocused} />}
@@ -158,12 +164,15 @@ const Register = () => {
           {loading ? <SpinnerLoading /> : "Register"}
         </button>
 
-        <button className='google-button'>
-          <span className='mx-3'>
-            <img className="" alt="googlelogo" src="/img/google.png" />
-          </span>
-          Continue with Google
-        </button>
+        <GoogleLogin
+          className='google-button'
+          onSuccess={credentialResponse => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
 
         <p>
           Already have an account?

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useLocation  } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
+import { GoogleLogin } from '@react-oauth/google';
 import { login } from '../../redux/actions/userActions';
 import Message from '../LoadingError/Error';
 import { SpinnerLoading } from '../LoadingError/Loading';
@@ -95,12 +96,15 @@ const Login = ({ headingText, useParagraphTag }) => {
 
         <button className='login-button' type="submit">{loading ? <SpinnerLoading /> : "Login"}</button>
 
-        <button className='google-button'>
-          <span className='mx-3'>
-            <img className="" alt="googlelogo" src="/img/google.png" />
-          </span>
-          Continue with Google
-        </button>
+        <GoogleLogin
+          className='google-button'
+          onSuccess={credentialResponse => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
 
         <p>
           Don't have an account?

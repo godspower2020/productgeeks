@@ -17,6 +17,7 @@ const RegisterScreen = () => {
   window.scrollTo(0, 0);
 
   const [showConfirmEmail, setShowConfirmEmail] = useState(false);
+  const [email, setEmail] = useState("");
 
   const toastId = React.useRef(null);
 
@@ -30,6 +31,10 @@ const RegisterScreen = () => {
     }
   }, [success]);
 
+  const handleEmailChange = (email) => {
+    setEmail(email);
+  };
+
   return (
     <>
       <Toast />
@@ -41,7 +46,7 @@ const RegisterScreen = () => {
               <AboutLinks />
             </div>
           </div>
-          {showConfirmEmail ? <ConfirmEmail /> : <Register />}
+          {showConfirmEmail ? <ConfirmEmail email={email} /> : <Register onEmailChange={handleEmailChange} />}
         </div>
       </div>
     </>

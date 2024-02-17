@@ -14,16 +14,13 @@ const ToastObjects = {
   autoClose: 3000,
 }
 
-const ConfirmEmail = () => {
+const ConfirmEmail = ({email}) => {
   const [otp, setOtp] = useState('');
   
   const toastId = React.useRef(null);
 
   const navigate = useNavigate(); 
   const dispatch = useDispatch();
-
-  const userRegister = useSelector((state) => state.userRegister);
-  const { userInfo } = userRegister;
 
   const { loading, success, error } = useSelector((state) => state.userEmailConfirmation);
 
@@ -43,12 +40,12 @@ const ConfirmEmail = () => {
   const handleConfirmation = async (e) => {
     e.preventDefault();
     
-    dispatch(confirmEmail(userInfo?.email, otp))
+    dispatch(confirmEmail(email, otp))
   }
 
   const handleResendOTP = async () => {
     try {
-      dispatch(resendOTP(userInfo?.email));
+      dispatch(resendOTP(email));
       
     } catch (error) {
       console.error('Error resending OTP:', error);
@@ -66,7 +63,7 @@ const ConfirmEmail = () => {
         {resendError && <Message variant="alert-danger">{resendError}</Message>}
         <form className="form-me">
           <p className='mb-5'>
-            A short code was sent to your email address <a href={`mailto:${userInfo.email}`} target="_blank" rel='noreferrer' style={{ color: 'blue' }}>{userInfo.email}</a>. Enter the code to verify your account.
+            A short code was sent to your email address <a href={`mailto:${email}`} target="_blank" rel='noreferrer' style={{ color: 'blue' }}>{email}</a>. Enter the code to verify your account.
           </p>
           <Link className="how-it-works" to={"/how-it-works"}>
             Need Help ?
