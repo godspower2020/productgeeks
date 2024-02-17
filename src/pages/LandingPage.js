@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../components/Header'
-import Carousel from "../components/homeComponents/Carousel";
+import Carousel from "../components/Carousel";
 import Footer from '../components/Footer'
 import { useSelector } from 'react-redux'
 import Prompt from '../components/AuthComponents/Prompt'

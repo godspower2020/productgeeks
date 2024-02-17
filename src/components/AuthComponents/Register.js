@@ -153,7 +153,7 @@ const Register = () => {
         <button 
           className='register-button' 
           type="submit" 
-          disabled={!isFormValid}
+          disabled={!isFormValid || loading}
         >
           {loading ? <SpinnerLoading /> : "Register"}
         </button>

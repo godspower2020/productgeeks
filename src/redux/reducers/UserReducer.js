@@ -1,4 +1,4 @@
-import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, RESEND_OTP_FAIL, RESEND_OTP_REQUEST, RESEND_OTP_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_RESET, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
+import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, RESEND_OTP_FAIL, RESEND_OTP_REQUEST, RESEND_OTP_SUCCESS, RESET_EMAIL_FAIL, RESET_EMAIL_REQUEST, RESET_EMAIL_SUCCESS, RESET_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST,  USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
 
 // LOGIN
 export const userLoginReducer = (state = {}, action) => {
@@ -82,6 +82,34 @@ export const resendEmailConfirmationReducer = (state = {}, action) => {
       case RESEND_OTP_SUCCESS:
         return { loading: false, success: true };
       case RESEND_OTP_FAIL:
+        return { loading: false, error: action.payload };
+      default:
+        return state;
+    }
+  };
+
+// USER REQUEST NEW PASSWORD EMAIL
+export const passwordResetMailReducer = (state = {}, action) => {
+    switch (action.type) {
+      case RESET_EMAIL_REQUEST:
+        return { loading: true };
+      case RESET_EMAIL_SUCCESS:
+        return { loading: false, success: true };
+      case RESET_EMAIL_FAIL:
+        return { loading: false, error: action.payload };
+      default:
+        return state;
+    }
+  };
+
+// USER NEW PASSWORD
+export const passwordResetReducer = (state = {}, action) => {
+    switch (action.type) {
+      case RESET_PASSWORD_REQUEST:
+        return { loading: true };
+      case RESET_PASSWORD_SUCCESS:
+        return { loading: false, success: true };
+      case RESET_PASSWORD_FAIL:
         return { loading: false, error: action.payload };
       default:
         return state;

@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import Prompt from "../components/AuthComponents/Prompt";
-import Carousel from "../components/homeComponents/Carousel";
+import Carousel from "../components/Carousel";
 import Screens from "../components/homeComponents/Screens";
 import { useSelector } from "react-redux";
 import Interests from "../components/homeComponents/Interests";

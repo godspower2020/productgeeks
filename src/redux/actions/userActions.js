@@ -1,6 +1,6 @@
 import API from '../api/index';
 
-import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, RESEND_OTP_FAIL, RESEND_OTP_REQUEST, RESEND_OTP_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
+import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, RESEND_OTP_FAIL, RESEND_OTP_REQUEST, RESEND_OTP_SUCCESS, RESET_EMAIL_FAIL, RESET_EMAIL_REQUEST, RESET_EMAIL_SUCCESS, RESET_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
 
 // USER LOGIN
 export const login = (email, password) => async(dispatch) => {
@@ -226,4 +226,50 @@ export const resendOTP = (email) => async (dispatch) => {
             : error.message,
       });
     }
-  };  
+};
+
+export const sendPasswordResetMail = (email) => async (dispatch) => {
+    try {
+      dispatch({ type: RESET_EMAIL_REQUEST });
+  
+      const { data } = await API.post('/api/reset-password', { email });
+  
+      dispatch({
+        type: RESET_EMAIL_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: RESET_EMAIL_FAIL,
+        payload: error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+      });
+    }
+  };
+
+// CONFIRM RESET EMAIL BY OTP
+export const resetPassword = (email, otp, newPassword) => async (dispatch) => {
+    try {
+      dispatch({ type: RESET_PASSWORD_REQUEST });
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+  
+      await API.post('/api/reset-password/reset', { email, otp, newPassword }, config);
+  
+      dispatch({
+        type: RESET_PASSWORD_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: RESET_PASSWORD_FAIL,
+        payload: error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+      });
+    }
+  };

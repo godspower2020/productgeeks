@@ -11,6 +11,7 @@ import SingleProduct from "./pages/SingleProduct";
 import Blog from "./pages/Blog";
 import SingleBlog from "./pages/SingleBlog";
 import Login from "./pages/LoginScreen";
+import ResetPassword from "./pages/ResetPasswordScreen";
 import Register from "./pages/RegisterScreen"; 
 import ProfileScreen from "./pages/ProfileScreen";
 import Contact from "./pages/Contact";
@@ -34,6 +35,7 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<SingleBlog />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<PrivateRouter component={ProfileScreen} />} /> 
           <Route path="/contact" element={<Contact />} /> 

@@ -9,6 +9,7 @@ const Login = ({ headingText, useParagraphTag }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false);
+  const [keepLoggedIn, setKeepLoggedIn] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
@@ -29,9 +30,13 @@ const Login = ({ headingText, useParagraphTag }) => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
+  const handleCheckboxChange = (e) => {
+    setKeepLoggedIn(e.target.checked);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(email, password))
+    dispatch(login(email, password, keepLoggedIn))
   }
 
   const HeadingTag = useParagraphTag ? "p" : "h4";
@@ -71,13 +76,20 @@ const Login = ({ headingText, useParagraphTag }) => {
         <div className='persist-reset mt-4'>
           <div className='persist'>
             <label className="custom-checkbox">
-              <input className='m-0' type="checkbox" />
+              <input
+                className='m-0'
+                type="checkbox"
+                checked={keepLoggedIn}
+                onChange={handleCheckboxChange}
+              />
               <span className="checkmark" />
               Keep me logged in
             </label>
           </div>
-          <div className='reset'>
-            <a href="/">Forgot Password?</a>
+          <div>
+            <p className='m-0'>
+              <Link to="/reset-password">Forgot Password?</Link>
+            </p>
           </div>
         </div>
 
