@@ -20,24 +20,29 @@ const Header = () => {
   useEffect(() => {
     const closeDropdown = () => {
       setDropdownOpen(false);
-      document.body.style.overflow = 'auto'; 
     };
-
+  
+    const handleScroll = () => {
+      if (dropdownOpen) {
+        closeDropdown();
+      }
+    };
+  
     if (dropdownOpen) {
-      document.body.style.overflow = 'hidden'; 
-      document.addEventListener('click', closeDropdown);
+      document.addEventListener("click", closeDropdown);
+      window.addEventListener("scroll", handleScroll);
     }
-
+  
     return () => {
-      document.removeEventListener('click', closeDropdown);
-      document.body.style.overflow = 'auto'; 
+      document.removeEventListener("click", closeDropdown);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [dropdownOpen]);
+  
 
   const toggleDropdown = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     setDropdownOpen(!dropdownOpen);
-    document.body.classList.toggle('dropdown-open');
   };
 
   const getInitials = (user) => {
@@ -172,5 +177,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// imagine i was in my contact page, and i am logged in, automatically, the login or signin button is not showing, theres a user now. then i try to go to the login screen, i am immediately redirection to the landing page. i dont like that activity. i will like to stay in my current page

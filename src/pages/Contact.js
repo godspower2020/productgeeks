@@ -50,7 +50,7 @@ const Contact = () => {
         <Toast />
         <div className='container contact'>
           <div className='section'>
-            <div className='row  section-1'>
+            <div className='row section-1'>
               <h1>Contact Us</h1>
               <p>Do you have any issue with any area of our operations? We are here for you.</p>
             </div>

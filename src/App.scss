@@ -1423,6 +1423,7 @@ textarea:focus {
   h1 {
     font-size: 40px;
     margin: 40px 0;
+    font-weight: bold;
   }
 
   h2 {
@@ -1434,6 +1435,10 @@ textarea:focus {
     
     @media (min-width: 768px) {
       padding: 90px 0;
+
+      .section-1 {
+        text-align: center;
+      }
     }
 
     .follow-social {
