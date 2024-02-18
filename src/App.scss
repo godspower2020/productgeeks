@@ -20,7 +20,7 @@ body {
   font-family: 'Work Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 17px;
+  font-size: 14.8px;
   padding: 0;
   box-sizing: border-box;
   color: var(--theme-dark);
@@ -31,6 +31,16 @@ a {
   text-decoration: none;
   color: var(--black-color);
 }
+
+p,
+span {
+  line-height: 1.6;
+}
+
+ul {
+  color: var(--black-color);
+}
+
 i,
 a,
 p,
@@ -44,10 +54,29 @@ span {
   padding: 0;
   margin: 0;
 }
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--black-color);
+}
+
+h1 {
+  @media (min-width: 768px) {
+      font-size: 58px !important;
+      font-weight: 900 !important;
+      margin: 30px 0 !important;
+  }
+}
+
 input:focus,
 select:focus,
 textarea:focus {
   outline: 0px;
+}
+.not-found {
+  margin-top: 90px;
 }
 
 /* custom container class to keey all product and its details */
@@ -390,7 +419,7 @@ textarea:focus {
 
       .nav-link {
         padding: 10px 0 5px;
-        font-size: 16px;
+        font-size: 15px;
         color: var(--link-grey-color) !important;
         white-space: nowrap;
 
@@ -402,6 +431,7 @@ textarea:focus {
 
         @media (min-width: 1093px) {
           padding: 12px 0;
+          font-size: 16px;
         }
       }
 
@@ -1389,17 +1419,21 @@ textarea:focus {
 // CONTACT
 .contact {
   margin-top: 70px;
+  
+  h1 {
+    font-size: 40px;
+    margin: 40px 0;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
 
   .section {
     padding: 40px 0;
     
     @media (min-width: 768px) {
       padding: 90px 0;
-    }
-
-    h1, 
-    h2 {
-      color: var(--black-color);
     }
 
     .follow-social {
@@ -1425,25 +1459,20 @@ textarea:focus {
   
       }
     }
-
-    .section-1 {
-
-      h1 {
-        font-size: 60px;
-        font-weight: 900;
-        margin: 30px 0;
-      }
-    }
   }
 
-  .form {
-    border-radius: 10px;
-    padding: 0 20px;
+  .form,
+  .form-control {
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=28, Direction=0, Color=#ABABAB)";/*IE 8*/
     -moz-box-shadow: 0 0 28px 4px rgba(171,171,171,0.2);/*FF 3.5+*/
     -webkit-box-shadow: 0 0 28px 4px rgba(171,171,171,0.2);/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
     box-shadow: 0 0 28px 4px rgba(171,171,171,0.2);/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=28, Direction=135, Color=#ABABAB); /*IE 5.5-7*/
+  }
+
+  .form {
+    border-radius: 10px;
+    padding: 0 20px;
   
     .form-group input {
       height: 50px;
@@ -1461,6 +1490,50 @@ textarea:focus {
       box-shadow: 0 10px 53px 0 rgba(163, 204, 170, 0.1);
     }
     
+  }
+}
+
+.about,
+.terms,
+.privacy {
+  margin-top: 90px;
+
+  h2 {
+    margin: 30px 0;
+    font-weight: 600;
+  }
+
+  .section {
+    padding: 20px 0 40px;
+  }
+}
+
+// ABOUT
+.about {
+
+  h1 {
+    font-size: 40px;
+    line-height: 1;
+    margin: 40px 0;
+  }
+}
+
+// TERMS
+.terms,
+.privacy {
+  
+  h2 {
+    font-size: 40px;
+  }
+
+  h5 {
+    color: var(--black-color);
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  p {
+    color: var(--black-color);
   }
 }
 

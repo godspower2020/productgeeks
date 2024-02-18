@@ -123,7 +123,7 @@ const Header = () => {
                 <Link className="" to="/register">
                   <button type="button" class="btn btn-theme-purple">sign up</button>
                 </Link>
-              </div>
+              </div> 
             }
           </div>  
         </div>
@@ -172,3 +172,5 @@ const Header = () => {
 };
 
 export default Header;
+
+// imagine i was in my contact page, and i am logged in, automatically, the login or signin button is not showing, theres a user now. then i try to go to the login screen, i am immediately redirection to the landing page. i dont like that activity. i will like to stay in my current page

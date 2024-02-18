@@ -8,10 +8,19 @@ import { getUserProfileDetails, updateUserProfile } from "../redux/actions/userA
 import { SpinnerLoading } from "../components/LoadingError/Loading";
 import PasswordValidation from "../components/AuthComponents/PasswordValidation";
 
+const ToastObjects = {
+  pauseOnFocusLoss : false,
+  draggable: false,
+  pauseOnHover: false,
+  autoClose: 3000,
+}
+
 const ProfileScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
+  const [nameChanged, setNameChanged] = useState(false); 
+  const [emailChanged, setEmailChanged] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("")
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -28,20 +37,13 @@ const ProfileScreen = () => {
 
   const toastId = React.useRef(null);
 
-  const ToastObjects = {
-    pauseOnFocusLoss : false,
-    draggable: false,
-    pauseOnHover: false,
-    autoClose: 3000,
-  }
-
   const dispatch = useDispatch()
 
   const userProfileDetails = useSelector((state) => state.userProfileDetails)
   const {error, loading, user} = userProfileDetails;
 
   const userUpdateProfileDetails = useSelector((state) => state.userUpdateProfileDetails)
-  const {loading: updateLoading} = userUpdateProfileDetails;
+  const {loading: updateLoading, success: updateSuccess, error: updateError} = userUpdateProfileDetails;
 
   useEffect(() => {
     if (user) {
@@ -83,6 +85,9 @@ const ProfileScreen = () => {
     setIsFormValid(isValidationPassed);
 
     setPassword(newPassword);
+    
+    setNameChanged(true);
+    setEmailChanged(true);
   };
 
   useEffect(() => {
@@ -103,6 +108,12 @@ const ProfileScreen = () => {
       .join(" ");
   
     setName(capitalizedName);
+    setNameChanged(true);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setEmailChanged(true); 
   };
 
   const submitHandler = (e) => {
@@ -119,24 +130,25 @@ const ProfileScreen = () => {
         password: changePassword ? password : undefined,
       };
   
-      dispatch(updateUserProfile(updatedUser));
-  
-      if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.success("Profile updated successfully", ToastObjects);
-      }
-  
-      if (changePassword) {
-        setPassword("");
-        setConfirmPassword("");
-      }
+      dispatch(updateUserProfile(updatedUser))
+      .then(() => {
+        if (changePassword) {
+          setPassword("");
+          setConfirmPassword("");
+        }
+        if (!toast.isActive(toastId.current)) {
+          toastId.current = toast.success("Profile updated successfully", ToastObjects);
+        }
+      })
     }
-  };  
+  };    
 
   return (
     <>
       <Header />
       <Toast />
         {error && <Message variant="alert-danger">{error}</Message>}
+        {updateError && <Message variant="alert-danger">{updateError}</Message>}
       <div className="container profile-account-settings">
         <div className="row align-items-start">
           <div className="sub-text">
@@ -172,7 +184,7 @@ const ProfileScreen = () => {
                       type="email" 
                       required
                       value={email} 
-                      onChange={(e) => setEmail(e.target.value)}  
+                      onChange={handleEmailChange}  
                     />
                   </div>
                 </div>
@@ -226,7 +238,8 @@ const ProfileScreen = () => {
                 <button
                   className="update-button"
                   type="submit"
-                  disabled={!isFormValid && changePassword}
+                  disabled={!(nameChanged || emailChanged) || (changePassword && !isFormValid) || updateLoading}
+                  style={{ opacity: (!(nameChanged || emailChanged) || (changePassword && !isFormValid) || updateLoading) ? '0.5' : '1' }} 
                 >
                   {updateLoading ? <SpinnerLoading /> : "Update"}
                 </button>

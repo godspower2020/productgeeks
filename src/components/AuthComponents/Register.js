@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GoogleLogin } from '@react-oauth/google';
 import { register } from '../../redux/actions/userActions';
 import Message from '../LoadingError/Error';
@@ -25,12 +25,22 @@ const Register = ({onEmailChange}) => {
   });
 
   const dispatch = useDispatch(); 
+  const navigate = useNavigate(); 
   const location = useLocation(); 
 
   const redirect = location.search ? location.search.split("=")[1]:"/landing-page";
 
   const userRegister = useSelector((state) => state.userRegister)
   const {error, loading} = userRegister;
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo} = userLogin;
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [userInfo, navigate, redirect]);
 
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
