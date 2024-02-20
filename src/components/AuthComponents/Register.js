@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { GoogleLogin } from '@react-oauth/google';
-import { register } from '../../redux/actions/userActions';
+import { googleLogin, register } from '../../redux/actions/userActions';
 import Message from '../LoadingError/Error';
 import { SpinnerLoading } from '../LoadingError/Loading';
 import PasswordValidation from './PasswordValidation';
@@ -104,11 +103,22 @@ const Register = ({onEmailChange}) => {
    dispatch(register(name, email, password, confirmPassword));
   };
 
+  const googleLoginHandler = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+  
+    if (token) {
+      dispatch(googleLogin(token));
+    } else {
+      window.open("http://localhost:5000/auth/google/callback", "_self");
+    }
+  };
+
   return (
     <div className="form-register">
       <h4 className="heading">Register</h4>
       {error && <Message variant="alert-danger">{error}</Message>}
-      <form className="form-me" onSubmit={submitHandler}>
+      <form className="form-me">
         <Link className="how-it-works" to={"/how-it-works"}>
           Need Help ?
         </Link>
@@ -167,6 +177,7 @@ const Register = ({onEmailChange}) => {
         </div>
 
         <button 
+          onClick={submitHandler}
           className='register-button' 
           type="submit" 
           disabled={!isFormValid || loading}
@@ -174,15 +185,9 @@ const Register = ({onEmailChange}) => {
           {loading ? <SpinnerLoading /> : "Register"}
         </button>
 
-        <GoogleLogin
-          className='google-button'
-          onSuccess={credentialResponse => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-        />
+        <button onClick={() => googleLoginHandler()} className='google-button'>
+          sign in with google
+        </button>
 
         <p>
           Already have an account?
@@ -194,3 +199,14 @@ const Register = ({onEmailChange}) => {
 }
 
 export default Register
+
+// const googleLoginHandler = () => {
+//   const urlParams = new URLSearchParams(window.location.search);
+//   const token = urlParams.get('token');
+
+//   if (token) {
+//     dispatch(googleLogin(token));
+//   } else {
+//     window.open("http://localhost:5000/auth/google/callback", "_self");
+//   }
+// };

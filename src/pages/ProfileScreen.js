@@ -147,12 +147,12 @@ const ProfileScreen = () => {
     <>
       <Header />
       <Toast />
-        {error && <Message variant="alert-danger">{error}</Message>}
-        {updateError && <Message variant="alert-danger">{updateError}</Message>}
       <div className="container profile-account-settings">
         <div className="row align-items-start">
           <div className="sub-text">
             <h2 className="my-2">Account settings</h2>
+            {error && <Message variant="alert-danger">{error}</Message>}
+            {updateError && <Message variant="alert-danger">{updateError}</Message>}
             <p className="py-3">Manage your Productgeeks profile</p>
           </div>
           {loading ? "" : (

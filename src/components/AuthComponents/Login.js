@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useLocation  } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { GoogleLogin } from '@react-oauth/google';
-import { login } from '../../redux/actions/userActions';
+import { googleLogin, login } from '../../redux/actions/userActions';
 import Message from '../LoadingError/Error';
 import { SpinnerLoading } from '../LoadingError/Loading';
 
@@ -40,13 +39,23 @@ const Login = ({ headingText, useParagraphTag }) => {
     dispatch(login(email, password, keepLoggedIn))
   }
 
+  const googleLoginHandler = async (userData) => {
+    window.open("http://localhost:5000/auth/google/callback", "_self")
+    try {
+  
+      dispatch(googleLogin(userData));
+    } catch (error) {
+      console.error("Error handling Google OAuth callback:", error);
+    }
+  };  
+
   const HeadingTag = useParagraphTag ? "p" : "h4";
   
   return (
     <div className="form-login">
       <HeadingTag className="heading">{headingText}</HeadingTag>
       {error && <Message variant="alert-danger">{error}</Message>}
-      <form className="form-me" onSubmit={submitHandler}>
+      <form className="form-me">
         <div className="email-input-container">
           <input 
             required
@@ -94,17 +103,11 @@ const Login = ({ headingText, useParagraphTag }) => {
           </div>
         </div>
 
-        <button className='login-button' type="submit">{loading ? <SpinnerLoading /> : "Login"}</button>
+        <button onClick={submitHandler} className='login-button' type="submit">{loading ? <SpinnerLoading /> : "Login"}</button>
 
-        <GoogleLogin
-          className='google-button'
-          onSuccess={credentialResponse => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-        />
+        <button onClick={googleLoginHandler} className='google-button'>
+          sign in with google
+        </button>
 
         <p>
           Don't have an account?

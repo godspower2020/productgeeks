@@ -1,6 +1,6 @@
 import API from '../api/index';
 
-import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, RESEND_OTP_FAIL, RESEND_OTP_REQUEST, RESEND_OTP_SUCCESS, RESET_EMAIL_FAIL, RESET_EMAIL_REQUEST, RESET_EMAIL_SUCCESS, RESET_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
+import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, GOOGLE_USER_LOGIN_FAIL, GOOGLE_USER_LOGIN_REQUEST, GOOGLE_USER_LOGIN_SUCCESS, RESEND_OTP_FAIL, RESEND_OTP_REQUEST, RESEND_OTP_SUCCESS, RESET_EMAIL_FAIL, RESET_EMAIL_REQUEST, RESET_EMAIL_SUCCESS, RESET_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
 
 // USER LOGIN
 export const login = (email, password) => async(dispatch) => {
@@ -78,6 +78,33 @@ export const register = (name, email, password, confirmPassword) => async(dispat
         });
     }
 }
+
+// GOOGLE LOGIN
+export const googleLogin = () => async (dispatch) => {
+  try {
+    dispatch({ type: GOOGLE_USER_LOGIN_REQUEST });
+
+    const response = await API.get("/auth/google/callback");
+    const userData = await response.json();
+
+    console.log("User data from Google:", userData);
+
+    dispatch({ 
+      type: GOOGLE_USER_LOGIN_SUCCESS 
+    });
+
+    dispatch({ 
+      type: USER_LOGIN_SUCCESS, 
+      payload: userData 
+    });
+
+    localStorage.setItem("userInfo", JSON.stringify(userData));
+  } catch (error) {
+    console.error('Error logging in with Google:', error);
+    dispatch({ type: GOOGLE_USER_LOGIN_FAIL, payload: error.message });
+  }
+};
+
 
 // CONFIRM EMAIL BY OTP
 export const confirmEmail = (email, otp) => async (dispatch) => {
