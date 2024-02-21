@@ -103,25 +103,26 @@ const Register = ({onEmailChange}) => {
    dispatch(register(name, email, password, confirmPassword));
   };
 
-  const googleLoginHandler = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-  
-    if (token) {
-      dispatch(googleLogin(token));
-    } else {
-      window.open("http://localhost:5000/auth/google/callback", "_self");
+  const googleLoginHandler = async (e) => {
+    e.preventDefault();
+    const serverUrl = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_SERVER_URL_PRO : process.env.REACT_APP_SERVER_URL_DEV;
+    const googleAuthUrl = `${serverUrl}/auth/google/callback`;
+    
+    window.open(googleAuthUrl, "_self");
+    
+    try {
+      dispatch(googleLogin());
+    } catch (error) {
+      console.error("Error handling Google OAuth callback:", error);
+      navigate('/login');
     }
-  };
+  }; 
 
   return (
     <div className="form-register">
       <h4 className="heading">Register</h4>
       {error && <Message variant="alert-danger">{error}</Message>}
       <form className="form-me">
-        <Link className="how-it-works" to={"/how-it-works"}>
-          Need Help ?
-        </Link>
         <div className="fullname-input-container">
           <input
             required
@@ -181,11 +182,12 @@ const Register = ({onEmailChange}) => {
           className='register-button' 
           type="submit" 
           disabled={!isFormValid || loading}
+          style={{ opacity: !isFormValid || loading ? '0.5' : '1' }}
         >
           {loading ? <SpinnerLoading /> : "Register"}
         </button>
 
-        <button onClick={() => googleLoginHandler()} className='google-button'>
+        <button onClick={googleLoginHandler} className='google-button'>
           sign in with google
         </button>
 
@@ -199,14 +201,3 @@ const Register = ({onEmailChange}) => {
 }
 
 export default Register
-
-// const googleLoginHandler = () => {
-//   const urlParams = new URLSearchParams(window.location.search);
-//   const token = urlParams.get('token');
-
-//   if (token) {
-//     dispatch(googleLogin(token));
-//   } else {
-//     window.open("http://localhost:5000/auth/google/callback", "_self");
-//   }
-// };

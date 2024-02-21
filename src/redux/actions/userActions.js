@@ -79,18 +79,11 @@ export const register = (name, email, password, confirmPassword) => async(dispat
     }
 }
 
-// GOOGLE LOGIN
-export const googleLogin = () => async (dispatch) => {
+// GOOGLE LOGIN 
+export const googleLogin = (userData) => async (dispatch) => {
   try {
-    dispatch({ type: GOOGLE_USER_LOGIN_REQUEST });
-
-    const response = await API.get("/auth/google/callback");
-    const userData = await response.json();
-
-    console.log("User data from Google:", userData);
-
     dispatch({ 
-      type: GOOGLE_USER_LOGIN_SUCCESS 
+      type: GOOGLE_USER_LOGIN_REQUEST 
     });
 
     dispatch({ 
@@ -105,9 +98,8 @@ export const googleLogin = () => async (dispatch) => {
   }
 };
 
-
 // CONFIRM EMAIL BY OTP
-export const confirmEmail = (email, otp) => async (dispatch) => {
+export const confirmEmail = (email, otp, token) => async (dispatch) => {
     try {
       dispatch({
         type: EMAIL_CONFIRMATION_REQUEST,
@@ -119,7 +111,7 @@ export const confirmEmail = (email, otp) => async (dispatch) => {
         },
       };
   
-      const { data } = await API.post(`/api/email-verification/verify`, { email, otp }, config);
+      const { data } = await API.post(`/api/email-verification/verify`, { email, otp, token }, config);
   
       const verifiedUserInfo = { ...data, verified: true };
   
@@ -133,6 +125,7 @@ export const confirmEmail = (email, otp) => async (dispatch) => {
       });
   
       localStorage.setItem("userInfo", JSON.stringify(verifiedUserInfo));
+      localStorage.setItem("token", verifiedUserInfo.token);
     } catch (error) {
       dispatch({
         type: EMAIL_CONFIRMATION_FAIL,
@@ -152,7 +145,7 @@ export const getUserProfileDetails = (id) => async(dispatch, getState) => {
         });
 
         const { userLogin: { userInfo }, } = getState();
-        const token = userInfo?.token; // Ensure userInfo and token are available
+        const token = userInfo?.token; 
 
         if (!token) {
             throw new Error('User token is missing');

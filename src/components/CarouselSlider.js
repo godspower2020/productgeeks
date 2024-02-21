@@ -8,7 +8,7 @@ const CarouselSlider = ({ active, imgSrc, title, description }) => {
       <div className='carousel-text'>
         <h1>{title}</h1>
         <p>{description}</p>
-        <Link to="/login">
+        <Link to="/register">
           <button type="button">Create free account</button>
         </Link>
       </div>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import Toast from '../LoadingError/Toast';
 import Message from '../LoadingError/Error';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { confirmEmail, resendOTP } from '../../redux/actions/userActions';
 import { SpinnerLoading } from '../LoadingError/Loading';
 
@@ -39,7 +39,7 @@ const ConfirmEmail = ({email}) => {
 
   const handleConfirmation = async (e) => {
     e.preventDefault();
-    
+
     dispatch(confirmEmail(email, otp))
   }
 
@@ -52,8 +52,6 @@ const ConfirmEmail = ({email}) => {
     }
   }
 
-  // 07033903922_#Five
-
   return (
     <>
       <Toast />
@@ -65,9 +63,6 @@ const ConfirmEmail = ({email}) => {
           <p className='mb-5'>
             A short code was sent to your email address <a href={`mailto:${email}`} target="_blank" rel='noreferrer' style={{ color: 'blue' }}>{email}</a>. Enter the code to verify your account.
           </p>
-          <Link className="how-it-works" to={"/how-it-works"}>
-            Need Help ?
-          </Link>
           <div className="fullname-input-container">
             <label htmlFor="account-confirm-pass">Enter Code</label>
             <input

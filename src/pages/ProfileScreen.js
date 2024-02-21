@@ -116,6 +116,17 @@ const ProfileScreen = () => {
     setEmailChanged(true); 
   };
 
+  const getInitials = (user) => {
+    const propertyToUse = user.name; 
+  
+    if (propertyToUse) {
+      const propertyArray = propertyToUse.split(' '); 
+      return propertyArray.slice(0, 2).map(word => word[0]).join('').toUpperCase();
+    }
+  
+    return '';
+  }; 
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (changePassword && password !== confirmPassword) {
@@ -155,13 +166,17 @@ const ProfileScreen = () => {
             {updateError && <Message variant="alert-danger">{updateError}</Message>}
             <p className="py-3">Manage your Productgeeks profile</p>
           </div>
-          {loading ? "" : (
+          {loading ? "" : ( 
             <>
               <div className="profile-avatar">
                 <p className="py-3">Profile Avatar</p>
-                <div className="round-cover-avatar">
-                  <h1>AG</h1>
-                </div>
+                {user.profileImage ? (
+                    <img src={user.profileImage} alt="Profile" className="profile-image" /> 
+                ) : (
+                    <div className="round-cover-avatar">
+                      <h1>{getInitials(user)}</h1>
+                    </div>
+                )}
               </div>
               <form className="form-container" onSubmit={submitHandler}>
                 <div className="col-lg-12">

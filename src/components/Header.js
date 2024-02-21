@@ -15,7 +15,6 @@ const Header = () => {
 
   const userLogin = useSelector((state) => state.userLogin)
   const {userInfo} = userLogin;
-
   
   useEffect(() => {
     const closeDropdown = () => {
@@ -113,9 +112,13 @@ const Header = () => {
           <div className="login order">
             {userInfo ? 
               <div className="round-cover-avatar" onClick={toggleDropdown}>
+                {userInfo.profileImage ? (
+                    <img src={userInfo.profileImage} alt="Profile" className="profile-image" /> 
+                ) : (
                 <div className="avatar d-flex justify-content-center align-items-center">
                   <p>{getInitials(userInfo)}</p>
                 </div>
+                )}
               </div>
               : 
               <div className="navbar-Login-register">

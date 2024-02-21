@@ -29,9 +29,6 @@ const ResetEmail = ({ loading, error, onEmailChange }) => {
             {error && <Message variant="alert-danger">{error}</Message>}
             <form className="form-me">
                 <p className='mb-5'>If you forgot your password, well, then we’ll email you a code to reset your password</p>
-                <Link className="how-it-works" to={"/how-it-works"}>
-                    Need Help ?
-                </Link>
                 <div className="fullname-input-container">
                     <label htmlFor="account-confirm-pass">Email</label>
                     <input

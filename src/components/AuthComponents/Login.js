@@ -36,16 +36,27 @@ const Login = ({ headingText, useParagraphTag }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    const form = e.target.form;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
     dispatch(login(email, password, keepLoggedIn))
   }
 
-  const googleLoginHandler = async (userData) => {
-    window.open("http://localhost:5000/auth/google/callback", "_self")
+  const googleLoginHandler = async (e) => {
+    e.preventDefault();
+    const serverUrl = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_SERVER_URL_PRO : process.env.REACT_APP_SERVER_URL_DEV;
+    const googleAuthUrl = `${serverUrl}/auth/google/callback`;
+    
+    window.open(googleAuthUrl, "_self");
+    
     try {
-  
-      dispatch(googleLogin(userData));
+      dispatch(googleLogin());
     } catch (error) {
       console.error("Error handling Google OAuth callback:", error);
+      navigate('/login');
     }
   };  
 
@@ -90,7 +101,7 @@ const Login = ({ headingText, useParagraphTag }) => {
                 className='m-0'
                 type="checkbox"
                 checked={keepLoggedIn}
-                onChange={handleCheckboxChange}
+                onChange={handleCheckboxChange} 
               />
               <span className="checkmark" />
               Keep me logged in
