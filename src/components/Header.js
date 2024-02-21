@@ -82,13 +82,12 @@ const Header = () => {
               <div className="input-group-prepend">
                 <span className="input-group-text">
                   <i className="fa fa-search" aria-hidden="true"></i>
-                  <p className="mx-1">search...</p>
+                  <p className="mx-1">Search...</p>
                 </span>
               </div>
               <input
                 type="search"
                 className="form-control rounded search"
-                placeholder="Search for anything..."
               />
             </form>
           </div>
@@ -119,13 +118,13 @@ const Header = () => {
                 </div>
               </div>
               : 
-              <div className="navbar-Login-Register">
-                <Link className="px-3" to="/login">
+              <div className="navbar-Login-register">
+                <Link className="login-button" to="/login">
                   <div className="login-hover-show">
                     Log in
                   </div>
                 </Link>
-                <Link className="" to="/register">
+                <Link className="register-button" to="/register">
                   <button type="button" class="btn btn-theme-purple">sign up</button>
                 </Link>
               </div> 

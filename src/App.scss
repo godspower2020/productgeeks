@@ -337,7 +337,7 @@ textarea:focus {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 4px;
+    gap: 8px;
 
     .brand {
       display: inline-block;
@@ -363,7 +363,9 @@ textarea:focus {
     }
 
     .search-bar {
-      max-width: 700px;
+      flex: 1;
+      min-width: 150px;
+      max-width: 600px;
       cursor: pointer;
       
       form.navbar-search {
@@ -383,26 +385,22 @@ textarea:focus {
             background: transparent;
             border: none;
 
+            i {
+              color: var(--light-gray-color);
+            }
+
             p {
-              display: block;
               font-size: 13px;
               color: var(--light-gray-color);
-
-              @media (min-width: 576px) {
-                display: none;
-              }
             }
           }
         }
         
         input {
-          display: none;
           cursor: pointer;
           border-radius: 24px !important;
-          
-          @media (min-width: 576px) {
-            display: block;
-          }
+          border: .5px solid var(--gray-color-opacity);
+          background-color: var(--gray-color-opacity);
           
           &::placeholder {
             float: right;
@@ -447,7 +445,7 @@ textarea:focus {
 
     .login {
         
-      .navbar-Login-Register {
+      .navbar-Login-register {
         display: flex;
         align-items: center;
         font-size: 16px;
@@ -455,22 +453,39 @@ textarea:focus {
         white-space: nowrap;
         text-decoration: none;
 
-        .login-hover-show {
-          border-radius: 8px;
-          padding: 6px 12px;
-          color: var(--black-color);
-          font-weight: 600;
+        .login-button {
+          padding: 0;
 
-          &:hover {
-            background-color: var(--search-bg-color);
-            transition: .4s ease-in-out;
+          @media (min-width: 949px) {
+            padding: 0 16px;
+          }
+          
+          .login-hover-show {
+            border-radius: 8px;
+            border: .5px solid var(--search-bg-color);
+            padding: 6px 12px;
+            color: var(--black-color);
+            font-weight: 600;
+  
+            &:hover {
+              background-color: var(--search-bg-color);
+              transition: .4s ease-in-out;
+            }
           }
         }
         
-        .btn-theme-purple {
-          background-color: var(--theme-purple);
-          color: #fff;
-          border-radius: 8px;
+        .register-button {
+          display: none;
+
+          .btn-theme-purple {
+            background-color: var(--theme-purple);
+            color: #fff;
+            border-radius: 8px;
+          }
+
+          @media (min-width: 949px) {
+            display: block;
+          }
         }
       }
 
@@ -502,7 +517,7 @@ textarea:focus {
       order: 3;
     }
 
-    @media (min-width: 949px) {
+    @media (min-width: 1049px) {
       .order:nth-child(3) {
         order: 3;
       }
@@ -512,14 +527,22 @@ textarea:focus {
       }
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 639px) {
       width: 100%;
-      gap: 0 60px;
+      gap: 0 50px;
+    }
+
+    @media (min-width: 865px) {
+      gap: 0 100px;
+    }
+
+    @media (min-width: 1049px) {
+      gap: 0 50px;
     }
   }
 
   @media (min-width: 768px) {
-    padding: 8px 30px 8px;
+    padding: 4px 30px;
   }
 
   @media (min-width: 2000px) {
@@ -573,8 +596,8 @@ textarea:focus {
 
     button {
       border: none;
-      border-radius: 12px;
-      padding: 10px 15px;
+      border-radius: 7px;
+      padding: 10px 7px;
       background-color: var(--theme-purple);
       color: #fff;
     }

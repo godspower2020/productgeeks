@@ -9,7 +9,7 @@ const CarouselSlider = ({ active, imgSrc, title, description }) => {
         <h1>{title}</h1>
         <p>{description}</p>
         <Link to="/login">
-          <button type="button">Try For free</button>
+          <button type="button">Create free account</button>
         </Link>
       </div>
     </div>
