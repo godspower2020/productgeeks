@@ -30,20 +30,6 @@ export const userRegisterReducer = (state = {}, action) => {
     }
 };
 
-// GOOGLE USER LOGIN
-export const googleUserLoginReducer = (state = {}, action) => {
-  switch (action.type) {
-    case GOOGLE_USER_LOGIN_REQUEST:
-      return { loading: true };
-    case GOOGLE_USER_LOGIN_SUCCESS:
-      return { loading: false };
-    case GOOGLE_USER_LOGIN_FAIL:
-      return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
-
 // USER PROFILE
 export const userProfileDetailsReducer = (state = {user: {} }, action) => {
     switch (action.type) {

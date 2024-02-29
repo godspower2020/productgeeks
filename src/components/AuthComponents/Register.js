@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { googleLogin, register } from '../../redux/actions/userActions';
+import { getGoogleUser, register } from '../../redux/actions/userActions';
 import Message from '../LoadingError/Error';
 import { SpinnerLoading } from '../LoadingError/Loading';
 import PasswordValidation from './PasswordValidation';
+import { USER_LOGIN_SUCCESS } from '../../redux/constants/UserConstants';
 
 const Register = ({onEmailChange}) => {
   const [name, setName] = useState("")
@@ -109,13 +110,6 @@ const Register = ({onEmailChange}) => {
     const googleAuthUrl = `${serverUrl}/auth/google/callback`;
     
     window.open(googleAuthUrl, "_self");
-    
-    try {
-      dispatch(googleLogin());
-    } catch (error) {
-      console.error("Error handling Google OAuth callback:", error);
-      navigate('/login');
-    }
   }; 
 
   return (

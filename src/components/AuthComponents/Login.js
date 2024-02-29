@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useLocation  } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { googleLogin, login } from '../../redux/actions/userActions';
+import { getGoogleUser, login } from '../../redux/actions/userActions';
 import Message from '../LoadingError/Error';
 import { SpinnerLoading } from '../LoadingError/Loading';
+import { USER_LOGIN_SUCCESS } from '../../redux/constants/UserConstants';
 
 const Login = ({ headingText, useParagraphTag }) => {
   const [email, setEmail] = useState("")
@@ -51,13 +52,6 @@ const Login = ({ headingText, useParagraphTag }) => {
     const googleAuthUrl = `${serverUrl}/auth/google/callback`;
     
     window.open(googleAuthUrl, "_self");
-    
-    try {
-      dispatch(googleLogin());
-    } catch (error) {
-      console.error("Error handling Google OAuth callback:", error);
-      navigate('/login');
-    }
   };  
 
   const HeadingTag = useParagraphTag ? "p" : "h4";
@@ -114,7 +108,15 @@ const Login = ({ headingText, useParagraphTag }) => {
           </div>
         </div>
 
-        <button onClick={submitHandler} className='login-button' type="submit">{loading ? <SpinnerLoading /> : "Login"}</button>
+        <button 
+          onClick={submitHandler} 
+          className='login-button' 
+          type="submit"
+          disabled={loading}
+          style={{ opacity: loading ? '0.5' : '1' }}
+        >
+            {loading ? <SpinnerLoading /> : "Login"}
+        </button>
 
         <button onClick={googleLoginHandler} className='google-button'>
           sign in with google

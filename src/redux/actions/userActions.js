@@ -37,15 +37,16 @@ export const login = (email, password) => async(dispatch) => {
 
 // LOGOUT
 export const logout = () => async(dispatch) => {
-    localStorage.removeItem("userInfo");
-    dispatch({
-        type: USER_LOGOUT,
-    });
-    dispatch({
-        type: USER_PROFILE_RESET,
-    });
+  localStorage.removeItem("googleUserInfo");
+  localStorage.removeItem("userInfo");
+  dispatch({
+      type: USER_LOGOUT,
+  });
+  dispatch({
+      type: USER_PROFILE_RESET,
+  });
 
-    window.location.reload(true);
+  window.location.reload(true);
 }
 
 // USER REGISTER
@@ -80,21 +81,17 @@ export const register = (name, email, password, confirmPassword) => async(dispat
 }
 
 // GOOGLE LOGIN 
-export const googleLogin = (userData) => async (dispatch) => {
+export const getGoogleUser = async () => {
   try {
-    dispatch({ 
-      type: GOOGLE_USER_LOGIN_REQUEST 
-    });
-
-    dispatch({ 
-      type: USER_LOGIN_SUCCESS, 
-      payload: userData 
-    });
-
-    localStorage.setItem("userInfo", JSON.stringify(userData));
+    const response = await API.get("/login/success", { withCredentials: true });
+    const googleUserData = response.data;
+    
+    // localStorage.setItem("userInfo", JSON.stringify(googleUserData));
+    
+    return googleUserData;
   } catch (error) {
-    console.error('Error logging in with Google:', error);
-    dispatch({ type: GOOGLE_USER_LOGIN_FAIL, payload: error.message });
+    console.log("error", error);
+    return null;
   }
 };
 
@@ -125,7 +122,6 @@ export const confirmEmail = (email, otp, token) => async (dispatch) => {
       });
   
       localStorage.setItem("userInfo", JSON.stringify(verifiedUserInfo));
-      localStorage.setItem("token", verifiedUserInfo.token);
     } catch (error) {
       dispatch({
         type: EMAIL_CONFIRMATION_FAIL,
@@ -146,6 +142,9 @@ export const getUserProfileDetails = (id) => async(dispatch, getState) => {
 
         const { userLogin: { userInfo }, } = getState();
         const token = userInfo?.token; 
+
+        // const { googleUserLogin: { googleUserInfo }, } = getState();
+        // const googleUserToken = googleUserInfo?.token; 
 
         if (!token) {
             throw new Error('User token is missing');

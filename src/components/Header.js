@@ -2,9 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { logout } from "../redux/actions/userActions";
+import { fetchGoogleUserData } from "../utils/FetchGoogleUser";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchGoogleUserData();
+    };
+    fetchData();
+  }, [])
 
   const location = useLocation();
   const dispatch = useDispatch()
@@ -110,9 +118,9 @@ const Header = () => {
             </ul>
           </div>
           <div className="login order">
-            {userInfo ? 
+            {(userInfo) ? 
               <div className="round-cover-avatar" onClick={toggleDropdown}>
-                {userInfo.profileImage ? (
+                {userInfo && userInfo.profileImage ? (
                     <img src={userInfo.profileImage} alt="Profile" className="profile-image" /> 
                 ) : (
                 <div className="avatar d-flex justify-content-center align-items-center">
@@ -135,15 +143,17 @@ const Header = () => {
           </div>  
         </div>
       </div>
-      {dropdownOpen && userInfo && (
+      {dropdownOpen && (userInfo) && (
         <div className="dropdown-container">
           <div className="dropdown-arrow"></div>
           <div className="dropdown">
+            {/* User info */}
             <div className="user-info">
               <p className="user-name">{userInfo.name}</p>
               <p className="user-email">{userInfo.email}</p>
             </div>
             <hr />
+            {/* Profile link */}
             <ul>
               <Link to="/profile">
                 <li>
@@ -153,22 +163,24 @@ const Header = () => {
               </Link>
             </ul>
             <hr />
+            {/* Logout */}
             <div className="logout" to="#" onClick={logoutHandler}>
               <p>
-                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                <i className="fa fa-sign-out" aria-hidden="true"></i>
                 Logout
               </p>
             </div>
             <hr />
+            {/* Dropdown links */}
             <div className="dropdown-links d-flex justify-content-between align-items-center">
               <Link className="" to="/privacy">
-              privacy
+                Privacy
               </Link>
               <Link className="" to="/terms">
-              Terms
+                Terms
               </Link>
               <Link className="" to="/copyright">
-              Copyright
+                Copyright
               </Link>
             </div>
           </div>

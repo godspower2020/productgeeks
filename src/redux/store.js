@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { productDetailsReducer, productListReducer } from './reducers/ProductReducers';
-import { userLoginReducer, userRegisterReducer, userProfileDetailsReducer, userUpdateProfileDetailsReducer, emailConfirmationReducer, resendEmailConfirmationReducer, passwordResetMailReducer, passwordResetReducer, googleUserLoginReducer } from './reducers/UserReducer';
+import { userLoginReducer, userRegisterReducer, userProfileDetailsReducer, userUpdateProfileDetailsReducer, emailConfirmationReducer, resendEmailConfirmationReducer, passwordResetMailReducer, passwordResetReducer } from './reducers/UserReducer';
 
 // USER LOGIN
 const userInfoFromLocalStorage = localStorage.getItem("userInfo")
@@ -19,7 +19,6 @@ const store = configureStore({
     userResendEmailConfirmation: resendEmailConfirmationReducer,
     userRequestResetPasswordMail: passwordResetMailReducer,
     passwordReset: passwordResetReducer,
-    googleUserLogin: googleUserLoginReducer,
   },
   preloadedState: {
     userLogin: {
