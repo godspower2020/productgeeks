@@ -86,7 +86,7 @@ export const getGoogleUser = async () => {
     const response = await API.get("/login/success", { withCredentials: true });
     const googleUserData = response.data;
     
-    // localStorage.setItem("userInfo", JSON.stringify(googleUserData));
+    localStorage.setItem("userInfo", JSON.stringify(googleUserData));
     
     return googleUserData;
   } catch (error) {

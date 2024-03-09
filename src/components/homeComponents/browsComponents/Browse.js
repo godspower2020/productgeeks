@@ -21,9 +21,11 @@ const Browse = ({ products, loading, error }) => {
     setFilteredProducts(
       selectedCategory === 'All'
         ? products
-        : products.filter((product) => product.categories.includes(selectedCategory))
+        : products.filter((product) =>
+            product.categories.some((category) => category.name === selectedCategory)
+          )
     );
-  }, [selectedCategory, products]);
+  }, [selectedCategory, products]);  
 
   const handleCategoryClick = (categories) => {
     setSelectedCategory(categories);
@@ -31,7 +33,10 @@ const Browse = ({ products, loading, error }) => {
     navigate({ search: queryParams.toString() });
   };
 
-  const categories = Array.from(new Set(products.flatMap((product) => product.categories || [])));
+  const uniqueCategoriesSet = new Set(products.flatMap(product => product.categories.map(category => category._id)));
+  const uniqueCategories = Array.from(uniqueCategoriesSet).map(categoryId => {
+      return products.find(product => product.categories.some(category => category._id === categoryId)).categories.find(category => category._id === categoryId);
+  });
 
   return (
     <>
@@ -50,7 +55,7 @@ const Browse = ({ products, loading, error }) => {
         (
           <>
             <FilterCategorySlider
-              categories={categories}
+              categories={uniqueCategories}
               selectedCategory={selectedCategory}
               loading={loading}
               handleCategoryClick={handleCategoryClick}
@@ -66,8 +71,7 @@ const Browse = ({ products, loading, error }) => {
                     {product.screensFlow && product.screensFlow.length > 0 && (
                       <Slider 
                         images={product.screensFlow.map(flow => {
-                          console.log('Flow:', flow);
-                          return flow.url;
+                          return flow.url || "";
                         })}
                         maxSlides={product.platform === 'Mobile' ? 3 : 4} 
                         productBrandName={product.brandName} 
@@ -79,24 +83,21 @@ const Browse = ({ products, loading, error }) => {
                   </div>
                   <div className="product-brand-cat mt-3" key={`brand-cat-${product._id}`}>
                     <div key={product._id} className="product-brand">
-                      <img src={product.productLogo.url} alt={product.brandName} />
+                      {product.productLogo && product.productLogo.url && (
+                        <img src={product.productLogo.url} alt={product.brandName} />
+                      )}
                     </div>
                     <Link to={`/apps/${product._id}`} className="shoptext px-2">
                       <p>{product.brandName}</p>
                       <div className="category">
                         <span>
                           {product.categories && product.categories.length > 0 ? (
-                            product.categories
-                              .map((item, index) => (index ? ', ' : '') + item)
-                              .join(', ')
-                              .length > 26 ? (
-                                `${product.categories
-                                  .map((item, index) => (index ? ', ' : '') + item)
-                                  .join('')
-                                  .slice(0, 26)}...`
-                              ) : (
-                                product.categories.map((item, index) => (index ? ', ' : '') + item).join('')
-                              )
+                            product.categories.map((item, index) => (
+                              <React.Fragment key={item._id}>
+                                {index ? ', ' : ''}
+                                {item.name}
+                              </React.Fragment>
+                            ))
                           ) : (
                             ''
                           )}
@@ -116,3 +117,20 @@ const Browse = ({ products, loading, error }) => {
 
 export default Browse 
 
+{/* <span>
+  {product.categories && product.categories.length > 0 ? (
+  product.categories
+    .map((item, index) => (index ? ', ' : '') + item)
+    .join(', ')
+    .length > 26 ? (
+      `${product.categories
+        .map((item, index) => (index ? ', ' : '') + item)
+        .join('')
+        .slice(0, 26)}...`
+    ) : (
+      product.categories.map((item, index) => (index ? ', ' : '') + item).join('')
+    )
+  ) : (
+  ''
+  )}
+</span> */}

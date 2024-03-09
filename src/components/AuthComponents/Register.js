@@ -182,7 +182,7 @@ const Register = ({onEmailChange}) => {
         </button>
 
         <button onClick={googleLoginHandler} className='google-button'>
-          sign in with google
+          sign in with google 
         </button>
 
         <p>

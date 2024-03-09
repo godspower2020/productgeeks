@@ -2,7 +2,7 @@ import React from "react";
 
 const Rating = ({ value, text }) => {
   return (
-    <div className="rating mx-4">
+    <div className="rating mx-2">
       {[...Array(5)].map((_, index) => (
         <i
           key={index}
@@ -18,6 +18,10 @@ const Rating = ({ value, text }) => {
       {text && <span>{text}</span>}
     </div>
   );
+};
+
+Rating.defaultProps = {
+  variant: "text-white",
 };
 
 export default Rating;

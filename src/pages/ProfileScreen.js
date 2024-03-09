@@ -258,7 +258,7 @@ const ProfileScreen = () => {
                 >
                   {updateLoading ? <SpinnerLoading /> : "Update"}
                 </button>
-                <br />
+                <br /> 
                 <button 
                   className="change-password-button"
                   type="button" 

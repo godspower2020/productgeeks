@@ -72,12 +72,12 @@ const FilterCategorySlider = ({ loading, categories, selectedCategory, handleCat
               id={`category-${index}`}
               to={{
                 pathname: location.pathname, 
-                search: `?category=${category}`,
+                search: `?category=${category.name}`,
               }}
-              className={`categoryButton ${selectedCategory === category ? 'activeCategory' : ''}`}
-              onClick={() => handleCategoryClick(category)}
+              className={`categoryButton ${selectedCategory === category.name ? 'activeCategory' : ''}`}
+              onClick={() => handleCategoryClick(category.name)}
             >
-              {category}
+            {category.name}
             </Link>
           ))}
         </div>

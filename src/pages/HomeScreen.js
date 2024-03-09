@@ -12,13 +12,18 @@ const HomeScreen = () => {
   const {userInfo} = userLogin;
 
   const homeScreenHeadingText = "Log in or sign up to continue browsing apps";
+
+  const limited = {
+    maxHeight: userInfo ? "none" : "1200px",
+    overflow: "hidden",
+  };
   
   return (
     <div>
       <Header />
       {!userInfo && <Carousel />}
-      {userInfo && <Interests />}
-      <Screens />
+      {userInfo && <Interests />} 
+      <Screens style={limited} />
       {!userInfo && <Prompt headingText={homeScreenHeadingText} />}
       <Footer />
     </div>

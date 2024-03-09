@@ -2,17 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { logout } from "../redux/actions/userActions";
-import { fetchGoogleUserData } from "../utils/FetchGoogleUser";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetchGoogleUserData();
-    };
-    fetchData();
-  }, [])
 
   const location = useLocation();
   const dispatch = useDispatch()
@@ -144,7 +136,7 @@ const Header = () => {
         </div>
       </div>
       {dropdownOpen && (userInfo) && (
-        <div className="dropdown-container">
+        <div className="dropdown-container"> 
           <div className="dropdown-arrow"></div>
           <div className="dropdown">
             {/* User info */}

@@ -1,17 +1,24 @@
-import React, { useEffect } from "react";
-import { useParams, useNavigate  } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from "react-toastify";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Rating from "../components/Rating";
 import { listProductDetails } from "../redux/actions/ProductActions";
 import Message from "../components/LoadingError/Error";
 import { GrowLoading } from "../components/LoadingError/Loading";
-import RatingForm from "../components/homeComponents/SingleApp/RatingForm";
+import OnboardingComponent from "../components/homeComponents/SingleApp/onboarding/OnboardingComponent";
+import RatingComponent from "../components/homeComponents/SingleApp/rating/RatingComponent";
+import Toast from "../components/LoadingError/Toast";
 
 const SingleProduct = () => {
+  const [showOnboarding, setShowOnboarding] = useState(true);
+  const [showRating, setShowRating] = useState(false);
+
   const { id } = useParams();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const dispatch = useDispatch()
 
@@ -21,31 +28,33 @@ const SingleProduct = () => {
   useEffect(() => {
     dispatch(listProductDetails(id));
   }, [dispatch, id]);
-  
+
   const goBackToBrowse = () => {
-    const browsePath = product.platform === 'Web' ? '/browse/web/apps' : '/browse/mobile/apps';
+    const browsePath = product && product.platform === 'Web' ? '/browse/web/apps' : '/browse/mobile/apps';
     navigate(browsePath);
   };
 
+  const handleReviewAdded = () => {
+    toast.success("Review Added")
+};
+
   window.scrollTo(0, 0);
 
-  return ( 
+  return (
     <>
+      <Toast />
       <Header />
       <div className="container-single-product">
         {
           loading ? (
             <div className="d-flex justify-content-center align-items-center gap-3">
               {[...Array(3)].map((_, index) => (
-                <GrowLoading />
+                <GrowLoading key={index} />
               ))}
             </div>
-          )
-          : error ? (
+          ) : error ? (
             <Message variant="alert-danger">{error}</Message>
-          )
-          :
-          (
+          ) : (
             <>
               <div className="back my-2" onClick={goBackToBrowse}>
                 <i className="fa fa-long-arrow-left" aria-hidden="true"></i>
@@ -53,35 +62,41 @@ const SingleProduct = () => {
               <div className="single-product">
                 <div className="single-product-info">
                   <div className="mt-2 mb-3 brand-cat-web">
-                    <div className="single-product-brand">
-                      <img className="sp-img" src={product.productLogo.url} alt={product.brandName} />
-                    </div>
+                    {product && product.productLogo && (
+                      <div className="single-product-brand">
+                        <img className="sp-img" src={product.productLogo.url} alt={product.brandName} />
+                      </div>
+                    )}
                     <div className="single-product-cat-web px-2">
                       <div>
-                        <h3>{product.brandName}</h3>
+                        <h3>{product && product.brandName}</h3>
                       </div>
-                      {product.category.map((item, index) => (
-                        <span>
-                          {(index ? ', ' : '') + item} 
-                        </span>
-                      ))}
-                      <div>
-                        <p>{product.description.website}</p>
-                      </div>
+                      {product && product.categories && product.categories.map((item, index) => {
+                        return (
+                          <span key={index}>
+                            {(index ? ', ' : '') + item.name}
+                          </span>
+                        );
+                      })}
                     </div>
-                  </div>
+                  </div> 
+                  {product && product.numReviews > 0 && (
+                    <div>
+                      <p>{product.numReviews} {product.numReviews === 1 ? 'review' : 'reviews'}</p>
+                    </div>
+                  )}
                   <div className="rating">
                     <div>
                       <p>usability</p>
-                      <Rating value={product.description.usability} />
+                      <Rating value={product.usability} />
                     </div>
                     <div>
                       <p>functionality</p>
-                      <Rating value={product.description.functionality} />
+                      <Rating value={product.functionality} />
                     </div>
                     <div>
                       <p>visualDesign</p>
-                      <Rating value={product.description.visualDesign} />
+                      <Rating value={product.visualDesign} />
                     </div>
                   </div>
                   <hr />
@@ -95,86 +110,56 @@ const SingleProduct = () => {
                   <hr />
                   <div className="details">
                     <h5>Details</h5>
-                    <p className="mt-3">{product.description.about}</p>
+                    <p className="mt-3">{product && product.description && product.description.about ? product.description.about : ""}</p>
+                  </div>
+                  <div className="website">
+                  <h5 className="mt-3">website</h5>
+                    <p>{product && product.description && product.description.website}</p>
                   </div>
                   <div className="location">
                     <h5 className="mt-3">Location</h5>
-                    <p>{product.description.location}</p>
+                    <p>{product && product.description && product.description.location ? product.description.location : ""}</p>
                   </div>
                   <div className="employees">
                     <h5 className="mt-3">Employees</h5>
-                    <p>{product.description.employees}</p>
+                    <p>{product && product.description && product.description.employees ? product.description.employees : ""}</p>
                   </div>
                   <div className="funding">
                     <h5 className="mt-3">Funding</h5>
-                    <p>{product.description.funding}</p>
+                    <p>{product && product.description && product.description.funding ? product.description.funding : ""}</p>
                   </div>
                   <div className="founded-date">
-                    <h5 className="mt-3">Founded date</h5> 
-                    <p>{product.description.foundedDate}</p>
+                    <h5 className="mt-3">Founded date</h5>
+                    <p>{product && product.description && product.description.foundedDate ? product.description.foundedDate : ""}</p>
                   </div>
                   <div className="founders">
                     <h5 className="mt-3">Founders</h5>
-                    {product.description.founders.map((item, index) => (
-                      <span>
-                        {(index ? ', ' : '') + item} 
+                    {product && product.description && product.description.founders && product.description.founders.map((item, index) => (
+                      <span key={index}>
+                        {(index ? ', ' : '') + item}
                       </span>
                     ))}
                   </div>
                   <div className="contact-mail">
                     <h5 className="mt-3">contact</h5>
-                    <p>{product.description.mail}</p>
+                    <p>{product && product.description && product.description.email ? product.description.email : ""}</p>
                   </div>
                 </div>
                 <div className="single-product-flows">
-                  <div className="screen-video-version-button">
-                    <div className="screen-video-button">
-                      <div className="screen-button">
-                        <p>screens</p>
-                      </div>
-                      <div className="video-button">
-                        <p>Video Process Flow</p>
-                      </div>
+                  <div className="onboarding-rating-button">
+                    <div className={`onboarding-button ${showOnboarding ? 'active' : ''}`} onClick={() => { setShowOnboarding(true); setShowRating(false); }}>
+                      <p className="">Onboarding</p>
                     </div>
-                    <div className="version">
-                      <p className="version-text">version</p>
-                      <div className="d-inline-block">
-                        <div className="version-button">
-                          <p>Aug 2023 (Latest)</p>
-                          <i className="fa fa-angle-down" aria-hidden="true"></i>
-                        </div>
-                      </div>
+                    <div className={`rating-button ${showRating ? 'active' : ''}`} onClick={() => { setShowOnboarding(false); setShowRating(true); }}>
+                      <p className="">Reviews</p>
                     </div>
                   </div>
-                  <div>
-                    <p className="mt-3">Onboarding</p>
-                    <div className="product-flows">
-                      <div className="flow">
-                        {product.screensFlow.map((item) => (
-                          <img className={`${product.platform === 'Mobile' ? 'img-mobile' : 'img-web'}`} src={item} alt={product.brandName} />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-lg-12">
-                  <h4 className="mb-4">Leave a Review</h4>
-                  <div className="ratings">
-                    <div className="usability">
-                      <p>Usability</p>
-                      <RatingForm />
-                    </div>
-                    <div className="functionality">
-                      <p>Functionality</p>
-                      <RatingForm />
-                    </div>
-                    <div className="visualDesign">
-                      <p>visualDesign</p>
-                      <RatingForm />
-                    </div>
-                  </div>
+                  {showOnboarding && (
+                    <OnboardingComponent product={product} />
+                  )}
+                  {showRating && (
+                    <RatingComponent product={product} id={id} onReviewAdded={handleReviewAdded}/>
+                  )}
                 </div>
               </div>
             </>
