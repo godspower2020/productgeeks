@@ -554,6 +554,10 @@ textarea:focus {
     padding: 4px 30px;
   }
 
+  @media (min-width: 983px) {
+    box-shadow: none;
+  }
+
   @media (min-width: 2000px) {
     padding: 8px 80px 8px;
   }
@@ -653,10 +657,10 @@ textarea:focus {
   color: var(--black-color);
   font-weight: 900;
   text-transform: uppercase;
-  padding: 10px 8px 15px;
+  padding: 10px 0 15px;
 
   @media (min-width: 998px) {
-    padding: 30px 8px 30px;
+    padding: 30px 0;
   }
 }
 

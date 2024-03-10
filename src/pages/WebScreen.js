@@ -12,13 +12,18 @@ const WebScreen = () => {
   const {userInfo} = userLogin;
 
   const webScreenHeadingText = "Log in or sign up to continue browsing apps";
+
+  const limited = {
+    maxHeight: userInfo ? "none" : "1200px",
+    marginTop: userInfo ? "100px" : "none",
+    overflow: "hidden",
+  };
   
   return (
     <div>
       <Header />
       {!userInfo && <Carousel />}
-      {userInfo && <Interests />}
-      <Screens />
+      <Screens style={limited} />
       {!userInfo && <Prompt headingText={webScreenHeadingText} />}
       <Footer />
     </div>
