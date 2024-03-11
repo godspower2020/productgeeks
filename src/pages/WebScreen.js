@@ -25,7 +25,7 @@ const WebScreen = () => {
       {!userInfo && <Carousel />}
       <Screens style={limited} />
       {!userInfo && <Prompt headingText={webScreenHeadingText} />}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

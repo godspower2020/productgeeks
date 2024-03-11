@@ -37,7 +37,7 @@ export const login = (email, password) => async(dispatch) => {
 
 // LOGOUT
 export const logout = () => async(dispatch) => {
-  localStorage.removeItem("googleUserInfo");
+  // localStorage.removeItem("googleUserInfo");
   localStorage.removeItem("userInfo");
   dispatch({
       type: USER_LOGOUT,
@@ -80,11 +80,12 @@ export const register = (name, email, password, confirmPassword) => async(dispat
     }
 }
 
-// GOOGLE LOGIN 
+// GOOGLE LOGIN  
 export const getGoogleUser = async () => {
   try {
     const response = await API.get("/login/success", { withCredentials: true });
     const googleUserData = response.data;
+    console.log(response.data)
     
     localStorage.setItem("userInfo", JSON.stringify(googleUserData));
     
@@ -265,7 +266,7 @@ export const sendPasswordResetMail = (email) => async (dispatch) => {
           : error.message,
       });
     }
-  };
+};
 
 // CONFIRM RESET EMAIL BY OTP
 export const resetPassword = (email, otp, newPassword) => async (dispatch) => {

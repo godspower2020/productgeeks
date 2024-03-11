@@ -10,7 +10,7 @@ const Blog = () => {
         <Header />   
         <Blogs />
         <CalltoActionSection />
-        <Footer />
+        {/* <Footer /> */}
     </>
   )
 }

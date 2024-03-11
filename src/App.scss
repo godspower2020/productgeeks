@@ -1040,7 +1040,6 @@ textarea:focus {
 
 /* SINGLE PRODUCT */
 .container-single-product {
-  margin: 0 auto;
 
   .back {
     display: inline-block;
@@ -1454,7 +1453,7 @@ textarea:focus {
           border-radius: 0 10px 10px 10px;
           background-color: #f8f9fa;
           display: inline-block;
-          min-width: 310px;
+          min-width: 250px;
           width: auto;
           max-width: 100%;
           box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.08);
@@ -1553,6 +1552,10 @@ textarea:focus {
           font-size: 15px !important;
         }
       }
+    }
+
+    .edit-review {
+      cursor: pointer;
     }
 
     .no-user {
@@ -2234,10 +2237,16 @@ textarea:focus {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 60%);
 }
 
+.app-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
 /* FOOTER */
 .footer {
   background-color: var(--black-color);
-  margin-top: .5rem;
+  margin-top: auto;
   padding: 16px;
 
   .row {

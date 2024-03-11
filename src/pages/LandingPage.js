@@ -18,7 +18,7 @@ const LandingPage = () => {
         {!userInfo && <Carousel />}
         {!userInfo && <Prompt headingText={landingPageHeadingText} />}
         {userInfo && <Landing />}
-        <Footer />
+        {/* <Footer /> */}
     </div>
   )
 }

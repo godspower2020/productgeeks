@@ -36,7 +36,7 @@ const SingleProduct = () => {
 
   const handleReviewAdded = () => {
     toast.success("Review Added")
-};
+  };
 
   window.scrollTo(0, 0);
 
@@ -166,7 +166,7 @@ const SingleProduct = () => {
           )
         }
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

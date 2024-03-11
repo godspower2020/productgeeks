@@ -24,7 +24,7 @@ const SingleBlog = () => {
               </div>
             </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
     </>
   )
 }

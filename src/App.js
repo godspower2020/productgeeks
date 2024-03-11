@@ -21,30 +21,34 @@ import Terms from "./pages/Terms";
 import Faqs from "./pages/Faqs";
 import NotFound from "./pages/NotFound";
 import PrivateRouter from "./PrivateRouter";
+import Footer from "./components/Footer";
 
 function App() {
 
   return (
     <Router>
+      <div className="app-wrap">
         <Routes>
-          <Route path="/" element={<Navigate to="/browse/mobile/apps" replace />} />
-          <Route path="/browse/mobile/apps/*" element={<HomeScreen />} />
-          <Route path="/landing-page" element={<LandingPage />} />
-          <Route path="/browse/web/apps/*" element={<WebScreen />} />
-          <Route path="/apps/:id" element={<SingleProduct />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<SingleBlog />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<PrivateRouter component={ProfileScreen} />} /> 
-          <Route path="/contact" element={<Contact />} /> 
-          <Route path="/about" element={<About />} /> 
-          <Route path="/privacy" element={<Privacy />} /> 
-          <Route path="/terms" element={<Terms />} /> 
-          <Route path="/faqs" element={<Faqs />} /> 
-          <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Navigate to="/browse/mobile/apps" replace />} />
+            <Route path="/browse/mobile/apps/*" element={<HomeScreen />} />
+            <Route path="/landing-page" element={<LandingPage />} />
+            <Route path="/browse/web/apps/*" element={<WebScreen />} />
+            <Route path="/apps/:id" element={<SingleProduct />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<SingleBlog />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<PrivateRouter component={ProfileScreen} />} /> 
+            <Route path="/contact" element={<Contact />} /> 
+            <Route path="/about" element={<About />} /> 
+            <Route path="/privacy" element={<Privacy />} /> 
+            <Route path="/terms" element={<Terms />} /> 
+            <Route path="/faqs" element={<Faqs />} /> 
+            <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
+      </div>
     </Router>
   );
 }

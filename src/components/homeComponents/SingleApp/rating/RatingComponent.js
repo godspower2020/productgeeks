@@ -7,7 +7,7 @@ import Message from "../../../LoadingError/Error";
 import { PRODUCT_CREATE_REVIEW_RESET } from '../../../../redux/constants/ProductConstants';
 import Rating from '../../../Rating';
 import { SpinnerLoading } from '../../../LoadingError/Loading';
-import { createProductReview, listProductDetails } from '../../../../redux/actions/ProductActions';
+import { createProductReview, editProductReview, listProductDetails } from '../../../../redux/actions/ProductActions';
 
 const initialState = {
     usability: 0,
@@ -18,6 +18,9 @@ const initialState = {
 
 const RatingComponent = ({product, id, onReviewAdded}) => {
     const [reviewData, setReviewData] = useState(initialState);
+    const [reviewDataToEdit, setReviewDataToEdit] = useState(null);
+    const [userReviewed, setUserReviewed] = useState(false);
+    const [editMode, setEditMode] = useState(false);
     
     const dispatch = useDispatch()
 
@@ -26,15 +29,20 @@ const RatingComponent = ({product, id, onReviewAdded}) => {
 
     const productReviewCreate = useSelector((state) => state.productReviewCreate); 
     const { loading: createReviewLoading, success: createReviewSuccess, error: createReviewError } = productReviewCreate; 
+
+    const productReviewEdit = useSelector((state) => state.productReviewEdit); 
+    const { loading: editReviewLoading, success: editReviewSuccess, error: editReviewError } = productReviewEdit; 
   
     useEffect(() => {
-      if (createReviewSuccess) {
-          dispatch({type: PRODUCT_CREATE_REVIEW_RESET})
-          setReviewData(initialState)
-          onReviewAdded()
-          dispatch(listProductDetails(id));
-      }
-    }, [createReviewSuccess, dispatch, id, onReviewAdded]);
+        if (createReviewSuccess) {
+            dispatch({type: PRODUCT_CREATE_REVIEW_RESET})
+            setReviewData(initialState)
+            onReviewAdded();
+            dispatch(listProductDetails(id));
+            setUserReviewed(true);
+        }
+    }, [createReviewSuccess, dispatch, id, onReviewAdded, userReviewed]);  
+    console.log("userReviewed:", userReviewed);
 
     const handleCommentChange = (e) => {
         const { name, value } = e.target;
@@ -49,12 +57,25 @@ const RatingComponent = ({product, id, onReviewAdded}) => {
           ...prevData,
           [field]: Number(value),
         }));
-    };    
+    };  
+    
+    const handleEditClick = (product) => {
+        if (product && product.review) {
+            setReviewDataToEdit(product.review); 
+            setEditMode(true);
+        } else {
+            console.error("Product review is undefined");
+        }
+    }; 
 
     const submitHandler = (e) => {
         e.preventDefault()
 
-        dispatch(createProductReview(id, reviewData))
+        if (editMode) {
+            
+        } else {
+            dispatch(createProductReview(id, reviewData));
+        }
     }
 
   return (
@@ -103,7 +124,7 @@ const RatingComponent = ({product, id, onReviewAdded}) => {
                     </div>
                 </div>
                 <div className="col-lg-6 top-margin">
-                    <h6>WRITE A CUSTOMER REVIEW</h6>
+                    <h6>{editMode ? 'EDIT YOUR REVIEW' : 'WRITE A CUSTOMER REVIEW'}</h6>
                     <div className="my-4">
                         {createReviewError && (
                             <Message variant="alert-danger">{createReviewError}</Message>
@@ -111,7 +132,7 @@ const RatingComponent = ({product, id, onReviewAdded}) => {
                     </div>
 
                     { userInfo ? (
-                        <form onSubmit={submitHandler}>
+                       <form onSubmit={submitHandler}>
                             <div className="col-lg-12">
                                 <div className="single-page-ratings">
                                     <div className="usability">
@@ -143,12 +164,22 @@ const RatingComponent = ({product, id, onReviewAdded}) => {
                             <div className="my-3">
                                 <button 
                                     className="col-12 bg-black border-0 p-3 rounded text-white"
-                                    disabled={ createReviewLoading}
-                                    style={{ opacity: createReviewLoading ? '0.5' : '1' }}
+                                    disabled={(createReviewLoading || userReviewed) && !editMode}
+                                    style={{ opacity: (createReviewLoading || userReviewed) && !editMode ? '0.5' : '1' }}
                                 >
-                                {createReviewLoading ? <SpinnerLoading /> : "SUBMIT"}
+                                    {createReviewLoading ? <SpinnerLoading /> : "SUBMIT"}
                                 </button>
                             </div>
+                            {!userReviewed && product.reviews.length > 0 && userInfo && (
+                                <div className="my-3">
+                                    <div
+                                        className="edit-review col-12 bg-black border-0 p-3 rounded text-white text-center"
+                                        onClick={() => handleEditClick(product)}
+                                    >
+                                        EDIT REVIEW
+                                    </div>
+                                </div>
+                            )}
                         </form>
                         ) : (
                             <div className="my-3">
@@ -170,3 +201,4 @@ const RatingComponent = ({product, id, onReviewAdded}) => {
 }
 
 export default RatingComponent
+

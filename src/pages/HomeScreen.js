@@ -24,7 +24,7 @@ const HomeScreen = () => {
       {!userInfo && <Carousel />}
       <Screens style={limited} />
       {!userInfo && <Prompt headingText={homeScreenHeadingText} />}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
