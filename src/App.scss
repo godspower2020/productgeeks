@@ -108,6 +108,7 @@ textarea:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   
   .slider {
     position: relative;
@@ -140,6 +141,7 @@ textarea:focus {
     }
   
     .slider-images {
+      width: 100%;
         
       img.slider-image {
         object-fit: cover;
@@ -802,7 +804,7 @@ textarea:focus {
         .mobile-product-screen {
           display: flex;
           flex-direction: column;
-          flex: 0 1 calc(100% - 10px);
+          flex: 1 calc(100%);
           width: 100%;
           
           .shop-product {
@@ -814,41 +816,6 @@ textarea:focus {
               background-color: #f3fbf7;
               border-radius: 18px;
               border: 1px solid var(--gray-color-opacity);
-            }
-          }
-                
-          .product-brand-cat {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        
-            .product-brand {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              max-width: 50px;
-              height: 50px;
-              
-              img {
-                width: 100%;
-                border-radius: 100% !important;
-              }
-            }
-        
-            .shoptext {
-
-              p {
-                color: var(--link-black-color);
-              }
-              
-              &:hover>p {
-                text-decoration: underline;
-              }
-        
-              .category span {
-                font-size: 13.3px;
-                color: var(--light-gray-color);
-              }
             }
           }
 
@@ -876,7 +843,7 @@ textarea:focus {
         .web-product-screen {
           display: flex;
           flex-direction: column;
-          flex: 0 1 calc(100% - 10px);
+          flex: 1 calc(100%);
           width: 100%;
           
           .shop-product {
@@ -888,41 +855,6 @@ textarea:focus {
               background-color: #f3fbf7;
               border-radius: 18px;
               border: 1px solid var(--gray-color-opacity);
-            }
-          }
-                
-          .product-brand-cat {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        
-            .product-brand {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              max-width: 50px;
-              height: 50px;
-              
-              img {
-                width: 100%;
-                border-radius: 100% !important;
-              }
-            }
-        
-            .shoptext {
-
-              p {
-                color: var(--link-black-color);
-              }
-              
-              &:hover>p {
-                text-decoration: underline;
-              }
-        
-              .category span {
-                font-size: 13.3px;
-                color: var(--light-gray-color);
-              }
             }
           }
 
@@ -955,6 +887,41 @@ textarea:focus {
           justify-content: center;
           align-items: center;
         }
+
+        .product-brand-cat {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+      
+          .product-brand {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            img {
+              width: 43px;
+              height: 43px;
+              object-fit: contain;
+              border-radius: 100% !important;
+            }
+          }
+      
+          .shoptext {
+
+            p {
+              color: var(--link-black-color);
+            }
+            
+            &:hover>p {
+              text-decoration: underline;
+            }
+      
+            .category span {
+              font-size: 13.3px;
+              color: var(--light-gray-color);
+            }
+          }
+        }
   
         @media (min-width: 986px) {
           gap: 40px 20px;
@@ -967,6 +934,7 @@ textarea:focus {
 
 /* NEWSLATTER */
 .subscribe-section {
+  margin-bottom: 20px;
   padding: 50px 30px;
   background-color: var(--black-color);
 
@@ -1541,6 +1509,7 @@ textarea:focus {
         max-width: 600px;
     
         select {
+          cursor: pointer;
           width: 100%;
         }
     
@@ -1555,6 +1524,7 @@ textarea:focus {
     }
 
     .edit-review {
+      background-color: var(--product-bg-color);
       cursor: pointer;
     }
 
@@ -1627,10 +1597,6 @@ textarea:focus {
         border-radius: 8px;
         background-color: var(--theme-purple);
         color: #fff;
-    
-        &:hover {
-    
-        }
       }
     }
   }

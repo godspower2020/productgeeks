@@ -68,17 +68,17 @@ const Browse = ({ products, loading, error }) => {
                 >
                   <div className="shop-product" key={product._id}>
                     <div className="shopBack">
-                    {product.screensFlow && product.screensFlow.length > 0 && (
-                      <Slider 
-                        images={product.screensFlow.map(flow => {
-                          return flow.url || "";
-                        })}
-                        maxSlides={product.platform === 'Mobile' ? 3 : 4} 
-                        productBrandName={product.brandName} 
-                        productPlatform={product.platform} 
-                        productId={product._id} 
-                      />
-                    )}
+                      {product.screensFlow && product.screensFlow.length > 0 && (
+                        <Slider 
+                          images={product.screensFlow.map(flow => {
+                            return flow.url || "";
+                          })}
+                          maxSlides={product.platform === 'Mobile' ? 3 : 4} 
+                          productBrandName={product.brandName} 
+                          productPlatform={product.platform} 
+                          productId={product._id} 
+                        />
+                      )}
                     </div>
                   </div>
                   <div className="product-brand-cat mt-3" key={`brand-cat-${product._id}`}>
@@ -92,12 +92,22 @@ const Browse = ({ products, loading, error }) => {
                       <div className="category">
                         <span>
                           {product.categories && product.categories.length > 0 ? (
-                            product.categories.map((item, index) => (
-                              <React.Fragment key={item._id}>
-                                {index ? ', ' : ''}
-                                {item.name}
-                              </React.Fragment>
-                            ))
+                            product.categories
+                              .map((item, index) => (index ? ', ' : '') + item.name)
+                              .join(', ')
+                              .length > 26 ? (
+                                <>
+                                  {product.categories
+                                    .map((item, index) => (index ? ', ' : '') + item.name)
+                                    .join(', ')
+                                    .slice(0, 26)}
+                                  ...
+                                </>
+                              ) : (
+                                product.categories
+                                  .map((item, index) => (index ? ', ' : '') + item.name)
+                                  .join('')
+                              )
                           ) : (
                             ''
                           )}
@@ -116,21 +126,3 @@ const Browse = ({ products, loading, error }) => {
 }
 
 export default Browse 
-
-{/* <span>
-  {product.categories && product.categories.length > 0 ? (
-  product.categories
-    .map((item, index) => (index ? ', ' : '') + item)
-    .join(', ')
-    .length > 26 ? (
-      `${product.categories
-        .map((item, index) => (index ? ', ' : '') + item)
-        .join('')
-        .slice(0, 26)}...`
-    ) : (
-      product.categories.map((item, index) => (index ? ', ' : '') + item).join('')
-    )
-  ) : (
-  ''
-  )}
-</span> */}

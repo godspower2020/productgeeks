@@ -1,6 +1,5 @@
 import React from 'react'
 import Header from "./../components/Header";
-import Footer from "./../components/Footer";
 import { useParams  } from "react-router-dom";
 import blogs from "../data/Blogs";
 
@@ -24,7 +23,6 @@ const SingleBlog = () => {
               </div>
             </div>
         </div>
-        {/* <Footer /> */}
     </>
   )
 }

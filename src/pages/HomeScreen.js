@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./../components/Header";
-import Footer from "./../components/Footer";
 import Prompt from "../components/AuthComponents/Prompt";
 import Carousel from "../components/Carousel";
 import Screens from "../components/homeComponents/Screens";
@@ -24,7 +23,6 @@ const HomeScreen = () => {
       {!userInfo && <Carousel />}
       <Screens style={limited} />
       {!userInfo && <Prompt headingText={homeScreenHeadingText} />}
-      {/* <Footer /> */}
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from '../components/Header'
 import Carousel from "../components/Carousel";
-import Footer from '../components/Footer'
 import { useSelector } from 'react-redux'
 import Prompt from '../components/AuthComponents/Prompt'
 import Landing from '../components/LandingComponents/Landing';
@@ -18,7 +17,6 @@ const LandingPage = () => {
         {!userInfo && <Carousel />}
         {!userInfo && <Prompt headingText={landingPageHeadingText} />}
         {userInfo && <Landing />}
-        {/* <Footer /> */}
     </div>
   )
 }

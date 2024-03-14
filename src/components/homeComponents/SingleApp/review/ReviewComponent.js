@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import moment from "moment";
@@ -16,10 +16,9 @@ const initialState = {
     comment: "",
 };
 
-const RatingComponent = ({product, id, onReviewAdded}) => {
+const RatingComponent = ({product, id, onReviewAdded, onReviewEdited}) => {
     const [reviewData, setReviewData] = useState(initialState);
     const [reviewDataToEdit, setReviewDataToEdit] = useState(null);
-    const [userReviewed, setUserReviewed] = useState(false);
     const [editMode, setEditMode] = useState(false);
     
     const dispatch = useDispatch()
@@ -31,18 +30,39 @@ const RatingComponent = ({product, id, onReviewAdded}) => {
     const { loading: createReviewLoading, success: createReviewSuccess, error: createReviewError } = productReviewCreate; 
 
     const productReviewEdit = useSelector((state) => state.productReviewEdit); 
-    const { loading: editReviewLoading, success: editReviewSuccess, error: editReviewError } = productReviewEdit; 
-  
+    const { loading: editReviewLoading, success: editReviewSuccess, error: editReviewError } = productReviewEdit;
+    
     useEffect(() => {
         if (createReviewSuccess) {
             dispatch({type: PRODUCT_CREATE_REVIEW_RESET})
             setReviewData(initialState)
             onReviewAdded();
             dispatch(listProductDetails(id));
-            setUserReviewed(true);
+            setEditMode(false);
         }
-    }, [createReviewSuccess, dispatch, id, onReviewAdded, userReviewed]);  
-    console.log("userReviewed:", userReviewed);
+
+        if (editReviewSuccess) {
+            dispatch({type: PRODUCT_CREATE_REVIEW_RESET})
+            setReviewData(initialState)
+            onReviewEdited();
+            dispatch(listProductDetails(id));
+            setEditMode(false);
+        }
+    }, [createReviewSuccess, editReviewSuccess, dispatch, id, onReviewAdded, onReviewEdited]);           
+
+    useEffect(() => {
+        if (editMode && reviewDataToEdit) {
+            const { usability, functionality, visualDesign, comment } = reviewDataToEdit;
+            setReviewData({
+                usability,
+                functionality,
+                visualDesign,
+                comment,
+            });
+        } else if (!editMode) {
+            setReviewData(initialState);
+        }
+    }, [editMode, reviewDataToEdit]);    
 
     const handleCommentChange = (e) => {
         const { name, value } = e.target;
@@ -59,24 +79,21 @@ const RatingComponent = ({product, id, onReviewAdded}) => {
         }));
     };  
     
-    const handleEditClick = (product) => {
-        if (product && product.review) {
-            setReviewDataToEdit(product.review); 
-            setEditMode(true);
-        } else {
-            console.error("Product review is undefined");
-        }
-    }; 
+    const handleEditClick = (reviews) => {
+        const userReview = reviews.find(review => review.user === userInfo._id);
+        setReviewDataToEdit(userReview);
+        setEditMode(true);
+    };
 
     const submitHandler = (e) => {
-        e.preventDefault()
-
+        e.preventDefault();
+    
         if (editMode) {
-            
+            dispatch(editProductReview(id, reviewDataToEdit._id, reviewData));
         } else {
             dispatch(createProductReview(id, reviewData));
         }
-    }
+    };    
 
   return (
     <>
@@ -84,15 +101,15 @@ const RatingComponent = ({product, id, onReviewAdded}) => {
             <div className="row my-6">
                 <div className="col-lg-6">
                     <h6 className="mb-3">REVIEWS</h6>
-                    {product.reviews.length === 0 && (
+                    {product && product.reviews && product.reviews.length === 0 && (
                         <div className='no-comment'>
                             <i className="far fa-comment-alt-slash"></i>
-                            <p>no reiews</p>
+                            <p>no reviews</p>
                         </div>
                     )}
-
                     <div className='reviews-container'>
-                        {product.reviews.map((review) => (
+                    {product && product.reviews && product.reviews.map((review) => {
+                        return (
                             <div key={review._id} className='review'>
                                 <p className='user-name'>{review.name}</p>
                                 <div className="alert comment mt-1">
@@ -104,7 +121,7 @@ const RatingComponent = ({product, id, onReviewAdded}) => {
                                             </div>
                                         </div>
                                         <div className='scores'>
-                                            <p>functionaity</p>
+                                            <p>functionality</p>
                                             <div>
                                                 <Rating value={review.functionality} />
                                             </div>
@@ -120,65 +137,72 @@ const RatingComponent = ({product, id, onReviewAdded}) => {
                                     <span className=''>{moment.utc(review.createdAt).calendar()}</span>
                                 </div>
                             </div>
-                        ))}
+                        );
+                    })}
                     </div>
                 </div>
                 <div className="col-lg-6 top-margin">
-                    <h6>{editMode ? 'EDIT YOUR REVIEW' : 'WRITE A CUSTOMER REVIEW'}</h6>
+                    <h6>{userInfo && product.reviews && product.reviews.some(review => review.user === userInfo._id) ? 'EDIT YOUR REVIEW' : 'WRITE A CUSTOMER REVIEW'}</h6>
                     <div className="my-4">
                         {createReviewError && (
                             <Message variant="alert-danger">{createReviewError}</Message>
                         )}
+                        {editReviewError && (
+                            <Message variant="alert-danger">{editReviewError}</Message>
+                        )}
                     </div>
 
-                    { userInfo ? (
+                    { userInfo ? (                       
                        <form onSubmit={submitHandler}>
-                            <div className="col-lg-12">
-                                <div className="single-page-ratings">
-                                    <div className="usability">
-                                        <p>Usability</p>
-                                        <UsabilityForm usability={reviewData.usability} onRatingChange={handleRatingChange} />
-                                    </div>
-                                    <div className="functionality">
-                                        <p>Functionality</p>
-                                        <FunctionalityForm functionality={reviewData.functionality} onRatingChange={handleRatingChange} />
-                                    </div>
-                                    <div className="visualDesign">
-                                        <p>visualDesign</p>
-                                        <VisualDesignForm visualDesign={reviewData.visualDesign} onRatingChange={handleRatingChange} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="my-4">
-                                <strong>Comment</strong>
-                                <textarea
-                                    row="3"
-                                    name="comment"
-                                    value={reviewData.comment}
-                                    onChange={handleCommentChange}
-                                    className="col-12 bg-light p-3 mt-2 border-0 rounded"
-                                    placeholder='Add a comment...'
-                                    required
-                                ></textarea>
-                            </div>
-                            <div className="my-3">
-                                <button 
-                                    className="col-12 bg-black border-0 p-3 rounded text-white"
-                                    disabled={(createReviewLoading || userReviewed) && !editMode}
-                                    style={{ opacity: (createReviewLoading || userReviewed) && !editMode ? '0.5' : '1' }}
-                                >
-                                    {createReviewLoading ? <SpinnerLoading /> : "SUBMIT"}
-                                </button>
-                            </div>
-                            {!userReviewed && product.reviews.length > 0 && userInfo && (
+                            {userInfo && product.reviews && product.reviews.some(review => review.user === userInfo._id) && !editMode ? (
                                 <div className="my-3">
                                     <div
-                                        className="edit-review col-12 bg-black border-0 p-3 rounded text-white text-center"
-                                        onClick={() => handleEditClick(product)}
+                                        className="edit-review col-12 border-0 p-3 rounded text-white text-center"
+                                        onClick={() => handleEditClick(product.reviews)}
                                     >
-                                        EDIT REVIEW
+                                        Edit Review
                                     </div>
                                 </div>
+                            ) : (
+                                <>
+                                    <div className="col-lg-12">
+                                        <div className="single-page-ratings">
+                                            <div className="usability">
+                                                <p>Usability</p>
+                                                <UsabilityForm usability={reviewData.usability} onRatingChange={handleRatingChange} />
+                                            </div>
+                                            <div className="functionality">
+                                                <p>Functionality</p>
+                                                <FunctionalityForm functionality={reviewData.functionality} onRatingChange={handleRatingChange} />
+                                            </div>
+                                            <div className="visualDesign">
+                                                <p>visualDesign</p>
+                                                <VisualDesignForm visualDesign={reviewData.visualDesign} onRatingChange={handleRatingChange} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="my-4">
+                                        <strong>Comment</strong>
+                                        <textarea
+                                            row="3"
+                                            name="comment"
+                                            value={reviewData.comment}
+                                            onChange={handleCommentChange}
+                                            className="col-12 bg-light p-3 mt-2 border-0 rounded"
+                                            placeholder='Add a comment...'
+                                            required
+                                        ></textarea>
+                                    </div>
+                                    <div className="my-3">
+                                        <button 
+                                            className="col-12 bg-black border-0 p-3 rounded text-white"
+                                            disabled={createReviewLoading || editReviewLoading} 
+                                            style={{ opacity: createReviewLoading || editReviewLoading ? '0.5' : '1' }} 
+                                        >
+                                            {createReviewLoading || editReviewLoading ? <SpinnerLoading /> : "Submit"}
+                                        </button>
+                                    </div>
+                                </>
                             )}
                         </form>
                         ) : (

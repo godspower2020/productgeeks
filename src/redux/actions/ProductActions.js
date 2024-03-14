@@ -91,7 +91,7 @@ export const createProductReview = (id, reviewData) => async (dispatch, getState
 };
 
 // SINGLE PRODUCT REVIEW ACTION EDIT
-export const editProductReview = (id, reviewData) => async (dispatch, getState) => {
+export const editProductReview = (id, reviewId, reviewData) => async (dispatch, getState) => {
     try {
         dispatch({
             type: PRODUCT_EDIT_REVIEW_REQUEST,
@@ -108,7 +108,7 @@ export const editProductReview = (id, reviewData) => async (dispatch, getState) 
             },
         };
 
-        await API.post(`/api/products/${id}/review/edit`, reviewData, config);
+        await API.post(`/api/products/${id}/review/update/${reviewId}`, reviewData, config);
 
         dispatch({
             type: PRODUCT_EDIT_REVIEW_SUCCESS,

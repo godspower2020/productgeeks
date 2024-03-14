@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getGoogleUser, login } from '../../redux/actions/userActions';
 import Message from '../LoadingError/Error';
 import { SpinnerLoading } from '../LoadingError/Loading';
-import { USER_LOGIN_SUCCESS } from '../../redux/constants/UserConstants';
 
 const Login = ({ headingText, useParagraphTag }) => {
   const [email, setEmail] = useState("")
@@ -14,7 +13,7 @@ const Login = ({ headingText, useParagraphTag }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
-  const location = useLocation ();  
+  const location = useLocation();  
 
   const redirect = location.search ? location.search.split("=")[1]:"/landing-page";
 

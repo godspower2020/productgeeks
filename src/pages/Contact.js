@@ -3,7 +3,6 @@ import emailjs from '@emailjs/browser';
 import { toast } from "react-toastify";
 import Toast from '../components/LoadingError/Toast';
 import Header from "./../components/Header";
-import Footer from '../components/Footer';
 import { SpinnerLoading } from '../components/LoadingError/Loading';
 
 const ToastObjects = {
@@ -104,7 +103,6 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        {/* <Footer /> */}
     </>
   )
 }

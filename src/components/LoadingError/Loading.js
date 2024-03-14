@@ -6,7 +6,7 @@ const GrowLoading = () => {
       <div
         className="spinner-grow text-secondary"
         role="status"
-        style={{ width: "30px", height: "30px" }}
+        style={{ width: "20px", height: "20px" }}
       >
         <span className="sr-only">Loading...</span>
       </div>

@@ -4,13 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 import Rating from "../components/Rating";
 import { listProductDetails } from "../redux/actions/ProductActions";
 import Message from "../components/LoadingError/Error";
 import { GrowLoading } from "../components/LoadingError/Loading";
 import OnboardingComponent from "../components/homeComponents/SingleApp/onboarding/OnboardingComponent";
-import RatingComponent from "../components/homeComponents/SingleApp/rating/RatingComponent";
+import ReviewComponent from "../components/homeComponents/SingleApp/review/ReviewComponent";
 import Toast from "../components/LoadingError/Toast";
 
 const SingleProduct = () => {
@@ -38,7 +37,9 @@ const SingleProduct = () => {
     toast.success("Review Added")
   };
 
-  window.scrollTo(0, 0);
+  const handleReviewEdited = () => {
+    toast.success("Review updated successfully")
+  };
 
   return (
     <>
@@ -158,7 +159,7 @@ const SingleProduct = () => {
                     <OnboardingComponent product={product} />
                   )}
                   {showRating && (
-                    <RatingComponent product={product} id={id} onReviewAdded={handleReviewAdded}/>
+                    <ReviewComponent product={product} id={id} onReviewAdded={handleReviewAdded} onReviewEdited={handleReviewEdited} />
                   )}
                 </div>
               </div>
@@ -166,7 +167,6 @@ const SingleProduct = () => {
           )
         }
       </div>
-      {/* <Footer /> */}
     </>
   );
 };
