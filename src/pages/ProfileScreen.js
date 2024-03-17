@@ -43,7 +43,7 @@ const ProfileScreen = () => {
   const {error, loading, user} = userProfileDetails;
 
   const userUpdateProfileDetails = useSelector((state) => state.userUpdateProfileDetails)
-  const {loading: updateLoading, success: updateSuccess, error: updateError} = userUpdateProfileDetails;
+  const {loading: updateLoading, error: updateError} = userUpdateProfileDetails;
 
   useEffect(() => {
     if (user) {

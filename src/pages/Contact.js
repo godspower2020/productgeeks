@@ -60,13 +60,13 @@ const Contact = () => {
                 <h2 className='mb-4'>Follow Us On Social Media</h2>
                 <p>Stay up to date with the latest news about productgeeks on our social media channels.</p>
                 <div className="col-lg-4 social-icons">
-                  <a className="" href='' target='_blank' rel="noreferrer">
+                  <a className="" href='https://myproductgeeks.com' target='_blank' rel="noreferrer">
                     <img alt="facebook" src="/img/facebook.png" />
                   </a>
-                  <a className="" href='' target='_blank' rel="noreferrer">
+                  <a className="" href='https://myproductgeeks.com' target='_blank' rel="noreferrer">
                     <img alt="twitter-x" src="/img/twitter-x.png" />
                   </a>
-                  <a className="" href='' target='_blank' rel="noreferrer">
+                  <a className="" href='https://myproductgeeks.com' target='_blank' rel="noreferrer">
                     <img alt="linkedin" src="/img/linkedin.png" />
                   </a>
                 </div>
