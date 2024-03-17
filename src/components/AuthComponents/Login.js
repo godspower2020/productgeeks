@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useLocation  } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { getGoogleUser, login } from '../../redux/actions/userActions';
+import { login } from '../../redux/actions/userActions';
 import Message from '../LoadingError/Error';
 import { SpinnerLoading } from '../LoadingError/Loading';
 

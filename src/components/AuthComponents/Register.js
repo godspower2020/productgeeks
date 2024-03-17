@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { getGoogleUser, register } from '../../redux/actions/userActions';
+import { register } from '../../redux/actions/userActions';
 import Message from '../LoadingError/Error';
 import { SpinnerLoading } from '../LoadingError/Loading';
 import PasswordValidation from './PasswordValidation';
-import { USER_LOGIN_SUCCESS } from '../../redux/constants/UserConstants';
 
 const Register = ({onEmailChange}) => {
   const [name, setName] = useState("")
