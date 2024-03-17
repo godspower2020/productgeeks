@@ -30,5 +30,3 @@ jobs:
         password: ${{ secrets.GIT_CPANEL_REACT_PASS }}
         protocol: ${{ secrets.GIT_CPANEL_REACT_PROTOCOL }}
         local-dir: ./build/
-
-        # KYhjN1uVxO1u
