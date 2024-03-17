@@ -31,7 +31,7 @@ const Contact = () => {
     setLoading(true)
     e.preventDefault()
     
-    emailjs.sendForm('service_i40nevj', 'template_oefnmjt', e.target, '_qrR0cXB1aI8pF9JG')
+    emailjs.sendForm('service_4nsqgrp', 'template_oefnmjt', e.target, '_qrR0cXB1aI8pF9JG')
       .then((result) => {
           setLoading(false)
           setFormData(initialState)
