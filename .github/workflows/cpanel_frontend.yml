@@ -23,9 +23,10 @@ jobs:
         npm run build
     
     - name: 📂 Sync files
-      uses: sebastianpopp/ftp-action@releases/v2
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        host: ${{ secrets.GIT_CPANEL_REACT_SERVER }}
-        user: ${{ secrets.GIT_CPANEL_REACT_USER }}
+        server: ${{ secrets.GIT_CPANEL_REACT_SERVER }}
+        username: ${{ secrets.GIT_CPANEL_REACT_USER }}
         password: ${{ secrets.GIT_CPANEL_REACT_PWD }}
-        remoteDir: ./build/
+        protocol: ${{ secrets.GIT_CPANEL_REACT_PROTOCOL }}
+        local-dir: ./build/
