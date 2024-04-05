@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { productCreateReviewReducer, productDetailsReducer, productEditReviewReducer, productListReducer } from './reducers/ProductReducers';
-import { userLoginReducer, userRegisterReducer, userProfileDetailsReducer, userUpdateProfileDetailsReducer, emailConfirmationReducer, resendEmailConfirmationReducer, passwordResetMailReducer, passwordResetReducer } from './reducers/UserReducer';
+import { userLoginReducer, userRegisterReducer, userProfileDetailsReducer, userUpdateProfileDetailsReducer, emailConfirmationReducer, resendEmailConfirmationReducer, passwordResetMailReducer, passwordResetReducer, googleUserSigninReducer } from './reducers/UserReducer';
 
 // USER LOGIN
 const userInfoFromLocalStorage = localStorage.getItem("userInfo")
@@ -15,6 +15,7 @@ const store = configureStore({
     productReviewEdit: productEditReviewReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
+    googleUserSignin: googleUserSigninReducer,
     userProfileDetails : userProfileDetailsReducer,
     userUpdateProfileDetails : userUpdateProfileDetailsReducer,
     userEmailConfirmation: emailConfirmationReducer,

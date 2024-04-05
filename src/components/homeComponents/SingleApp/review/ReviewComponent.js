@@ -16,7 +16,7 @@ const initialState = {
     comment: "",
 };
 
-const RatingComponent = ({product, id, onReviewAdded, onReviewEdited}) => {
+const RatingComponent = ({defaultProduct, id, onReviewAdded, onReviewEdited}) => {
     const [reviewData, setReviewData] = useState(initialState);
     const [reviewDataToEdit, setReviewDataToEdit] = useState(null);
     const [editMode, setEditMode] = useState(false);
@@ -75,7 +75,7 @@ const RatingComponent = ({product, id, onReviewAdded, onReviewEdited}) => {
     const handleRatingChange = (field, value) => {
         setReviewData((prevData) => ({
           ...prevData,
-          [field]: Number(value),
+          [field]: Number(value), 
         }));
     };  
     
@@ -101,48 +101,48 @@ const RatingComponent = ({product, id, onReviewAdded, onReviewEdited}) => {
             <div className="row my-6">
                 <div className="col-lg-6">
                     <h6 className="mb-3">REVIEWS</h6>
-                    {product && product.reviews && product.reviews.length === 0 && (
+                    {defaultProduct && defaultProduct.reviews && defaultProduct.reviews.length === 0 && (
                         <div className='no-comment'>
                             <i className="far fa-comment-alt-slash"></i>
                             <p>no reviews</p>
                         </div>
-                    )}
+                    )} 
                     <div className='reviews-container'>
-                    {product && product.reviews && product.reviews.map((review) => {
-                        return (
-                            <div key={review._id} className='review'>
-                                <p className='user-name'>{review.name}</p>
-                                <div className="alert comment mt-1">
-                                    <div className='individual-ratings rating'>
-                                        <div className='scores'>
-                                            <p>usability</p>
-                                            <div>
-                                                <Rating value={review.usability} />
+                        {defaultProduct && defaultProduct.reviews && defaultProduct.reviews.map((review) => {
+                            return (
+                                <div key={review._id} className='review'>
+                                    <p className='user-name'>{review.name}</p>
+                                    <div className="alert comment mt-1">
+                                        <div className='individual-ratings rating'>
+                                            <div className='scores'>
+                                                <p>usability</p>
+                                                <div>
+                                                    <Rating value={review.usability} />
+                                                </div>
+                                            </div>
+                                            <div className='scores'>
+                                                <p>functionality</p>
+                                                <div>
+                                                    <Rating value={review.functionality} />
+                                                </div>
+                                            </div>
+                                            <div className='scores'>
+                                                <p>visual design</p>
+                                                <div>
+                                                    <Rating value={review.visualDesign} />
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className='scores'>
-                                            <p>functionality</p>
-                                            <div>
-                                                <Rating value={review.functionality} />
-                                            </div>
-                                        </div>
-                                        <div className='scores'>
-                                            <p>visual design</p>
-                                            <div>
-                                                <Rating value={review.visualDesign} />
-                                            </div>
-                                        </div>
+                                        <p>{review.comment}</p>
+                                        <span className=''>{moment.utc(review.createdAt).calendar()}</span>
                                     </div>
-                                    <p>{review.comment}</p>
-                                    <span className=''>{moment.utc(review.createdAt).calendar()}</span>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
                     </div>
                 </div>
                 <div className="col-lg-6 top-margin">
-                    <h6>{userInfo && product.reviews && product.reviews.some(review => review.user === userInfo._id) ? 'EDIT YOUR REVIEW' : 'WRITE A CUSTOMER REVIEW'}</h6>
+                    <h6>{userInfo && defaultProduct.reviews && defaultProduct.reviews.some(review => review.user === userInfo._id) ? 'EDIT YOUR REVIEW' : 'WRITE A CUSTOMER REVIEW'}</h6>
                     <div className="my-4">
                         {createReviewError && (
                             <Message variant="alert-danger">{createReviewError}</Message>
@@ -154,11 +154,11 @@ const RatingComponent = ({product, id, onReviewAdded, onReviewEdited}) => {
 
                     { userInfo ? (                       
                        <form onSubmit={submitHandler}>
-                            {userInfo && product.reviews && product.reviews.some(review => review.user === userInfo._id) && !editMode ? (
+                            {userInfo && defaultProduct.reviews && defaultProduct.reviews.some(review => review.user === userInfo._id) && !editMode ? (
                                 <div className="my-3">
                                     <div
                                         className="edit-review col-12 border-0 p-3 rounded text-white text-center"
-                                        onClick={() => handleEditClick(product.reviews)}
+                                        onClick={() => handleEditClick(defaultProduct.reviews)}
                                     >
                                         Edit Review
                                     </div>

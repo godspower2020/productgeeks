@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-const Slider = ({ images, productId, maxSlides }) => {
+const Slider = ({ images, productId }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToSlide = (index) => {
     setCurrentIndex(index);
-  };
+  }; 
 
   const goToNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);

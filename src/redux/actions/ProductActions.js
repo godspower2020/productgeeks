@@ -108,7 +108,7 @@ export const editProductReview = (id, reviewId, reviewData) => async (dispatch, 
             },
         };
 
-        await API.post(`/api/products/${id}/review/update/${reviewId}`, reviewData, config);
+        await API.put(`/api/products/${id}/review/update/${reviewId}`, reviewData, config);
 
         dispatch({
             type: PRODUCT_EDIT_REVIEW_SUCCESS,

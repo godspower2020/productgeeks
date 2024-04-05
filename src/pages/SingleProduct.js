@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; 
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 
@@ -15,6 +15,7 @@ import Toast from "../components/LoadingError/Toast";
 const SingleProduct = () => {
   const [showOnboarding, setShowOnboarding] = useState(true);
   const [showRating, setShowRating] = useState(false);
+  const [selectedVersion, setSelectedVersion] = useState('');
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -25,8 +26,9 @@ const SingleProduct = () => {
   const { loading, error, product } = productDetails;
 
   useEffect(() => {
-    dispatch(listProductDetails(id));
-  }, [dispatch, id]);
+    setSelectedVersion(id);
+    dispatch(listProductDetails(selectedVersion || id)); 
+  }, [dispatch, id, selectedVersion]);
 
   const goBackToBrowse = () => {
     const browsePath = product && product.platform === 'Web' ? '/browse/web/apps' : '/browse/mobile/apps';
@@ -40,6 +42,13 @@ const SingleProduct = () => {
   const handleReviewEdited = () => {
     toast.success("Review updated successfully")
   };
+
+  const handleVersionChange = (e) => {
+    setSelectedVersion(e.target.value);
+    navigate(`/apps/${e.target.value}`);
+  };
+
+  const defaultProduct = product && product.product
 
   return (
     <>
@@ -60,109 +69,125 @@ const SingleProduct = () => {
               <div className="back my-2" onClick={goBackToBrowse}>
                 <i className="fa fa-long-arrow-left" aria-hidden="true"></i>
               </div>
-              <div className="single-product">
-                <div className="single-product-info">
-                  <div className="mt-2 mb-3 brand-cat-web">
-                    {product && product.productLogo && (
-                      <div className="single-product-brand">
-                        <img className="sp-img" src={product.productLogo.url} alt={product.brandName} />
+              {defaultProduct && (
+                <div className="single-product">
+                  <div className="single-product-info">
+                    <div className="mt-2 mb-3 brand-cat-web">
+                      {defaultProduct && defaultProduct.productLogo && (
+                        <div className="single-product-brand">
+                          <img className="sp-img" src={defaultProduct.productLogo.url} alt={defaultProduct.brandName} />
+                        </div>
+                      )}
+                      <div className="single-product-cat-web px-2">
+                        <div>
+                          <h3>{defaultProduct && defaultProduct.brandName}</h3>
+                        </div>
+                        {defaultProduct && defaultProduct.categories && defaultProduct.categories.map((item, index) => {
+                          return (
+                            <span key={index}>
+                              {(index ? ', ' : '') + item.name}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </div> 
+                    {defaultProduct && defaultProduct.numReviews > 0 && (
+                      <div>
+                        <p>{defaultProduct.numReviews} {defaultProduct.numReviews === 1 ? 'review' : 'reviews'}</p>
                       </div>
                     )}
-                    <div className="single-product-cat-web px-2">
+                    <div className="rating">
                       <div>
-                        <h3>{product && product.brandName}</h3>
+                        <p>usability</p>
+                        <Rating value={defaultProduct.usability} />
                       </div>
-                      {product && product.categories && product.categories.map((item, index) => {
-                        return (
-                          <span key={index}>
-                            {(index ? ', ' : '') + item.name}
-                          </span>
-                        );
-                      })}
+                      <div>
+                        <p>functionality</p>
+                        <Rating value={defaultProduct.functionality} />
+                      </div>
+                      <div>
+                        <p>visualDesign</p>
+                        <Rating value={defaultProduct.visualDesign} />
+                      </div>
                     </div>
-                  </div> 
-                  {product && product.numReviews > 0 && (
-                    <div>
-                      <p>{product.numReviews} {product.numReviews === 1 ? 'review' : 'reviews'}</p>
+                    <hr />
+                    <div className="interest">
+                      <p>Add to interest</p>
+                      <label className="switch">
+                        <input type="checkbox" />
+                        <span className="slider round" />
+                      </label>
                     </div>
-                  )}
-                  <div className="rating">
-                    <div>
-                      <p>usability</p>
-                      <Rating value={product.usability} />
+                    <hr />
+                    <div className="details">
+                      <h5>Details</h5>
+                      <p className="mt-3">{defaultProduct && defaultProduct.description && defaultProduct.description.about ? defaultProduct.description.about : ""}</p>
                     </div>
-                    <div>
-                      <p>functionality</p>
-                      <Rating value={product.functionality} />
+                    <div className="website">
+                    <h5 className="mt-3">website</h5>
+                      <p>{defaultProduct && defaultProduct.description && defaultProduct.description.website}</p>
                     </div>
-                    <div>
-                      <p>visualDesign</p>
-                      <Rating value={product.visualDesign} />
+                    <div className="location">
+                      <h5 className="mt-3">Location</h5>
+                      <p>{defaultProduct && defaultProduct.description && defaultProduct.description.location ? defaultProduct.description.location : ""}</p>
+                    </div>
+                    <div className="employees">
+                      <h5 className="mt-3">Employees</h5>
+                      <p>{defaultProduct && defaultProduct.description && defaultProduct.description.employees ? defaultProduct.description.employees : ""}</p>
+                    </div>
+                    <div className="funding">
+                      <h5 className="mt-3">Funding</h5>
+                      <p>{defaultProduct && defaultProduct.description && defaultProduct.description.funding ? defaultProduct.description.funding : ""}</p>
+                    </div>
+                    <div className="founded-date">
+                      <h5 className="mt-3">Founded date</h5>
+                      <p>{defaultProduct && defaultProduct.description && defaultProduct.description.foundedDate ? defaultProduct.description.foundedDate : ""}</p>
+                    </div>
+                    <div className="founders">
+                      <h5 className="mt-3">Founders</h5>
+                      {defaultProduct && defaultProduct.description && defaultProduct.description.founders && defaultProduct.description.founders.map((item, index) => (
+                        <span key={index}>
+                          {(index ? ', ' : '') + item}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="contact-mail">
+                      <h5 className="mt-3">contact</h5>
+                      <p>{defaultProduct && defaultProduct.description && defaultProduct.description.email ? defaultProduct.description.email : ""}</p>
                     </div>
                   </div>
-                  <hr />
-                  <div className="interest">
-                    <p>Add to interest</p>
-                    <label className="switch">
-                      <input type="checkbox" />
-                      <span className="slider round" />
-                    </label>
-                  </div>
-                  <hr />
-                  <div className="details">
-                    <h5>Details</h5>
-                    <p className="mt-3">{product && product.description && product.description.about ? product.description.about : ""}</p>
-                  </div>
-                  <div className="website">
-                  <h5 className="mt-3">website</h5>
-                    <p>{product && product.description && product.description.website}</p>
-                  </div>
-                  <div className="location">
-                    <h5 className="mt-3">Location</h5>
-                    <p>{product && product.description && product.description.location ? product.description.location : ""}</p>
-                  </div>
-                  <div className="employees">
-                    <h5 className="mt-3">Employees</h5>
-                    <p>{product && product.description && product.description.employees ? product.description.employees : ""}</p>
-                  </div>
-                  <div className="funding">
-                    <h5 className="mt-3">Funding</h5>
-                    <p>{product && product.description && product.description.funding ? product.description.funding : ""}</p>
-                  </div>
-                  <div className="founded-date">
-                    <h5 className="mt-3">Founded date</h5>
-                    <p>{product && product.description && product.description.foundedDate ? product.description.foundedDate : ""}</p>
-                  </div>
-                  <div className="founders">
-                    <h5 className="mt-3">Founders</h5>
-                    {product && product.description && product.description.founders && product.description.founders.map((item, index) => (
-                      <span key={index}>
-                        {(index ? ', ' : '') + item}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="contact-mail">
-                    <h5 className="mt-3">contact</h5>
-                    <p>{product && product.description && product.description.email ? product.description.email : ""}</p>
+                  <div className="single-product-flows">
+                    <div className="onboarding-rating-version-button">
+                      <div className="onboarding-rating-button">
+                        <div className={`onboarding-button ${showOnboarding ? 'active' : ''}`} onClick={() => { setShowOnboarding(true); setShowRating(false); }}>
+                          <p className="">Onboarding</p>
+                        </div>
+                        <div className={`rating-button ${showRating ? 'active' : ''}`} onClick={() => { setShowOnboarding(false); setShowRating(true); }}>
+                          <p className="">Reviews</p>
+                        </div>
+                      </div>
+                      <div className="version">
+                        <p className="version-text">version</p>
+                        <div className="version-button">
+                          <select onChange={handleVersionChange} value={selectedVersion}>
+                            {product && product.relatedProducts && product.relatedProducts.map((relatedProduct, index) => (
+                              <option key={index} value={relatedProduct._id}>
+                                {relatedProduct.version ? relatedProduct.version : "No version"}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    {showOnboarding && (
+                      <OnboardingComponent defaultProduct={defaultProduct} />
+                    )}
+                    {showRating && (
+                      <ReviewComponent defaultProduct={defaultProduct} id={id} onReviewAdded={handleReviewAdded} onReviewEdited={handleReviewEdited} />
+                    )}
                   </div>
                 </div>
-                <div className="single-product-flows">
-                  <div className="onboarding-rating-button">
-                    <div className={`onboarding-button ${showOnboarding ? 'active' : ''}`} onClick={() => { setShowOnboarding(true); setShowRating(false); }}>
-                      <p className="">Onboarding</p>
-                    </div>
-                    <div className={`rating-button ${showRating ? 'active' : ''}`} onClick={() => { setShowOnboarding(false); setShowRating(true); }}>
-                      <p className="">Reviews</p>
-                    </div>
-                  </div>
-                  {showOnboarding && (
-                    <OnboardingComponent product={product} />
-                  )}
-                  {showRating && (
-                    <ReviewComponent product={product} id={id} onReviewAdded={handleReviewAdded} onReviewEdited={handleReviewEdited} />
-                  )}
-                </div>
-              </div>
+              )}
             </>
           )
         }

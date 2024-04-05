@@ -27,7 +27,7 @@ const Register = ({onEmailChange}) => {
   const navigate = useNavigate(); 
   const location = useLocation(); 
 
-  const redirect = location.search ? location.search.split("=")[1]:"/landing-page";
+  const redirect = location.search ? location.search.split("=")[1]:"/";
 
   const userRegister = useSelector((state) => state.userRegister)
   const {error, loading} = userRegister;

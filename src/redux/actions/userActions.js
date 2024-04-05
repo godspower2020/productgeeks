@@ -1,3 +1,5 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import API from '../api/index';
 
 import { EMAIL_CONFIRMATION_FAIL, EMAIL_CONFIRMATION_REQUEST, EMAIL_CONFIRMATION_SUCCESS, RESEND_OTP_FAIL, RESEND_OTP_REQUEST, RESEND_OTP_SUCCESS, RESET_EMAIL_FAIL, RESET_EMAIL_REQUEST, RESET_EMAIL_SUCCESS, RESET_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_RESET, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/UserConstants";
@@ -37,7 +39,6 @@ export const login = (email, password) => async(dispatch) => {
 
 // LOGOUT
 export const logout = () => async(dispatch) => {
-  // localStorage.removeItem("googleUserInfo");
   localStorage.removeItem("userInfo");
   dispatch({
       type: USER_LOGOUT,
@@ -81,20 +82,32 @@ export const register = (name, email, password, confirmPassword) => async(dispat
 }
 
 // GOOGLE LOGIN  
-export const getGoogleUser = async () => {
-  try {
-    const response = await API.get("/login/success", { withCredentials: true });
-    const googleUserData = response.data;
-    console.log(response.data)
-    
-    localStorage.setItem("userInfo", JSON.stringify(googleUserData));
-    
-    return googleUserData;
-  } catch (error) {
-    console.log("error", error);
-    return null;
+export const getGoogleUser = createAsyncThunk(
+  'user/googleUserSignIn',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      const config = {
+        headers: {
+            "Content-Type": "application/json",
+        }
+      }
+
+      const response = await API.get("/login/success", { withCredentials: true }, config);
+      const googleUserData = response.data; 
+
+      dispatch({
+        type: USER_LOGIN_SUCCESS,
+        payload: googleUserData, 
+      });
+      
+      localStorage.setItem("userInfo", JSON.stringify(googleUserData));
+      
+    } catch (error) {
+      console.log("error", error);
+      return rejectWithValue(error.response.data); 
+    }
   }
-};
+);
 
 // CONFIRM EMAIL BY OTP
 export const confirmEmail = (email, otp, token) => async (dispatch) => {
@@ -143,9 +156,6 @@ export const getUserProfileDetails = (id) => async(dispatch, getState) => {
 
         const { userLogin: { userInfo }, } = getState();
         const token = userInfo?.token; 
-
-        // const { googleUserLogin: { googleUserInfo }, } = getState();
-        // const googleUserToken = googleUserInfo?.token; 
 
         if (!token) {
             throw new Error('User token is missing');
@@ -222,8 +232,7 @@ export const updateUserProfile = (user) => async(dispatch, getState) => {
                 
         });
     }
-}
-  
+}  
 export const resendOTP = (email) => async (dispatch) => {
     try {
       dispatch({ type: RESEND_OTP_REQUEST });

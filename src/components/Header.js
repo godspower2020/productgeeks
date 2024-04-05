@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { logout } from "../redux/actions/userActions";
+import { getGoogleUser, logout } from "../redux/actions/userActions";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -15,6 +15,12 @@ const Header = () => {
 
   const userLogin = useSelector((state) => state.userLogin)
   const {userInfo} = userLogin;
+
+  useEffect(() => {
+    if (!userInfo) {
+      dispatch(getGoogleUser());
+    }
+  }, [dispatch, userInfo]);
   
   useEffect(() => {
     const closeDropdown = () => {
@@ -93,13 +99,10 @@ const Header = () => {
           <div className="nav order">
             <ul className="navbar-nav">
               <li className={`nav-item ${activeLink("/browse/mobile/apps") && "active"}`}>
-                <Link className="nav-link" to="/browse/mobile/apps">Mobile</Link>
+                <Link className="nav-link" to="/browse/mobile/apps">Mobile Apps</Link>
               </li>
               <li className={`nav-item ${activeLink("/browse/web/apps") && "active"}`}>
-                <Link className="nav-link" to="/browse/web/apps">Web</Link>
-              </li>
-              <li className={`nav-item ${activeLink("/landing-page") && "active"}`}>
-                <Link className="nav-link" to="/landing-page">Landing Page</Link>
+                <Link className="nav-link" to="/browse/web/apps">Web Pages</Link>
               </li>
               <li className={`nav-item ${activeLink("/blog") && "active"}`}>
                 <Link className="nav-link" to="/blog">Blog</Link>

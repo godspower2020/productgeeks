@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import HomeScreen from "./pages/HomeScreen";
 import WebScreen from "./pages/WebScreen";
-import LandingPage from "./pages/LandingPage";
 import SingleProduct from "./pages/SingleProduct";
 import Blog from "./pages/Blog";
 import SingleBlog from "./pages/SingleBlog";
@@ -31,7 +30,6 @@ function App() {
         <Routes>
             <Route path="/" element={<Navigate to="/browse/mobile/apps" replace />} />
             <Route path="/browse/mobile/apps/*" element={<HomeScreen />} />
-            <Route path="/landing-page" element={<LandingPage />} />
             <Route path="/browse/web/apps/*" element={<WebScreen />} />
             <Route path="/apps/:id" element={<SingleProduct />} />
             <Route path="/blog" element={<Blog />} />

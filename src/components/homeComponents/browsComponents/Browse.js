@@ -18,14 +18,16 @@ const Browse = ({ products, loading, error }) => {
   const queryParams = new URLSearchParams(location.search);
 
   useEffect(() => {
-    setFilteredProducts(
-      selectedCategory === 'All'
-        ? products
-        : products.filter((product) =>
-            product.categories.some((category) => category.name === selectedCategory)
-          )
-    );
-  }, [selectedCategory, products]);  
+    if (products) {
+      setFilteredProducts(
+        selectedCategory === 'All'
+          ? products
+          : products.filter((product) =>
+              product.categories.some((category) => category.name === selectedCategory)
+            )
+      );
+    }
+  }, [selectedCategory, products]);
 
   const handleCategoryClick = (categories) => {
     setSelectedCategory(categories);
@@ -70,12 +72,7 @@ const Browse = ({ products, loading, error }) => {
                     <div className="shopBack">
                       {product.screensFlow && product.screensFlow.length > 0 && (
                         <Slider 
-                          images={product.screensFlow.map(flow => {
-                            return flow.url || "";
-                          })}
-                          maxSlides={product.platform === 'Mobile' ? 3 : 4} 
-                          productBrandName={product.brandName} 
-                          productPlatform={product.platform} 
+                          images={product.screensFlow.map(flow => flow.url || "").slice(0, product.platform === 'Mobile' ? 3 : 4)}
                           productId={product._id} 
                         />
                       )}

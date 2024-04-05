@@ -56,6 +56,10 @@ const ProfileScreen = () => {
     dispatch(getUserProfileDetails("profile"))
   }, [dispatch])
 
+  useEffect(() => {
+    console.log("User Info:", user);
+  }, [user]);
+
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
@@ -152,7 +156,7 @@ const ProfileScreen = () => {
         }
       })
     }
-  };    
+  };
 
   return (
     <>
@@ -168,16 +172,18 @@ const ProfileScreen = () => {
           </div>
           {loading ? "" : ( 
             <>
-              <div className="profile-avatar">
-                <p className="py-3">Profile Avatar</p>
-                {user.profileImage ? (
+              {user && (
+                <div className="profile-avatar">
+                  <p className="py-3">Profile Avatar</p>
+                  {user.profileImage ? (
                     <img src={user.profileImage} alt="Profile" className="profile-image" /> 
-                ) : (
+                  ) : (
                     <div className="round-cover-avatar">
                       <h1>{getInitials(user)}</h1>
                     </div>
-                )}
-              </div>
+                  )}
+                </div>
+              )}
               <form className="form-container" onSubmit={submitHandler}>
                 <div className="col-lg-12">
                   <div className="form">

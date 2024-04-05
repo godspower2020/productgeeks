@@ -6,7 +6,12 @@ const Toast = () => {
     <div>
       <style>{`
         .Toastify__toast-container {
-          height: 30px;
+          width: auto;
+          padding: 10px;
+          font-size: 14px; 
+        }
+        .Toastify__toast {
+          min-width: 200px; 
         }
         .Toastify__progress-bar {
           height: 2px; 
