@@ -103,7 +103,6 @@ export const getGoogleUser = createAsyncThunk(
       localStorage.setItem("userInfo", JSON.stringify(googleUserData));
       
     } catch (error) {
-      console.log("error", error);
       return rejectWithValue(error.response.data); 
     }
   }

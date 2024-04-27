@@ -117,9 +117,9 @@ const Login = ({ headingText, useParagraphTag }) => {
             {loading ? <SpinnerLoading /> : "Login"}
         </button>
 
-        <button onClick={googleLoginHandler} className='google-button'>
+        {/* <button onClick={googleLoginHandler} className='google-button'>
           sign in with google
-        </button>
+        </button> */}
 
         <p>
           Don't have an account?

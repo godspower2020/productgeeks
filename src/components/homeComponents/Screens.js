@@ -4,7 +4,7 @@ import BrowseWeb from './browsComponents/BrowseWeb';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProduct } from '../../redux/actions/ProductActions';
 
-const Screens = ({style}) => {
+const Screens = () => {
   const url = window.location.href;
   const isMobile = url.includes('/browse/mobile/apps');
 
@@ -17,7 +17,7 @@ const Screens = ({style}) => {
     dispatch(listProduct());
   }, [dispatch]);
 
-  return isMobile ? <BrowseMobile products={products} loading={loading} error={error} style={style} /> : <BrowseWeb products={products} loading={loading} error={error} style={style} />;
+  return isMobile ? <BrowseMobile products={products} loading={loading} error={error} /> : <BrowseWeb products={products} loading={loading} error={error} />;
 };
 
 export default Screens;

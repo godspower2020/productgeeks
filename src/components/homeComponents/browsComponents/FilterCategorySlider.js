@@ -27,7 +27,9 @@ const FilterCategorySlider = ({ loading, categories, selectedCategory, handleCat
 
   const handlePrevCategory = () => {
     setCurrentIndex((prevIndex) => {
-      const newIndex = Math.max(prevIndex - 1, 0);
+      const buttonWidth = containerRef.current.children[0].offsetWidth; 
+      const buttonsToScroll = Math.min(6, Math.ceil(containerRef.current.offsetWidth / buttonWidth)); 
+      const newIndex = Math.max(prevIndex - buttonsToScroll, 0);
       scrollIntoView(newIndex);
       return newIndex;
     });
@@ -35,11 +37,13 @@ const FilterCategorySlider = ({ loading, categories, selectedCategory, handleCat
 
   const handleNextCategory = () => {
     setCurrentIndex((prevIndex) => {
-      const newIndex = Math.min(prevIndex + 1, categories.length - 1);
+      const buttonWidth = containerRef.current.children[0].offsetWidth; 
+      const buttonsToScroll = Math.min(6, Math.ceil(containerRef.current.offsetWidth / buttonWidth)); 
+      const newIndex = Math.min(prevIndex + buttonsToScroll, categories.length - 1);
       scrollIntoView(newIndex);
       return newIndex;
     });
-  };
+  };  
 
   const scrollIntoView = (index) => {
     const container = containerRef.current;

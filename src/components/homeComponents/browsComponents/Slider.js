@@ -22,6 +22,10 @@ const Slider = ({ images, productId }) => {
     transform: `translateX(${-currentIndex * 100}%)`,
   };
 
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="slider-container">
       <div className="slider">
@@ -38,6 +42,7 @@ const Slider = ({ images, productId }) => {
                 src={image}
                 alt={`Slide ${index + 1}`}
                 className="slider-image"
+                onContextMenu={handleContextMenu} 
               /> 
             ))}
           </div>

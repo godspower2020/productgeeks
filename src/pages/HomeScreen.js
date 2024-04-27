@@ -1,28 +1,26 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Helmet } from 'react-helmet';
 import Header from "./../components/Header";
-import Prompt from "../components/AuthComponents/Prompt";
 import Carousel from "../components/Carousel";
 import Screens from "../components/homeComponents/Screens";
-import { useSelector } from "react-redux";
+import GoogleAnalytics from "../utils/GoogleAnalytics"; 
 
 const HomeScreen = () => {
-  const userLogin = useSelector((state) => state.userLogin)
-  const {userInfo} = userLogin;
-
-  const homeScreenHeadingText = "Log in or sign up to continue browsing apps";
-
-  const limited = {
-    maxHeight: userInfo ? "none" : "1200px",
-    marginTop: userInfo ? "100px" : "none",
-    overflow: "hidden",
-  };
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   
   return (
     <div>
+      <Helmet>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-X68KRGZPLC"></script>
+        <GoogleAnalytics /> 
+        <title>myproductgeeks | Welcome</title>
+        <meta name="description" content="Explore the world of user experiences at Product Geeks. Get inspired by top-rated designers & agencies worldwide. Discover, optimize, and share innovative mobile and web screens." />
+      </Helmet>
       <Header />
       {!userInfo && <Carousel />}
-      <Screens style={limited} />
-      {!userInfo && <Prompt headingText={homeScreenHeadingText} />}
+      <Screens />
     </div>
   );
 };

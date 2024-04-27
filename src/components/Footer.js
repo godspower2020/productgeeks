@@ -23,13 +23,13 @@ const Footer = () => {
           </div>
         </Link>
         <div className="col-lg-4 social-icons">
-          <a className="" href='https://myproductgeeks.com' target='_blank' rel="noreferrer">
+          <a className="" href='https://facebook.com/myproductgeeks/' target='_blank' rel="noreferrer">
             <img alt="facebook" src="/img/facebook.png" />
           </a>
-          <a className="" href='https://myproductgeeks.com' target='_blank' rel="noreferrer">
+          <a className="" href='https://twitter.com/myproductgeeks' target='_blank' rel="noreferrer">
             <img alt="twitter-x" src="/img/twitter-x.png" />
           </a>
-          <a className="" href='https://myproductgeeks.com' target='_blank' rel="noreferrer">
+          <a className="" href='https://linkedin.com/company/myproductgeeks' target='_blank' rel="noreferrer">
             <img alt="linkedin" src="/img/linkedin.png" />
           </a>
         </div>

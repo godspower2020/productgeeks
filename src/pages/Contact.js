@@ -1,9 +1,11 @@
 import React, { useState, useRef  } from 'react'
+import { Helmet } from 'react-helmet';
 import emailjs from '@emailjs/browser';
 import { toast } from "react-toastify";
 import Toast from '../components/LoadingError/Toast';
 import Header from "./../components/Header";
 import { SpinnerLoading } from '../components/LoadingError/Loading';
+import GoogleAnalytics from "../utils/GoogleAnalytics";
 
 const ToastObjects = {
   pauseOnFocusLoss : false,
@@ -45,64 +47,70 @@ const Contact = () => {
   }
   return (
     <>
-        <Header />  
-        <Toast />
-        <div className='container contact'>
-          <div className='section'>
-            <div className='row section-1'>
-              <h1>Contact Us</h1>
-              <p>Do you have any issue with any area of our operations? We are here for you.</p>
-            </div>
+      <Helmet>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-X68KRGZPLC"></script>
+        <GoogleAnalytics /> 
+        <title>myproductgeeks | Contact Us</title>
+        <meta name="description" content="Contact ProductGeeks to get assistance with any issues or inquiries. Stay updated with the latest news and announcements by following us on social media. Send us a message using the form provided on this page." />
+      </Helmet>
+      <Header />  
+      <Toast />
+      <div className='container contact'>
+        <div className='section'>
+          <div className='row section-1'>
+            <h1>Contact Us</h1>
+            <p>Do you have any issue with any area of our operations? We are here for you.</p>
           </div>
-          <div className='section'>
-            <div className='row'>
-              <div className='col-lg-6 follow-social'>
-                <h2 className='mb-4'>Follow Us On Social Media</h2>
-                <p>Stay up to date with the latest news about productgeeks on our social media channels.</p>
-                <div className="col-lg-4 social-icons">
-                  <a className="" href='https://myproductgeeks.com' target='_blank' rel="noreferrer">
-                    <img alt="facebook" src="/img/facebook.png" />
-                  </a>
-                  <a className="" href='https://myproductgeeks.com' target='_blank' rel="noreferrer">
-                    <img alt="twitter-x" src="/img/twitter-x.png" />
-                  </a>
-                  <a className="" href='https://myproductgeeks.com' target='_blank' rel="noreferrer">
-                    <img alt="linkedin" src="/img/linkedin.png" />
-                  </a>
+        </div>
+        <div className='section'>
+          <div className='row'>
+            <div className='col-lg-6 follow-social'>
+              <h2 className='mb-4'>Follow Us On Social Media</h2>
+              <p>Stay up to date with the latest news about productgeeks on our social media channels.</p>
+              <div className="col-lg-4 social-icons">
+                <a className="" href='https://facebook.com/myproductgeeks/' target='_blank' rel="noreferrer">
+                  <img alt="facebook" src="/img/facebook.png" />
+                </a>
+                <a className="" href='https://twitter.com/myproductgeeks' target='_blank' rel="noreferrer">
+                  <img alt="twitter-x" src="/img/twitter-x.png" />
+                </a>
+                <a className="" href='https://linkedin.com/company/myproductgeeks' target='_blank' rel="noreferrer">
+                  <img alt="linkedin" src="/img/linkedin.png" />
+                </a>
+              </div>
+            </div>
+            <div className='col-lg-6 form'>
+              <h2 className='my-5'>Send Us A Message</h2>
+              <form className="email-form" onSubmit={handleSubmit}>
+                <div className="form-group ">
+                  <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required value={name} onChange={handleChange} />
                 </div>
-              </div>
-              <div className='col-lg-6 form'>
-                <h2 className='my-5'>Send Us A Message</h2>
-                <form className="email-form" onSubmit={handleSubmit}>
-                  <div className="form-group ">
-                    <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required value={name} onChange={handleChange} />
-                  </div>
-                  <div className="form-group mt-4">
-                    <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" required value={email} onChange={handleChange} />
-                  </div>
-                  <div className="form-group mt-4">
-                    <input type="text" className="form-control" name="subject" id="subject" placeholder="Subject" required value={subject} onChange={handleChange} />
-                  </div>
-                  <div className="form-group mt-4">
-                    <textarea className="form-control" name="message" rows={5} placeholder="Message" required value={message} onChange={handleChange} />
-                  </div>
-                  <div className="text-center button">
-                    <button type="submit">
-                    {loading ? 
-                      <div className='straight-button'>
-                        <SpinnerLoading  /> 
-                      </div> :
-                      <>
-                        Send message 
-                      </>               
-                      }
-                    </button>
-                  </div>
-                </form> 
-              </div>
+                <div className="form-group mt-4">
+                  <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" required value={email} onChange={handleChange} />
+                </div>
+                <div className="form-group mt-4">
+                  <input type="text" className="form-control" name="subject" id="subject" placeholder="Subject" required value={subject} onChange={handleChange} />
+                </div>
+                <div className="form-group mt-4">
+                  <textarea className="form-control" name="message" rows={5} placeholder="Message" required value={message} onChange={handleChange} />
+                </div>
+                <div className="text-center button">
+                  <button type="submit">
+                  {loading ? 
+                    <div className='straight-button'>
+                      <SpinnerLoading  /> 
+                    </div> :
+                    <>
+                      Send message 
+                    </>               
+                    }
+                  </button>
+                </div>
+              </form> 
             </div>
           </div>
         </div>
+      </div>
     </>
   )
 }

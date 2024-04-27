@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import { Helmet } from 'react-helmet';
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Toast from "../components/LoadingError/Toast";
 import Login from "../components/AuthComponents/Login";
 import AboutLinks from "../components/AuthComponents/AboutLinks";
+import GoogleAnalytics from "../utils/GoogleAnalytics";
 
 const ToastObjects = {
   pauseOnFocusLoss : false,
@@ -27,6 +29,12 @@ const LoginScreen = () => {
 
   return (
     <>
+      <Helmet>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-X68KRGZPLC"></script>
+        <GoogleAnalytics /> 
+        <title>myproductgeeks | Login</title>
+        <meta name="description" content="Login to your account on ProductGeeks to access exclusive features and content. Join our community of product enthusiasts and stay updated with the latest trends." />
+      </Helmet>
       <Toast />
       <div className="stretch-me">
         <div className="login-me">

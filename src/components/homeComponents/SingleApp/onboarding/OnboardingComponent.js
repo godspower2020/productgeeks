@@ -1,8 +1,47 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import VideoComponent from './VideoComponent';
 
-const OnboardingComponent = ({defaultProduct}) => {
+const OnboardingComponent = ({ defaultProduct }) => {
   const [showScreens, setShowScreens] = useState(true);
+
+  const handleContextMenu = e => {
+    e.preventDefault();
+  };
+
+  const renderScreensByCategory = category => {
+    return (
+      defaultProduct &&
+      defaultProduct.screensFlow
+        .filter(screen => screen.screensCategory === category)
+        .map(screen => (
+          <img
+            key={screen._id}
+            className={`${defaultProduct.platform === 'Mobile' ? 'img-mobile' : 'img-web'}`}
+            src={screen.url}
+            alt={defaultProduct.brandName}
+            onContextMenu={handleContextMenu}
+          />
+        ))
+    );
+  };
+
+  const renderCategories = () => {
+    const categories = defaultProduct.screensFlow.reduce((acc, screen) => {
+      if (!acc.includes(screen.screensCategory)) {
+        acc.push(screen.screensCategory);
+      }
+      return acc;
+    }, []);
+
+    return categories.map(category => (
+      <div key={category} className="category">
+        <p className='mt-3 text-black'>{category}</p>
+        <div className='screens-container'>
+          <div className="screens">{renderScreensByCategory(category)}</div>
+        </div>
+      </div>
+    ));
+  };
 
   return (
     <>
@@ -17,18 +56,16 @@ const OnboardingComponent = ({defaultProduct}) => {
         </div>
       </div>
       <div className="product-flows">
-        <div className="flow">
+        <>
           {showScreens ? (
-            defaultProduct && defaultProduct.screensFlow && defaultProduct.screensFlow.map((item) => (
-              <img key={item._id} className={`${defaultProduct.platform === 'Mobile' ? 'img-mobile' : 'img-web'}`} src={item.url} alt={defaultProduct.brandName} />
-            ))
+            <div className="categories-container">{renderCategories()}</div>
           ) : (
             <VideoComponent videos={defaultProduct && defaultProduct.videosFlow} />
           )}
-        </div>
+        </>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default OnboardingComponent
+export default OnboardingComponent;

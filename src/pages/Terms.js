@@ -1,9 +1,17 @@
 import React from 'react'
+import { Helmet } from 'react-helmet';
 import Header from '../components/Header'
+import GoogleAnalytics from "../utils/GoogleAnalytics";
 
 const Terms = () => {
   return (
     <>
+      <Helmet>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-X68KRGZPLC"></script>
+        <GoogleAnalytics /> 
+        <title>myproductgeeks | Terms</title>
+        <meta name="description" content="Explore the terms of use for Product Geeks. Understand your rights and responsibilities when using our platform." />
+      </Helmet>
       <Header />
       <div className='container terms'>
         <div className='section'>

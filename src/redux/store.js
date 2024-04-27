@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { productCreateReviewReducer, productDetailsReducer, productEditReviewReducer, productListReducer } from './reducers/ProductReducers';
+import { productCreateReviewReducer, productDetailsReducer, productEditReviewReducer, productListReducer, productSearchedListReducer } from './reducers/ProductReducers';
 import { userLoginReducer, userRegisterReducer, userProfileDetailsReducer, userUpdateProfileDetailsReducer, emailConfirmationReducer, resendEmailConfirmationReducer, passwordResetMailReducer, passwordResetReducer, googleUserSigninReducer } from './reducers/UserReducer';
 
 // USER LOGIN
@@ -10,6 +10,7 @@ const userInfoFromLocalStorage = localStorage.getItem("userInfo")
 const store = configureStore({
   reducer: {
     productList: productListReducer,
+    productSearchedList: productSearchedListReducer,
     productDetails: productDetailsReducer,
     productReviewCreate: productCreateReviewReducer,
     productReviewEdit: productEditReviewReducer,

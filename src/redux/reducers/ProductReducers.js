@@ -1,4 +1,4 @@
-import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_CREATE_REVIEW_REQUEST, PRODUCT_CREATE_REVIEW_SUCCESS, PRODUCT_CREATE_REVIEW_FAIL, PRODUCT_CREATE_REVIEW_RESET, PRODUCT_EDIT_REVIEW_REQUEST, PRODUCT_EDIT_REVIEW_SUCCESS, PRODUCT_EDIT_REVIEW_FAIL } from '../constants/ProductConstants';
+import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_CREATE_REVIEW_REQUEST, PRODUCT_CREATE_REVIEW_SUCCESS, PRODUCT_CREATE_REVIEW_FAIL, PRODUCT_CREATE_REVIEW_RESET, PRODUCT_EDIT_REVIEW_REQUEST, PRODUCT_EDIT_REVIEW_SUCCESS, PRODUCT_EDIT_REVIEW_FAIL, PRODUCT_SEARCHED_LIST_REQUEST, PRODUCT_SEARCHED_LIST_SUCCESS, PRODUCT_SEARCHED_LIST_FAIL } from '../constants/ProductConstants';
 
 // ALL PRODUCT LIST
 export const productListReducer = (state = { products:[]}, action) => {
@@ -8,6 +8,20 @@ export const productListReducer = (state = { products:[]}, action) => {
         case PRODUCT_LIST_SUCCESS:
             return { loading: false, products: action.payload }
         case PRODUCT_LIST_FAIL:
+            return { loading: false, error: action.payload }
+        default:
+            return state;
+    }
+};
+
+// ALL SEARCHED PRODUCT LIST
+export const productSearchedListReducer = (state = { products:[]}, action) => {
+    switch (action.type) {
+        case PRODUCT_SEARCHED_LIST_REQUEST:
+            return { loading: true, products: [], error: null };
+        case PRODUCT_SEARCHED_LIST_SUCCESS:
+            return { loading: false, products: action.payload }
+        case PRODUCT_SEARCHED_LIST_FAIL:
             return { loading: false, error: action.payload }
         default:
             return state;

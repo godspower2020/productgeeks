@@ -1,9 +1,17 @@
 import React from 'react'
+import { Helmet } from 'react-helmet';
 import Header from '../components/Header'
+import GoogleAnalytics from "../utils/GoogleAnalytics";
 
 const About = () => {
   return (
     <>
+      <Helmet>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-X68KRGZPLC"></script>
+        <GoogleAnalytics /> 
+        <title>myproductgeeks | About Us</title>
+        <meta name="description" content="Discover how ProductGeeks is revolutionizing the world of digital design. Learn about our mission to provide access to top design ideas and solutions, making the design process easier and more effective. Explore our expert-curated library of interfaces from leading digital products, saving time and effort for product designers. Join our community of creative professionals sharing and showcasing their work, growing their portfolios, and connecting with innovative brands worldwide." />
+      </Helmet>
       <Header />
       <div className='container about'>
         <div className='section'>

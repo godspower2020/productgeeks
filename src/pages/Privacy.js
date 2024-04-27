@@ -1,9 +1,17 @@
 import React from 'react'
+import { Helmet } from 'react-helmet';
 import Header from '../components/Header'
+import GoogleAnalytics from "../utils/GoogleAnalytics";
 
 const Privacy = () => {
   return (
     <>
+      <Helmet>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-X68KRGZPLC"></script>
+        <GoogleAnalytics /> 
+        <title>myproductgeeks | Privacy Policy</title>
+        <meta name="description" content="Learn how ProductGeeks collects, uses, and protects your personal information. Understand your rights and choices regarding your data privacy." />
+      </Helmet>
       <Header />
       <div className='container privacy'>
         <div className='section'>

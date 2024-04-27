@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { getGoogleUser, logout } from "../redux/actions/userActions";
+import SearchResultsList from "./SearchResultsList";
+import { listSearchedProduct } from "../redux/actions/ProductActions";
 
 const Header = () => {
+  const [keyword, setKeyword] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const location = useLocation();
@@ -15,6 +18,9 @@ const Header = () => {
 
   const userLogin = useSelector((state) => state.userLogin)
   const {userInfo} = userLogin;
+
+  const productSearchedList = useSelector((state) => state.productSearchedList);
+  const { loading, products } = productSearchedList;
 
   useEffect(() => {
     if (!userInfo) {
@@ -61,12 +67,26 @@ const Header = () => {
     return '';
   };  
 
+  const handleChange = async (value) => {
+    setKeyword(value);
+    if (value.trim() === "") {
+      dispatch(listSearchedProduct(""));
+    } else {
+      dispatch(listSearchedProduct(value));
+    }
+  };  
+
+  const handleClear = () => {
+    setKeyword("");
+    dispatch(listSearchedProduct(""));
+  };
+
   const logoutHandler = () => {
     dispatch(logout());
   }
 
   return (
-    <div>
+    <div className="header-container">
       <div className="header">
         <div className="container-header">
           <div className="brand order">
@@ -82,20 +102,21 @@ const Header = () => {
               </div>
             </Link> 
           </div>
+
           <div className="search-bar d-flex align-items-center order">
-            <form className="navbar-search input-group m-0">
-              <div className="input-group-prepend">
-                <span className="input-group-text">
-                  <i className="fa fa-search" aria-hidden="true"></i>
-                  <p className="mx-1">Search...</p>
-                </span>
-              </div>
-              <input
-                type="search"
-                className="form-control rounded search"
-              />
-            </form>
+            <i className="fa fa-search" aria-hidden="true"></i>
+            <input
+                value={keyword}
+                onChange={(e) => handleChange(e.target.value)}
+                placeholder='search...'
+                className="rounded search"
+            />
+            {keyword && (
+              <i className="fas fa-times" aria-hidden="true" onClick={handleClear}></i>
+            )}
           </div>
+          {keyword && <SearchResultsList products={products} loading={loading} keyword={keyword} />}
+
           <div className="nav order">
             <ul className="navbar-nav">
               <li className={`nav-item ${activeLink("/browse/mobile/apps") && "active"}`}>
@@ -104,9 +125,9 @@ const Header = () => {
               <li className={`nav-item ${activeLink("/browse/web/apps") && "active"}`}>
                 <Link className="nav-link" to="/browse/web/apps">Web Pages</Link>
               </li>
-              <li className={`nav-item ${activeLink("/blog") && "active"}`}>
+              {/* <li className={`nav-item ${activeLink("/blog") && "active"}`}>
                 <Link className="nav-link" to="/blog">Blog</Link>
-              </li>
+              </li> */}
               <li className={`nav-item ${activeLink("/contact") && "active"}`}>
                 <Link className="nav-link" to="/contact">Contact</Link>
               </li>
@@ -114,7 +135,7 @@ const Header = () => {
           </div>
           <div className="login order">
             {(userInfo) ? 
-              <div className="round-cover-avatar" onClick={toggleDropdown}>
+              <div className="round-cover-avatar" onClick={toggleDropdown}> 
                 {userInfo && userInfo.profileImage ? (
                     <img src={userInfo.profileImage} alt="Profile" className="profile-image" /> 
                 ) : (

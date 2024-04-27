@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Toast from '../components/LoadingError/Toast';
 import Message from "../components/LoadingError/Error";
 import { getUserProfileDetails, updateUserProfile } from "../redux/actions/userActions";
-import { SpinnerLoading } from "../components/LoadingError/Loading";
+import { SearchSpinnerLoading, SpinnerLoading } from "../components/LoadingError/Loading";
 import PasswordValidation from "../components/AuthComponents/PasswordValidation";
 
 const ToastObjects = {
@@ -57,7 +57,6 @@ const ProfileScreen = () => {
   }, [dispatch])
 
   useEffect(() => {
-    console.log("User Info:", user);
   }, [user]);
 
   const handleShowPassword = () => {
@@ -170,7 +169,9 @@ const ProfileScreen = () => {
             {updateError && <Message variant="alert-danger">{updateError}</Message>}
             <p className="py-3">Manage your Productgeeks profile</p>
           </div>
-          {loading ? "" : ( 
+          {loading ? (
+            <SearchSpinnerLoading />
+          ) : ( 
             <>
               {user && (
                 <div className="profile-avatar">

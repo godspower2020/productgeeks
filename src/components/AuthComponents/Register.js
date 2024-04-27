@@ -180,9 +180,9 @@ const Register = ({onEmailChange}) => {
           {loading ? <SpinnerLoading /> : "Register"}
         </button>
 
-        <button onClick={googleLoginHandler} className='google-button'>
+        {/* <button onClick={googleLoginHandler} className='google-button'>
           sign in with google 
-        </button>
+        </button> */}
 
         <p>
           Already have an account?
